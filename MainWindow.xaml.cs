@@ -21,18 +21,89 @@ namespace Capstone
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Seller> SellerDataList = new List<Seller>();
-        List<Buyer> BuyerDataList = new List<Buyer>();
+        List<Seller> sellerWorkingList;
+        List<Buyer> buyerWorkingList;
 
-        List<Seller> SellerWorkingList = new List<Seller>();
-        List<Buyer> BuyerWorkingList = new List<Buyer>();
+        List<Seller> sellerDataList;
+        List<Buyer> buyerDataList;
 
-        List<Seller> SellerOverflowList = new List<Seller>();
-        List<Buyer> BuyerOverflowList = new List<Buyer>();
+        List<Seller> sellerSurplusList;
+        List<Buyer> buyerDeficitList;
+
+        List<Seller> sellerCurrSurplusList;
+        List<Buyer> buyerCurrDeficitList;
+        private int buyEmptyFlag;
+        private int sellEmptyFlag;
+
         public MainWindow()
         {
             InitializeComponent();
+            //test
+            //test 2
+            int i;
+            int j;
+            int k;
+
+            int buyFlagWatch;
+            int sellFlagWatch;
+
+            
+
+
+            for (i = 0; i < 3650; i++)   // simulate 10 years each step being a day
+            {
+                buyEmptyFlag = 0;
+                sellEmptyFlag = 0;
+
+                sellerWorkingList = sellerDataList.Concat(sellerSurplusList).ToList();
+                buyerWorkingList = buyerDataList.Concat(buyerDeficitList).ToList();
+
+
+                for (k = buyEmptyFlag; k < buyerWorkingList.Count; k++)
+	            {
+
+                for (j = sellEmptyFlag; j < sellerWorkingList.Count; j++)
+                {
+                    buyFlagWatch = buyEmptyFlag;
+                    if (sellerWorkingList[j].CostProduction >= buyerWorkingList[buyEmptyFlag].MaxCost * buyerWorkingList[buyEmptyFlag].NegotiationPercent)
+                    {
+                        transact(sellerWorkingList[j], buyerWorkingList[buyEmptyFlag]);
+                    }
+                    if (buyFlagWatch != buyEmptyFlag)
+                    {
+                        break;
+                    }
+
+                    if (j == sellerWorkingList.Count - 1)     // this is where price should iterate upwards
+                    {
+                        if (buyEmptyFlag >= buyerDataList.Count)
+                        {
+                                buyerCurrDeficitList[buyEmptyFlag - buyerDataList.Count].TotalDemand += buyerWorkingList[buyEmptyFlag].DailyVol;
+            
+                        }
+                        else
+                        {
+                                buyerCurrDeficitList[buyEmptyFlag] += buyerWorkingList[buyEmptyFlag].DailyVol;
+            
+                        }
+                        buyerWorkingList[buyEmptyFlag].DailyVol = 0;
+                        buyEmptyFlag++;
+                    }
+
+
+                }
+
+            }
+
+
+
         }
+
+       
+
+    }
+
+ 
 
         private void AddSellerButton_Click(object sender, RoutedEventArgs e)
         {
@@ -48,7 +119,7 @@ namespace Capstone
 
                 
                 Seller newSeller = new Seller(hold, sellVolume, costProduction, incentivePercent);
-                SellerDataList.Add(newSeller);
+                sellerDataList.Add(newSeller);
                 ListBoxItem stockListBoxItem = new ListBoxItem();
                 stockListBoxItem.Content = SellerNameTextBox.Text;
                 SellerDataListBox.Items.Add(stockListBoxItem);
@@ -70,7 +141,7 @@ namespace Capstone
         private void SellerDataListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Seller selectedSeller;
-            selectedSeller = SellerDataList[SellerDataListBox.SelectedIndex];
+            selectedSeller = sellerDataList[SellerDataListBox.SelectedIndex];
             SellerNameTextBox.Text = selectedSeller.SellerName;
             SellVolTextBox.Text = selectedSeller.SellVolume.ToString();
             CostProductionTextBox.Text = selectedSeller.CostProduction.ToString();
@@ -194,7 +265,29 @@ namespace Capstone
         {
 
         }
+
+        void transact(Seller seller, Buyer buyer)
+
+        {
+            if (seller.DailyVol > buyer.DailyVol)
+            {
+                buyEmptyFlag++;
+
+
+            }
+            else if (seller.DailyVol < buyer.DailyVol)
+            {
+                sellEmptyFlag++;
+
+
+            }
+            else
+            {
+
+            }
+        }
     }
+
 
 }
 
