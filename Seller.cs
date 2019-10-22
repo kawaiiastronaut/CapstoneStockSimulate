@@ -9,17 +9,17 @@ namespace Capstone
     class Seller
     {
         private string sellerName;
-        private long sellVolume;
+        private float totalVolume;
         private long costProduction;
         private int incentivePercent;
         private long[] expenseArray = new long[20];
         private float[] outputArray = new float[4000];
 
 
-        public Seller(string sellerName, long sellVolume, long costProduction, int IncentivePercent)
+        public Seller(string sellerName, float totalVolume, long costProduction, int IncentivePercent)
         {
             this.SellerName = sellerName;
-            this.SellVolume = sellVolume;
+            this.TotalVolume = totalVolume;
             this.CostProduction = costProduction;
             this.IncentivePercent = incentivePercent;
         }
@@ -35,15 +35,15 @@ namespace Capstone
                 sellerName = value;
             }
         }
-        public long SellVolume
+        public float TotalVolume
         {
             get
             {
-                return sellVolume;
+                return totalVolume;
             }
             set
             {
-                sellVolume = value;
+                totalVolume = value;
             }
         }
         public long CostProduction

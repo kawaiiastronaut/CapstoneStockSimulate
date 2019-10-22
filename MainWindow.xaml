@@ -8,7 +8,7 @@
         Title="MainWindow" Height="809.6" Width="1000">
     <Grid>
         <Label Content="Sellers" HorizontalAlignment="Left" Margin="34,22,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="334" Margin="34,47,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="StockListBox_SelectionChanged" >
+        <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="334" Margin="34,47,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="SellerDataListBox_SelectionChanged" >
 
         </ListBox>
         <TextBox Name="SellerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="308,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="SellerNameTextBox_TextChanged"/>
@@ -21,7 +21,7 @@
         <TextBox x:Name="IncentiveTextBox"  HorizontalAlignment="Left" Height="23" Margin="308,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="25"/>
         <Button Name="AddSellerButton" Content="Add a Seller" HorizontalAlignment="Left" Margin="210,346,0,0" VerticalAlignment="Top" Width="218" Height="35" Click="AddSellerButton_Click" />
         <Label Content="Buyers" HorizontalAlignment="Left" Margin="513,41,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="BuyerListBox" HorizontalAlignment="Left" Height="315" Margin="513,66,0,0" VerticalAlignment="Top" Width="171"/>
+        <ListBox x:Name="BuyerDataListBox" HorizontalAlignment="Left" Height="315" Margin="513,66,0,0" VerticalAlignment="Top" Width="171"/>
         <TextBox x:Name="BuyerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="838,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <Label Content="Name" HorizontalAlignment="Left" Margin="718,89,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TotalDemandTextbox"  HorizontalAlignment="Left" Height="23" Margin="838,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.901,0.698"/>
@@ -59,6 +59,8 @@
         <Label FontSize="8" Content="Y5Q3" Margin="736,586,222.6,172"/>
         <Label  FontSize="8" Content="Y5Q4" Margin="771,586,187.6,172"/>
         <Label Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="428,212,0,0"/>
+        <TextBox x:Name="debugSeller" HorizontalAlignment="Left" Height="23" Margin="137,711,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="debugBuyer" HorizontalAlignment="Left" Height="23" Margin="684,711,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
