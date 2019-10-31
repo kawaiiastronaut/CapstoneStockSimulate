@@ -8,7 +8,7 @@
         Title="MainWindow" Height="809.6" Width="1000">
     <Grid>
         <Label Content="Sellers" HorizontalAlignment="Left" Margin="34,22,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="334" Margin="34,47,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="StockListBox_SelectionChanged" >
+        <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="334" Margin="34,47,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="SellerDataListBox_SelectionChanged" >
 
         </ListBox>
         <TextBox Name="SellerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="308,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="SellerNameTextBox_TextChanged"/>

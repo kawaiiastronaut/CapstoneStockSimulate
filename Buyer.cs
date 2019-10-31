@@ -9,19 +9,25 @@ namespace Capstone
     class Buyer
     {
         private string buyerName;
-        private long totalDemand;
+        private float totalDemand;
         private int negotiationPercent;
         private float maxCost;
 
-        public Buyer( string buyerName, long totalDemand, int negotiationPercent, float maxCost )
+        private float realCost;
+        private float dailyDemand;
+
+        public Buyer( string buyerName, float totalDemand, int negotiationPercent, float maxCost )
         {
             this.buyerName = buyerName;
             this.totalDemand = totalDemand;
             this.negotiationPercent = negotiationPercent;
             this.maxCost = maxCost;
 
+            this.dailyDemand = this.totalDemand / 368;
+            this.realCost = this.maxCost * (float)this.negotiationPercent;
 
- 
+
+
 
 
 
@@ -39,7 +45,7 @@ namespace Capstone
                 buyerName = value;
             }
         }
-        public long TotalDemand
+        public float TotalDemand
         {
             get
             {
