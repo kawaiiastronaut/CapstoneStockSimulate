@@ -13,6 +13,9 @@ namespace Capstone
         private int negotiationPercent;
         private float maxCost;
 
+        private float realCost;
+        private float dailyDemand;
+
         public Buyer( string buyerName, float totalDemand, int negotiationPercent, float maxCost )
         {
             this.buyerName = buyerName;
@@ -20,8 +23,11 @@ namespace Capstone
             this.negotiationPercent = negotiationPercent;
             this.maxCost = maxCost;
 
+            this.dailyDemand = this.totalDemand / 368;
+            this.realCost = this.maxCost * (float)this.negotiationPercent;
 
- 
+
+
 
 
 

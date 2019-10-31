@@ -15,6 +15,9 @@ namespace Capstone
         private long[] expenseArray = new long[20];
         private float[] outputArray = new float[4000];
 
+        private float dailyVolume;
+        private float minSellPrice;
+
 
         public Seller(string sellerName, float totalVolume, long costProduction, int IncentivePercent)
         {
@@ -22,6 +25,9 @@ namespace Capstone
             this.TotalVolume = totalVolume;
             this.CostProduction = costProduction;
             this.IncentivePercent = incentivePercent;
+
+            this.dailyVolume = this.totalVolume / 368;
+            this.minSellPrice = this.costProduction * (float)this.incentivePercent;
         }
 
         public string SellerName

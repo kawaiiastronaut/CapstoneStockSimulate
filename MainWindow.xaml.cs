@@ -21,6 +21,7 @@ namespace Capstone
     /// </summary>
     public partial class MainWindow : Window
     {
+        float runningTotal = 0;
         List<Seller> sellerWorkingList = new List<Seller>();
         List<Buyer> buyerWorkingList = new List<Buyer>();
 
@@ -51,6 +52,8 @@ namespace Capstone
 
             int buyFlagWatch;
             int sellFlagWatch;
+
+            float[] surplusDeficit = new float[20];
 
             Seller dataSeller = new Seller("sell1", 20, 10, 0);
             Buyer dataBuyer = new Buyer("buy1", 18, 50, 50);
@@ -93,7 +96,7 @@ namespace Capstone
             buyerDeficitList.Add(deficit2Buyer);
 
 
-            for (i = 0; i < 3; i++)   // simulate 10 years each step being a day surrently modified to simulate only 1 day with total demand for testing purposes
+            for (i = 0; i < 368; i++)   // simulate 10 years each step being a day surrently modified to simulate only 1 day with total demand for testing purposes
             {
                 buyEmptyFlag = 0;
                 sellEmptyFlag = 0;
@@ -270,9 +273,125 @@ namespace Capstone
 
                 }
 
-
                 float total = buyerDeficitList.Sum(item => item.TotalDemand);
                 float total2 = sellerSurplusList.Sum(item => item.TotalVolume);
+
+                if (i/368 == 0) //yr 1
+                {
+                    if (i%368 == 91) //q1
+                    {
+                        surplusDeficit[0] = total2 - total;
+                        runningTotal += surplusDeficit[0];
+                    }
+                    else if (i % 368 == 183) //q2
+                    {
+                        surplusDeficit[1] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[1];
+                    }
+                    else if (i % 368 == 275) //q3
+                    {
+                        surplusDeficit[2] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[2];
+                    }
+                    else if (i % 368 == 367) //q4
+                    {
+                        surplusDeficit[3] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[3];
+                    }
+                }
+                else if(i/368 ==1) //yr 2
+                {
+                    if (i % 368 == 91) //q1
+                    {
+                        surplusDeficit[4] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[4];
+                    }
+                    else if (i % 368 == 183) //q2
+                    {
+                        surplusDeficit[5] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[5];
+                    }
+                    else if (i % 368 == 275) //q3
+                    {
+                        surplusDeficit[6] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[6];
+                    }
+                    else if (i % 368 == 367) //q4
+                    {
+                        surplusDeficit[7] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[7];
+                    }
+                }
+                else if (i / 368 == 2) //yr 3
+                {
+                    if (i % 368 == 91) //q1
+                    {
+                        surplusDeficit[8] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[8];
+                    }
+                    else if (i % 368 == 183) //q2
+                    {
+                        surplusDeficit[9] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[9];
+                    }
+                    else if (i % 368 == 275) //q3
+                    {
+                        surplusDeficit[10] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[10];
+                    }
+                    else if (i % 368 == 367) //q4
+                    {
+                        surplusDeficit[11] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[11];
+                    }
+                }
+                else if (i / 368 == 3) //yr 4
+                {
+                    if (i % 368 == 91) //q1
+                    {
+                        surplusDeficit[12] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[12];
+                    }
+                    else if (i % 368 == 183) //q2
+                    {
+                        surplusDeficit[13] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[13];
+                    }
+                    else if (i % 368 == 275) //q3
+                    {
+                        surplusDeficit[14] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[14];
+                    }
+                    else if (i % 368 == 367) //q4
+                    {
+                        surplusDeficit[15] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[15];
+                    }
+                }
+                else if (i / 368 == 4) //yr 5
+                {
+                    if (i % 368 == 91) //q1
+                    {
+                        surplusDeficit[16] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[16];
+                    }
+                    else if (i % 368 == 183) //q2
+                    {
+                        surplusDeficit[17] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[17];
+                    }
+                    else if (i % 368 == 275) //q3
+                    {
+                        surplusDeficit[18] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[18];
+                    }
+                    else if (i % 368 == 367) //q4
+                    {
+                        surplusDeficit[19] = total2 - total - runningTotal;
+                        runningTotal += surplusDeficit[19];
+                    }
+                }
+
                 debugBuyer.Text = total.ToString();
                 debugSeller.Text = total2.ToString();
                 sellerCurrDataList.Clear();
@@ -284,9 +403,10 @@ namespace Capstone
 
             } //end final FOR loop
 
-       
+           
 
-    }
+
+        }
 
  
 
