@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp4"
+    xmlns:local="clr-namespace:WpfApp4"
         mc:Ignorable="d"
         Title="MainWindow" Height="809.6" Width="1000">
     <Grid>
         <Label Content="Sellers" HorizontalAlignment="Left" Margin="34,22,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="334" Margin="34,47,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="StockListBox_SelectionChanged" >
+        <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="334" Margin="34,47,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="SellerDataListBox_SelectionChanged" >
 
         </ListBox>
         <TextBox Name="SellerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="308,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="SellerNameTextBox_TextChanged"/>
@@ -33,7 +33,10 @@
         <Button x:Name="AddBuyerButton" Content="Add Buyer" HorizontalAlignment="Left" Margin="740,250,0,0" VerticalAlignment="Top" Width="218" Height="35" Click="AddBuyerButton_Click" />
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="102,386,0,0" VerticalAlignment="Top" Width="697">
             <Canvas x:Name="front_Canvas" HorizontalAlignment="Left" Height="200" Margin="-0.8,-0.8,-104,-1.4" VerticalAlignment="Top" Width="700"/>
+            
         </Border>
+       
+
         <Label Name="Max" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,386,0,0"/>
         <Label Name="Min" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,560,0,0"/>
         <Label Content="%" HorizontalAlignment="Left" Margin="963,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="29.87,-12.594"/>
@@ -59,6 +62,6 @@
         <Label FontSize="8" Content="Y5Q3" Margin="736,586,222.6,172"/>
         <Label  FontSize="8" Content="Y5Q4" Margin="771,586,187.6,172"/>
         <Label Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="428,200,0,0"/>
-
+        
     </Grid>
 </Window>

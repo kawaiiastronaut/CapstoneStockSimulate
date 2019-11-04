@@ -31,7 +31,15 @@ namespace Capstone
         List<Buyer> BuyerOverflowList = new List<Buyer>();
         public MainWindow()
         {
+
+            double [] arrayFloat = new double[] { 45.1123123, -54.2, 23.4, 78.1, -23.9, 45.1, -54.2, 23.4, 78.1, -23.9, 45.1, -54.2, 23.4, 78.1, -23.9, 45.1, -54.2, 23.4, 78.1, -23.9 };
+            long[] longArray = Array.ConvertAll<double, long>(arrayFloat,
+    delegate (double i)
+    {
+        return (long)i;
+    });
             InitializeComponent();
+            displayOutput(longArray);
         }
 
         private void AddSellerButton_Click(object sender, RoutedEventArgs e)
@@ -133,7 +141,9 @@ namespace Capstone
                     }
                     Canvas.SetLeft(rect, i * rect.Width);
                     prevBase = (long)rect.Height + prevBase;
-                    Canvas.SetTop(rect, prevBase-rect.Height);
+                    //sets top of rectangle at 100 if negative
+                    Canvas.SetTop(rect, 100);
+                    //Canvas.SetTop(rect, prevBase-rect.Height);
                     front_Canvas.Children.Add(rect);
                     Label label = new Label();
                     label.FontSize = 5;
@@ -161,12 +171,15 @@ namespace Capstone
                     }
                     Canvas.SetLeft(rect, i * rect.Width);
                     prevBase = -(long)rect.Height + prevBase;
-                    Canvas.SetTop(rect, prevBase);
+                    Canvas.SetBottom(rect, 100);
+                    // Canvas.SetTop(rect, prevBase);
                     front_Canvas.Children.Add(rect);
                     Label label = new Label();
                     label.Content = "$" + output[i].ToString();
                     Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetTop(label, prevBase);
+                    //set the bottom of positive number at 0
+                    Canvas.SetBottom(label, 100);
+                    //Canvas.SetTop(label, prevBase);
                     label.FontSize = 5;
                     front_Canvas.Children.Add(label);
                 }
@@ -191,6 +204,11 @@ namespace Capstone
         }
 
         private void SellerNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void SellerDataListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
 
         }
