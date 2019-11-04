@@ -17,8 +17,11 @@ using static System.Math;
 namespace Capstone
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml j
+    /// Interaction logic for MainWindow.xaml 
+    /// 
     /// </summary>
+   
+       
     public partial class MainWindow : Window
     {
         float runningTotal = 0;
@@ -56,16 +59,16 @@ namespace Capstone
             float[] surplusDeficit = new float[20];
 
             Seller dataSeller = new Seller("sell1", 20, 10, 0);
-            Buyer dataBuyer = new Buyer("buy1", 18, 50, 50);
+            Buyer dataBuyer = new Buyer("buy1", 18, 50, 40);
 
-            //Seller data2Seller = new Seller("sell2", 22, 10, 0);
+            Seller data2Seller = new Seller("sell2", 22, 10, 0);
             Buyer data2Buyer = new Buyer("buy2", 18, 50, 50);
 
             Buyer deficitBuyer = new Buyer(dataBuyer.BuyerName, 0, dataBuyer.NegotiationPercent, dataBuyer.MaxCost);
             Seller surplusSeller = new Seller(dataSeller.SellerName, 0, dataSeller.CostProduction, dataSeller.IncentivePercent);
 
             Buyer deficit2Buyer = new Buyer(data2Buyer.BuyerName, 0, data2Buyer.NegotiationPercent, data2Buyer.MaxCost);
-            //Seller surplus2Seller = new Seller(data2Seller.SellerName, 0, data2Seller.CostProduction, data2Seller.IncentivePercent);
+            Seller surplus2Seller = new Seller(data2Seller.SellerName, 0, data2Seller.CostProduction, data2Seller.IncentivePercent);
 
             ListBoxItem stockListBoxItem = new ListBoxItem();
             stockListBoxItem.Content = dataSeller.SellerName;
@@ -75,9 +78,9 @@ namespace Capstone
             buyerListBoxItem.Content = dataBuyer.BuyerName;
             BuyerDataListBox.Items.Add(buyerListBoxItem);
 
-            //ListBoxItem stock2ListBoxItem = new ListBoxItem();
-            //stock2ListBoxItem.Content = data2Seller.SellerName;
-            //SellerDataListBox.Items.Add(stock2ListBoxItem);
+            ListBoxItem stock2ListBoxItem = new ListBoxItem();
+            stock2ListBoxItem.Content = data2Seller.SellerName;
+            SellerDataListBox.Items.Add(stock2ListBoxItem);
 
             ListBoxItem buyer2ListBoxItem = new ListBoxItem();
             buyer2ListBoxItem.Content = data2Buyer.BuyerName;
@@ -86,17 +89,17 @@ namespace Capstone
             sellerDataList.Add(dataSeller);
             buyerDataList.Add(dataBuyer);
 
-            //sellerDataList.Add(data2Seller);
+            sellerDataList.Add(data2Seller);
             buyerDataList.Add(data2Buyer);
 
             sellerSurplusList.Add(surplusSeller);
             buyerDeficitList.Add(deficitBuyer);
 
-            //sellerSurplusList.Add(surplus2Seller);
+            sellerSurplusList.Add(surplus2Seller);
             buyerDeficitList.Add(deficit2Buyer);
 
 
-            for (i = 0; i < 368; i++)   // simulate 10 years each step being a day surrently modified to simulate only 1 day with total demand for testing purposes
+            for (i = 0; i < 368; i++)   // simulate 5-7 years 
             {
                 buyEmptyFlag = 0;
                 sellEmptyFlag = 0;
@@ -120,7 +123,7 @@ namespace Capstone
                 currDataSeller = new Seller(dataSeller.SellerName, dataSeller.TotalVolume , dataSeller.CostProduction, dataSeller.IncentivePercent);
                 currDataBuyer = new Buyer(dataBuyer.BuyerName, dataBuyer.TotalDemand, dataBuyer.NegotiationPercent, dataBuyer.MaxCost);
 
-                //currData2Seller = new Seller(data2Seller.SellerName, data2Seller.TotalVolume, data2Seller.CostProduction, data2Seller.IncentivePercent);
+                currData2Seller = new Seller(data2Seller.SellerName, data2Seller.TotalVolume, data2Seller.CostProduction, data2Seller.IncentivePercent);
                 currData2Buyer = new Buyer(data2Buyer.BuyerName, data2Buyer.TotalDemand, data2Buyer.NegotiationPercent, data2Buyer.MaxCost);
 
 
@@ -131,20 +134,20 @@ namespace Capstone
                 Seller currSurplusSeller = new Seller(surplusSeller.SellerName, 0, surplusSeller.CostProduction, surplusSeller.IncentivePercent);
 
                 Buyer currDeficit2Buyer = new Buyer(deficit2Buyer.BuyerName, 0, deficit2Buyer.NegotiationPercent, deficit2Buyer.MaxCost);
-                //Seller currSurplus2Seller = new Seller(surplus2Seller.SellerName, 0, surplus2Seller.CostProduction, surplus2Seller.IncentivePercent);
+                Seller currSurplus2Seller = new Seller(surplus2Seller.SellerName, 0, surplus2Seller.CostProduction, surplus2Seller.IncentivePercent);
 
 
                 sellerCurrDataList.Add(currDataSeller);
                 buyerCurrDataList.Add(currDataBuyer);
 
-                //sellerCurrDataList.Add(currData2Seller);
+                sellerCurrDataList.Add(currData2Seller);
                 buyerCurrDataList.Add(currData2Buyer);
 
 
                 sellerCurrSurplusList.Add(currSurplusSeller);
                 buyerCurrDeficitList.Add(currDeficitBuyer);
 
-                //sellerCurrSurplusList.Add(currSurplus2Seller);
+                sellerCurrSurplusList.Add(currSurplus2Seller);
                 buyerCurrDeficitList.Add(currDeficit2Buyer);
 
                 count = 0;
@@ -390,7 +393,7 @@ namespace Capstone
                         surplusDeficit[19] = total2 - total - runningTotal;
                         runningTotal += surplusDeficit[19];
                     }
-                }
+                } 
 
                 debugBuyer.Text = total.ToString();
                 debugSeller.Text = total2.ToString();
@@ -401,12 +404,52 @@ namespace Capstone
                 buyerWorkingList.Clear();
                 sellerWorkingList.Clear();
 
+                //START SORTING
+
+                int n = buyerDataList.Count();
+
+                for (int ii = 1; ii < n; ii++)  //Insertion sort for buyers because the lists are mostly sorted, average case O(n) time; is sorted based on cost.
+                {
+
+                    Buyer deficitKey = buyerDeficitList[ii];
+                    Buyer key = buyerDataList[ii];
+                    int jj = ii - 1;
+
+                    while ((jj > -1) && (buyerDataList[jj].RealCost < key.RealCost))
+                    {
+
+                        buyerDataList[jj + 1] = buyerDataList[jj];
+                        buyerDeficitList[jj + 1] = buyerDeficitList[jj];
+                        jj--;
+                    }
+                    buyerDeficitList[jj + 1] = deficitKey;
+                    buyerDataList[jj + 1] = key;
+                }
+
+                for (int ii = 1; ii < n; ii++)  //Insertion sort for sellers because the lists are mostly sorted, average case O(n) time; is sorted based on volume.
+                {
+
+                    Seller surplusKey = sellerSurplusList[ii];
+                    Seller key = sellerDataList[ii];
+                    int jj = ii - 1;
+
+                    while ((jj > -1) && (sellerSurplusList[jj].DailyVolume < surplusKey.DailyVolume)) 
+                    {
+
+                        sellerDataList[jj + 1] = sellerDataList[jj];
+                        sellerSurplusList[jj + 1] = sellerSurplusList[jj];
+                        jj--;
+                    }
+                    sellerSurplusList[jj + 1] = surplusKey;
+                    sellerDataList[jj + 1] = key;
+                }
+
             } //end final FOR loop
 
            
 
 
-        }
+        } // end MAIN 
 
  
 

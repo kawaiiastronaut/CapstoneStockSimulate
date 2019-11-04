@@ -24,7 +24,7 @@ namespace Capstone
             this.maxCost = maxCost;
 
             this.dailyDemand = this.totalDemand / 368;
-            this.realCost = this.maxCost * (float)this.negotiationPercent;
+            this.realCost = this.maxCost * (float)this.negotiationPercent/(float)100;
 
 
 
@@ -54,6 +54,28 @@ namespace Capstone
             set
             {
                 totalDemand = value;
+            }
+        }
+        public float DailyDemand
+        {
+            get
+            {
+                return dailyDemand;
+            }
+            set
+            {
+                dailyDemand = value;
+            }
+        }
+        public float RealCost
+        {
+            get
+            {
+                return realCost;
+            }
+            set
+            {
+                realCost = value;
             }
         }
         public int NegotiationPercent
