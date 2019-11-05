@@ -149,7 +149,7 @@ namespace Capstone
                     label.FontSize = 5;
                     label.Content = "$" + output[i].ToString();
                     Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetTop(label, prevBase-rect.Height-2);
+                    Canvas.SetTop(label, 100);
                     front_Canvas.Children.Add(label);
                 }
                 else
