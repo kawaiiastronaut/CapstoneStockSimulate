@@ -446,7 +446,17 @@ namespace Capstone
 
             } //end final FOR loop
 
-           
+            int[] integerArray = new int[] { 21, 2, 3, 4, 5, -10, 200, -56, 87, -24, 21, 2, 3, 4, 5, -10, 200, -56, 87, -24 };
+
+            long[] longArray = Array.ConvertAll<int, long>(integerArray,
+                delegate (int ie)
+                {
+                    return (long)ie;
+                });
+
+            displayOutput(longArray);
+
+
 
 
         } // end MAIN 
@@ -552,13 +562,13 @@ namespace Capstone
                     }
                     Canvas.SetLeft(rect, i * rect.Width);
                     prevBase = (long)rect.Height + prevBase;
-                    Canvas.SetTop(rect, prevBase-rect.Height);
+                    Canvas.SetTop(rect, 100);
                     front_Canvas.Children.Add(rect);
                     Label label = new Label();
                     label.FontSize = 5;
                     label.Content = "$" + output[i].ToString();
                     Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetTop(label, prevBase-rect.Height-2);
+                    Canvas.SetTop(label, 100);
                     front_Canvas.Children.Add(label);
                 }
                 else
@@ -580,12 +590,12 @@ namespace Capstone
                     }
                     Canvas.SetLeft(rect, i * rect.Width);
                     prevBase = -(long)rect.Height + prevBase;
-                    Canvas.SetTop(rect, prevBase);
+                    Canvas.SetBottom(rect, 100);
                     front_Canvas.Children.Add(rect);
                     Label label = new Label();
                     label.Content = "$" + output[i].ToString();
                     Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetTop(label, prevBase);
+                    Canvas.SetBottom(label, 100);
                     label.FontSize = 5;
                     front_Canvas.Children.Add(label);
                 }
