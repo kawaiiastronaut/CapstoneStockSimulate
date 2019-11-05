@@ -9,19 +9,25 @@ namespace Capstone
     class Seller
     {
         private string sellerName;
-        private long sellVolume;
+        private float totalVolume;
         private long costProduction;
         private int incentivePercent;
         private long[] expenseArray = new long[20];
         private float[] outputArray = new float[4000];
 
+        private float dailyVolume;
+        private float minSellPrice;
 
-        public Seller(string sellerName, long sellVolume, long costProduction, int IncentivePercent)
+
+        public Seller(string sellerName, float totalVolume, long costProduction, int IncentivePercent)
         {
             this.SellerName = sellerName;
-            this.SellVolume = sellVolume;
+            this.TotalVolume = totalVolume;
             this.CostProduction = costProduction;
             this.IncentivePercent = incentivePercent;
+
+            this.dailyVolume = this.totalVolume / 368;
+            this.minSellPrice = this.costProduction * (float)this.incentivePercent;
         }
 
         public string SellerName
@@ -35,15 +41,37 @@ namespace Capstone
                 sellerName = value;
             }
         }
-        public long SellVolume
+        public float TotalVolume
         {
             get
             {
-                return sellVolume;
+                return totalVolume;
             }
             set
             {
-                sellVolume = value;
+                totalVolume = value;
+            }
+        }
+        public float DailyVolume
+        {
+            get
+            {
+                return dailyVolume;
+            }
+            set
+            {
+                dailyVolume = value;
+            }
+        }
+        public float MinSellPrice
+        {
+            get
+            {
+                return minSellPrice;
+            }
+            set
+            {
+                minSellPrice = value;
             }
         }
         public long CostProduction
