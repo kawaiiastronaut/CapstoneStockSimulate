@@ -446,7 +446,7 @@ namespace Capstone
 
             } //end final FOR loop
 
-            int[] integerArray = new int[] { 21, 2, 3, 4, 5, -10, 200, -56, 87, -24, 21, 2, 3, 4, 5, -10, 200, -56, 87, -24 };
+            int[] integerArray = new int[] { 21, 2, 3, 4, 5, -10, 75, -56, 87, -24, 21, 2, 3, 4, 5, -10, 75, -56, 87, -24 };
 
             long[] longArray = Array.ConvertAll<int, long>(integerArray,
                 delegate (int ie)
@@ -512,9 +512,10 @@ namespace Capstone
         private void displayOutput(long[] output)
         {
             front_Canvas.Children.Clear();
+            front_Canvas.Width = 35 * 20;
             long[] minMaxValue = new long[20];
             int i;
-            long minValue=0;
+            long minValue=10000;
             long maxValue=0;
             long minMaxDiff;
             long height = 200;
@@ -522,26 +523,30 @@ namespace Capstone
             long carry = 0;
             long unitHeight;
             minMaxValue[0] = output[0];
-            for (i = 1; i <= 19; i++)
-            {
-                minMaxValue[i] = minMaxValue[i-1] + output[i];
 
-            }
+            float centerGraph = 0;
+            float newZeroPoint = 0;
+
             for (i = 0; i <= 19; i++)
             {
-                if (minMaxValue[i]>maxValue)
+                if (output[i]>maxValue)
                 {
-                    maxValue = minMaxValue[i];
+                    maxValue = output[i];
                 }
-                if (minMaxValue[i] < minValue)
+                if (output[i] < minValue)
                 {
-                    minValue = minMaxValue[i];
+                    minValue = output[i];
                 }
 
             }
             minMaxDiff = Abs(maxValue - minValue);
             unitHeight = minMaxDiff/height;
-            prevBase = maxValue / unitHeight;
+            // prevBase = maxValue / unitHeight;
+           
+            centerGraph = 200 / (maxValue + Abs(minValue));
+            newZeroPoint = centerGraph * -(minValue);
+            
+
             for (i = 0; i <= 19; i++)
             {
                 if(output[i]<0)
@@ -550,8 +555,10 @@ namespace Capstone
                     rect = new System.Windows.Shapes.Rectangle();
                     rect.Stroke = new SolidColorBrush(Colors.Red);
                     rect.Fill = new SolidColorBrush(Colors.Red);
+                    
                     rect.Width = 35;
-                    if (unitHeight != 0)
+                    rect.Height = Abs(output[i]);
+                   /* if (unitHeight != 0)
                     {
                         rect.Height = Abs((carry + output[i]) / unitHeight);
                         carry = ((carry + output[i]) % unitHeight);
@@ -560,15 +567,16 @@ namespace Capstone
                     {
                         rect.Height = height;
                     }
+                    */
                     Canvas.SetLeft(rect, i * rect.Width);
                     prevBase = (long)rect.Height + prevBase;
-                    Canvas.SetTop(rect, 100);
+                    Canvas.SetBottom(rect, newZeroPoint - rect.Height);
                     front_Canvas.Children.Add(rect);
                     Label label = new Label();
                     label.FontSize = 5;
                     label.Content = "$" + output[i].ToString();
                     Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetTop(label, 100);
+                    Canvas.SetTop(label, newZeroPoint);
                     front_Canvas.Children.Add(label);
                 }
                 else
@@ -578,7 +586,8 @@ namespace Capstone
                     rect.Stroke = new SolidColorBrush(Colors.Green);
                     rect.Fill = new SolidColorBrush(Colors.Green);
                     rect.Width = 35;
-                    if (unitHeight != 0)
+                    rect.Height = Abs(output[i]);
+                   /* if (unitHeight != 0)
                     {
                         rect.Height = (float)((carry + output[i]) / unitHeight);
                         carry = (carry + output[i]) % unitHeight;
@@ -588,9 +597,11 @@ namespace Capstone
                         rect.Height = height/20;
                         carry = (carry + output[i]);
                     }
+
+                   */
                     Canvas.SetLeft(rect, i * rect.Width);
                     prevBase = -(long)rect.Height + prevBase;
-                    Canvas.SetBottom(rect, 100);
+                    Canvas.SetBottom(rect, newZeroPoint);
                     front_Canvas.Children.Add(rect);
                     Label label = new Label();
                     label.Content = "$" + output[i].ToString();

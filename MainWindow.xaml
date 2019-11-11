@@ -8,36 +8,36 @@
         Title="MainWindow" Height="809.6" Width="1000">
     <Grid>
         <Label Content="Sellers" HorizontalAlignment="Left" Margin="34,22,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="334" Margin="34,47,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="SellerDataListBox_SelectionChanged" >
+        <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="315" Margin="34,47,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="SellerDataListBox_SelectionChanged" >
 
         </ListBox>
-        <TextBox Name="SellerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="308,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="SellerNameTextBox_TextChanged"/>
-        <Label Content="Seller Name" HorizontalAlignment="Left" Margin="210,70,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="SellVolTextBox"  HorizontalAlignment="Left" Height="23" Margin="308,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Total Volume aval" HorizontalAlignment="Left" Margin="210,113,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="CostProductionTextBox"  HorizontalAlignment="Left" Height="23" Margin="315,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label Content="Cost of production" HorizontalAlignment="Left" Margin="194,164,0,0" VerticalAlignment="Top"/>
-        <Label Content="Incentive proportion&#xA;" HorizontalAlignment="Left" Margin="184,208,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="IncentiveTextBox"  HorizontalAlignment="Left" Height="23" Margin="308,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="25"/>
-        <Button Name="AddSellerButton" Content="Add a Seller" HorizontalAlignment="Left" Margin="210,346,0,0" VerticalAlignment="Top" Width="218" Height="35" Click="AddSellerButton_Click" />
-        <Label Content="Buyers" HorizontalAlignment="Left" Margin="513,41,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="BuyerDataListBox" HorizontalAlignment="Left" Height="315" Margin="513,66,0,0" VerticalAlignment="Top" Width="171"/>
-        <TextBox x:Name="BuyerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="838,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label Content="Name" HorizontalAlignment="Left" Margin="718,89,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TotalDemandTextbox"  HorizontalAlignment="Left" Height="23" Margin="838,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.901,0.698"/>
-        <Label Content="Total volume demand" HorizontalAlignment="Left" Margin="718,131,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="NegotiationTextBox"  HorizontalAlignment="Left" Height="23" Margin="838,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="50"/>
-        <Label Content="Negotiation percent" HorizontalAlignment="Left" Margin="729,174,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
-        <TextBox x:Name="MaxCostTextBox"  HorizontalAlignment="Left" Height="23" Margin="835,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Max Cost Per Unit&#xA;" HorizontalAlignment="Left" Margin="736,217,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="AddBuyerButton" Content="Add Buyer" HorizontalAlignment="Left" Margin="721,32,0,0" VerticalAlignment="Top" Width="218" Height="35" Click="AddBuyerButton_Click" />
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="102,386,0,0" VerticalAlignment="Top" Width="697">
-            <Canvas x:Name="front_Canvas" HorizontalAlignment="Left" Height="200" Margin="-0.8,-0.8,-104,-1.4" VerticalAlignment="Top" Width="700"/>
+        <TextBox Name="SellerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="SellerNameTextBox_TextChanged"/>
+        <Label Content="Seller Name" HorizontalAlignment="Left" Margin="185,50,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="SellVolTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Total Volume avaliable" HorizontalAlignment="Left" Margin="185,86,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="CostProductionTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label Content="Cost of production" HorizontalAlignment="Left" Margin="185,123,0,0" VerticalAlignment="Top"/>
+        <Label Content="Incentive proportion&#xA;" HorizontalAlignment="Left" Margin="185,156,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="IncentiveTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="25"/>
+        <Button Name="AddSellerButton" Content="Add a Seller" HorizontalAlignment="Left" Margin="245,327,0,0" VerticalAlignment="Top" Width="218" Height="35" Click="AddSellerButton_Click" />
+        <Label Content="Buyers" HorizontalAlignment="Left" Margin="513,22,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="BuyerDataListBox" HorizontalAlignment="Left" Height="315" Margin="513,47,0,0" VerticalAlignment="Top" Width="171"/>
+        <TextBox x:Name="BuyerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="830,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label Content="Buyer Name" HorizontalAlignment="Left" Margin="700,47,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TotalDemandTextbox"  HorizontalAlignment="Left" Height="23" Margin="830,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.901,0.698"/>
+        <Label Content="Total volume demand" HorizontalAlignment="Left" Margin="700,86,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NegotiationTextBox"  HorizontalAlignment="Left" Height="23" Margin="830,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="50"/>
+        <Label Content="Negotiation percent" HorizontalAlignment="Left" Margin="700,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
+        <TextBox x:Name="MaxCostTextBox"  HorizontalAlignment="Left" Height="23" Margin="830,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Max Cost Per Unit&#xA;" HorizontalAlignment="Left" Margin="700,153,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="AddBuyerButton" Content="Add Buyer" HorizontalAlignment="Left" Margin="737,327,0,0" VerticalAlignment="Top" Width="218" Height="35" Click="AddBuyerButton_Click" />
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="102,386,0,0" VerticalAlignment="Top" Width="700">
+            <Canvas x:Name="front_Canvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-9,-1" VerticalAlignment="Top" Width="705"/>
         </Border>
         <Label Name="Max" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,386,0,0"/>
         <Label Name="Min" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,560,0,0"/>
-        <Label Content="%" HorizontalAlignment="Left" Margin="958,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="29.87,-12.594"/>
-        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="963,174,0,0"/>
+        <Label Content="%" HorizontalAlignment="Left" Margin="955,153,0,0" VerticalAlignment="Top" RenderTransformOrigin="29.87,-12.594"/>
+        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="958,157,0,0" RenderTransformOrigin="-0.6,-1.5"/>
         <Label FontSize="8" Content="Y1Q1" Margin="102,586,856.6,172"/>
         <Label FontSize="8" Content="Y1Q2" Margin="137,586,821.6,172"/>
         <Label FontSize="8" Content="Y1Q3" RenderTransformOrigin="0.488,0.521" Margin="172,586,786.6,172"/>
@@ -58,7 +58,7 @@
         <Label FontSize="8" Content="Y5Q2" Margin="700,586,258.6,172"/>
         <Label FontSize="8" Content="Y5Q3" Margin="736,586,222.6,172"/>
         <Label  FontSize="8" Content="Y5Q4" Margin="771,586,187.6,172"/>
-        <Label Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="428,212,0,0"/>
+        <Label Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="438,160,0,0"/>
         <TextBox x:Name="debugSeller" HorizontalAlignment="Left" Height="23" Margin="137,711,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="debugBuyer" HorizontalAlignment="Left" Height="23" Margin="684,711,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
 
