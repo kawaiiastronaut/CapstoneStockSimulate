@@ -42,16 +42,20 @@ namespace Capstone
 
         private int buyEmptyFlag;
         private int sellEmptyFlag;
+        int buyerClickCounter = 0;
+        int sellerClickCounter = 0;
 
         public MainWindow()
         {
             InitializeComponent();
+            InitializeAutoBuyerSeller();
             //test
             //test 2
             int i;
             int j;
             int k;
             int count;
+            
 
             int buyFlagWatch;
             int sellFlagWatch;
@@ -447,6 +451,31 @@ namespace Capstone
             } //end final FOR loop
 
             int[] integerArray = new int[] { 21, 2, 3, 4, 5, -10, 75, -56, 87, -24, 21, 2, 3, 4, 5, -10, 75, -56, 87, -24 };
+            int[] integer100Array = new int[1840];
+            Random rnd = new Random();
+            for(int a = 0; a < 1840; a++)
+            {
+
+                //int range = 100;
+                 integer100Array[a] = rnd.Next(1, 200);
+
+                //integer100Array[a] = a % 200;
+                /* int rand = rnd.Next(0, 2);
+                if(a == 0){
+                    integer100Array[a] = 100;
+                }
+                else if(rand % 2 == 0)
+                {
+                    integer100Array[a] = integer100Array[a-1] + 2;
+                }
+                else
+                {
+                    integer100Array[a] = integer100Array[a-1] - 2;
+                }
+                */
+
+            }
+
 
             long[] longArray = Array.ConvertAll<int, long>(integerArray,
                 delegate (int ie)
@@ -454,7 +483,14 @@ namespace Capstone
                     return (long)ie;
                 });
 
+            long[] longerArray = Array.ConvertAll<int, long>(integer100Array,
+                delegate (int ie)
+                {
+                    return (long)ie;
+                });
+
             displayOutput(longArray);
+            displayLineGraph(longerArray);
 
 
 
@@ -494,6 +530,96 @@ namespace Capstone
            
                 
            
+        }
+
+        private void AddMultipleBuyers_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("This is a test");
+        }
+
+        private void AddMultipleSellers_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("This is a test");
+        }
+
+
+        private void AutoBuyerButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if(buyerClickCounter % 2 == 0)
+            {
+                AddBuyerButton.Content = "Add Buyers";
+                //SellerNameLabel.Content = "Seller Names";
+                AddBuyerButton.Click -= AddBuyerButton_Click;
+                AddBuyerButton.Click += AddMultipleBuyers_Click;
+                 
+               
+                numberOfBuyersTextBox.Visibility = Visibility.Visible;
+                numberOfBuyersLabel.Visibility = Visibility.Visible;
+                RangeBuyCostTextBox.Visibility = Visibility.Visible;
+                RangeBuyCostLabel.Visibility = Visibility.Visible;
+
+
+            }
+            else
+            {
+                AddBuyerButton.Click += AddBuyerButton_Click;
+                AddBuyerButton.Click -= AddMultipleBuyers_Click;
+                AddBuyerButton.Content = "Add Buyer";
+                
+                numberOfBuyersTextBox.Visibility = Visibility.Hidden;
+                numberOfBuyersLabel.Visibility = Visibility.Hidden;
+                RangeBuyCostTextBox.Visibility = Visibility.Hidden;
+                RangeBuyCostLabel.Visibility = Visibility.Hidden;
+            }
+
+            buyerClickCounter++;
+        }
+
+        private void AutoSellerButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sellerClickCounter % 2 == 0)
+            {
+                AddSellerButton.Content = "Add Sellers";
+                // SellerNameLabel.Content = "Seller Names";
+                AddSellerButton.Click -= AddSellerButton_Click;
+                AddSellerButton.Click += AddMultipleSellers_Click;
+              //  AddSellerButton.Visibility = Visibility.Hidden;
+                //AddMultipleSellersButton.Visibility = Visibility.Visible;
+                numberOfSellersTextBox.Visibility = Visibility.Visible;
+                numberOfSellersLabel.Visibility = Visibility.Visible;
+                RangeCostProductionTextBox.Visibility = Visibility.Visible;
+                RangeCostProductionLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AddSellerButton.Content = "Add Seller";
+                // SellerNameLabel.Content = "Seller Name";
+                AddSellerButton.Click += AddSellerButton_Click;
+                AddSellerButton.Click -= AddMultipleSellers_Click;
+
+                numberOfSellersTextBox.Visibility = Visibility.Hidden;
+                numberOfSellersLabel.Visibility = Visibility.Hidden;
+                RangeCostProductionTextBox.Visibility = Visibility.Hidden;
+                RangeCostProductionLabel.Visibility = Visibility.Hidden;
+            }
+
+            sellerClickCounter++;
+
+        }
+
+        private void InitializeAutoBuyerSeller()
+        {
+            
+            numberOfSellersTextBox.Visibility = Visibility.Hidden;
+            numberOfSellersLabel.Visibility = Visibility.Hidden;
+            RangeCostProductionTextBox.Visibility = Visibility.Hidden;
+            RangeCostProductionLabel.Visibility = Visibility.Hidden;
+
+            numberOfBuyersTextBox.Visibility = Visibility.Hidden;
+            numberOfBuyersLabel.Visibility = Visibility.Hidden;
+            RangeBuyCostTextBox.Visibility = Visibility.Hidden;
+            RangeBuyCostLabel.Visibility = Visibility.Hidden;
         }
 
         private void SellerDataListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -541,6 +667,10 @@ namespace Capstone
             }
             minMaxDiff = Abs(maxValue - minValue);
             unitHeight = minMaxDiff/height;
+            front_Canvas.Height = minMaxDiff;
+            barGraphBorder.Height = minMaxDiff;
+            
+
             // prevBase = maxValue / unitHeight;
            
             centerGraph = 200 / (maxValue + Abs(minValue));
@@ -600,7 +730,7 @@ namespace Capstone
 
                    */
                     Canvas.SetLeft(rect, i * rect.Width);
-                    prevBase = -(long)rect.Height + prevBase;
+                    // prevBase = -(long)rect.Height + prevBase;
                     Canvas.SetBottom(rect, newZeroPoint);
                     front_Canvas.Children.Add(rect);
                     Label label = new Label();
@@ -611,24 +741,113 @@ namespace Capstone
                     front_Canvas.Children.Add(label);
                 }
 
-
-               
-                
-
-
-
             }
             Max.Content = "$" + maxValue.ToString();
             Min.Content = "$" + minValue.ToString();
+           
+        }
+
+        private void displayLineGraph(long[] output)
+        {
+            lineGraphCanvas.Children.Clear();
+           // front_Canvas.Width = 35 * 20;
             
+            int i;
+            long minValue = 10000;
+            long maxValue = 0;
+            long height = 200;
+            long minMaxDiff = 0;
+
+            float centerGraph = 0;
+            float newZeroPoint = 0;
+
+            for (i = 0; i <= 19; i++)
+            {
+                if (output[i] > maxValue)
+                {
+                    maxValue = output[i];
+                }
+                if (output[i] < minValue)
+                {
+                    minValue = output[i];
+                }
+
+            }
+
+            minMaxDiff = maxValue + minValue;
+            //lineGraphCanvas.Height = 200;
+
+            for (i = 0; i < 1840; i++)
+            {
+                if (i % 8 == 0)
+                {
+
+                    System.Windows.Shapes.Ellipse circle;
+                    circle = new System.Windows.Shapes.Ellipse();
+                    circle.Stroke = new SolidColorBrush(Colors.Red);
+                    circle.Fill = new SolidColorBrush(Colors.Red);
+                    circle.Height = (lineGraphCanvas.Height / 230) * 3.5;
+                    circle.Width = (lineGraphCanvas.Height / 230) * 3.5;
+                    
+
+                    Canvas.SetLeft(circle, (i * circle.Width) / 8);
+                    Canvas.SetBottom(circle, output[i]);
+                    lineGraphCanvas.Children.Add(circle);
 
 
+                    if(i < 1840 - 8)
+                    {
+                        System.Windows.Shapes.Line line;
+                        line = new System.Windows.Shapes.Line();
+                        line.Stroke = new SolidColorBrush(Colors.Black);
+                        line.StrokeThickness = 0.5;
+
+                         line.X1 = ((i * circle.Width) / 8) + circle.Width;
+                         line.Y1 = - output[i] + 200;
+                         line.X2 = ((i+8) * circle.Width) / 8 ;
+                         line.Y2 = - output[i+8] + 200;
+                         
+
+                        lineGraphCanvas.Children.Add(line);
+                    }
+
+                    
+                    
 
 
+                    System.Windows.Shapes.Rectangle rect;
 
 
+                    rect = new System.Windows.Shapes.Rectangle();
+
+                    rect.Height = Abs(output[i]);
+                    /* if (unitHeight != 0)
+                     {
+                         rect.Height = Abs((carry + output[i]) / unitHeight);
+                         carry = ((carry + output[i]) % unitHeight);
+                     }
+                     else
+                     {
+                         rect.Height = height;
+                     }
+                     */
+
+                    /* Label label = new Label();
+                     label.FontSize = 5;
+                     label.Content = "$" + output[i].ToString();
+                     Canvas.SetLeft(label, i * rect.Width);
+                     Canvas.SetTop(label, newZeroPoint);
+                     front_Canvas.Children.Add(label);
+                     */
+                    System.Windows.Shapes.Ellipse prevCircle;
+                    prevCircle = new System.Windows.Shapes.Ellipse();
+                    prevCircle = circle;
+                    
+                }
+            }
 
         }
+          
 
         private void SellerNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
