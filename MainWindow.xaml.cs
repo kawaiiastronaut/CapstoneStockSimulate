@@ -42,8 +42,14 @@ namespace Capstone
 
         private int buyEmptyFlag;
         private int sellEmptyFlag;
+
         int buyerClickCounter = 0;
         int sellerClickCounter = 0;
+        int arrayStartValue = 0;
+        int arrayEndValue = 1840;
+        int[] integer10Array = new int[1840];
+        long[] longerArray = new long[1840];
+
 
         public MainWindow()
         {
@@ -451,13 +457,39 @@ namespace Capstone
             } //end final FOR loop
 
             int[] integerArray = new int[] { 21, 2, 3, 4, 5, -10, 75, -56, 87, -24, 21, 2, 3, 4, 5, -10, 75, -56, 87, -24 };
-            int[] integer100Array = new int[1840];
+            
             Random rnd = new Random();
             for(int a = 0; a < 1840; a++)
             {
-
+                if(a < 367)
+                {
+                    if(a < 150)
+                    {
+                        integer10Array[a] = 25;
+                    }
+                    else
+                    {
+                        integer10Array[a] = 100;
+                    }
+                    //integer10Array[a] = 100;
+                }else if(a < 735){
+                    integer10Array[a] = a % 50;
+                }else if(a < 1103){
+                    integer10Array[a] = a % 150;
+                }
+                else if(a < 1471)
+                {
+                    integer10Array[a] = a % 150;
+                }
+                else
+                {
+                    integer10Array[a] = 150;
+                }
+                
+                
                 //int range = 100;
-                 integer100Array[a] = rnd.Next(1, 200);
+               
+               // integer10Array[a] = rnd.Next(1, 200);
 
                 //integer100Array[a] = a % 200;
                 /* int rand = rnd.Next(0, 2);
@@ -483,7 +515,7 @@ namespace Capstone
                     return (long)ie;
                 });
 
-            long[] longerArray = Array.ConvertAll<int, long>(integer100Array,
+            longerArray = Array.ConvertAll<int, long>(integer10Array,
                 delegate (int ie)
                 {
                     return (long)ie;
@@ -686,6 +718,7 @@ namespace Capstone
                     rect.Stroke = new SolidColorBrush(Colors.Red);
                     rect.Fill = new SolidColorBrush(Colors.Red);
                     
+                    
                     rect.Width = 35;
                     rect.Height = Abs(output[i]);
                    /* if (unitHeight != 0)
@@ -701,13 +734,18 @@ namespace Capstone
                     Canvas.SetLeft(rect, i * rect.Width);
                     prevBase = (long)rect.Height + prevBase;
                     Canvas.SetBottom(rect, newZeroPoint - rect.Height);
+                    if(rect.IsMouseOver == true)
+                    {
+                        Console.WriteLine("This should print");
+                    }
                     front_Canvas.Children.Add(rect);
-                    Label label = new Label();
+                  /*  Label label = new Label();
                     label.FontSize = 5;
                     label.Content = "$" + output[i].ToString();
                     Canvas.SetLeft(label, i * rect.Width);
                     Canvas.SetTop(label, newZeroPoint);
                     front_Canvas.Children.Add(label);
+                    */
                 }
                 else
                 {
@@ -750,8 +788,8 @@ namespace Capstone
         private void displayLineGraph(long[] output)
         {
             lineGraphCanvas.Children.Clear();
-           // front_Canvas.Width = 35 * 20;
-            
+            // front_Canvas.Width = 35 * 20;
+
             int i;
             long minValue = 10000;
             long maxValue = 0;
@@ -774,80 +812,131 @@ namespace Capstone
 
             }
 
-            minMaxDiff = maxValue + minValue;
+            //minMaxDiff = maxValue + minValue;
             //lineGraphCanvas.Height = 200;
 
-            for (i = 0; i < 1840; i++)
+            //makes line graph for years 1-5
+            if (arrayStartValue == 0 && arrayEndValue == 1840)
             {
-                if (i % 8 == 0)
+                
+                for (i = 0; i < 1840; i++)
                 {
-
-                    System.Windows.Shapes.Ellipse circle;
-                    circle = new System.Windows.Shapes.Ellipse();
-                    circle.Stroke = new SolidColorBrush(Colors.Red);
-                    circle.Fill = new SolidColorBrush(Colors.Red);
-                    circle.Height = (lineGraphCanvas.Height / 230) * 3.5;
-                    circle.Width = (lineGraphCanvas.Height / 230) * 3.5;
-                    
-
-                    Canvas.SetLeft(circle, (i * circle.Width) / 8);
-                    Canvas.SetBottom(circle, output[i]);
-                    lineGraphCanvas.Children.Add(circle);
-
-
-                    if(i < 1840 - 8)
+                    if (i % 10 == 0)
                     {
-                        System.Windows.Shapes.Line line;
-                        line = new System.Windows.Shapes.Line();
-                        line.Stroke = new SolidColorBrush(Colors.Black);
-                        line.StrokeThickness = 0.5;
 
-                         line.X1 = ((i * circle.Width) / 8) + circle.Width;
-                         line.Y1 = - output[i] + 200;
-                         line.X2 = ((i+8) * circle.Width) / 8 ;
-                         line.Y2 = - output[i+8] + 200;
-                         
+                        System.Windows.Shapes.Ellipse circle;
+                        circle = new System.Windows.Shapes.Ellipse();
+                        circle.Stroke = new SolidColorBrush(Colors.Red);
+                        circle.Fill = new SolidColorBrush(Colors.Red);
+                        circle.Height = (lineGraphCanvas.Height / 184) * 3.5;
+                        circle.Width = (lineGraphCanvas.Height / 184) * 3.5;
 
-                        lineGraphCanvas.Children.Add(line);
+                        Canvas.SetLeft(circle, (i * circle.Width) / 10);
+                        Canvas.SetBottom(circle, output[i]);
+                        lineGraphCanvas.Children.Add(circle);
+
+
+                        if (i < 1840 - 10)
+                        {
+                            System.Windows.Shapes.Line line;
+                            line = new System.Windows.Shapes.Line();
+                            line.Stroke = new SolidColorBrush(Colors.Black);
+                            line.StrokeThickness = 0.5;
+
+                            line.X1 = ((i * circle.Width) / 10) + circle.Width;
+                            line.Y1 = -output[i] + 200;
+                            line.X2 = ((i + 10) * circle.Width) / 10;
+                            line.Y2 = -output[i + 10] + 200;
+
+                            lineGraphCanvas.Children.Add(line);
+                        }
+
+                    }
+                }
+            }
+            else //makes line graph for year 1, 2, 3, 4, or 5
+            {
+                for (i = arrayStartValue; i < arrayEndValue; i++)
+                {
+                    
+                    if (i % 2 == 0)
+                    {
+                        System.Windows.Shapes.Ellipse circle;
+                        circle = new System.Windows.Shapes.Ellipse();
+                        circle.Stroke = new SolidColorBrush(Colors.Red);
+                        circle.Fill = new SolidColorBrush(Colors.Red);
+                        circle.Height = (lineGraphCanvas.Width / 184);
+                        circle.Width = (lineGraphCanvas.Width / 184);
+
+
+                        //  Canvas.SetLeft(circle, -((i % 368 * circle.Width) / 2) + 700) ;
+                        Canvas.SetLeft(circle, ((i % 368) * circle.Width) / 2);
+                        Canvas.SetTop(circle, -output[i] + lineGraphCanvas.Height);
+                        lineGraphCanvas.Children.Add(circle);
+
+
+                        if (i < arrayEndValue - 2)
+                        {
+                            System.Windows.Shapes.Line line;
+                            line = new System.Windows.Shapes.Line();
+                            line.Stroke = new SolidColorBrush(Colors.Black);
+                            line.StrokeThickness = 0.5;
+
+
+                            line.X1 = (i % 368) * circle.Width / 2 + circle.Width;
+                            line.Y1 = -output[i] +  lineGraphCanvas.Height ;
+                            line.X2 = (i % 368 + 2) * circle.Width / 2;
+                            line.Y2 = -output[i + 2] + lineGraphCanvas.Height;
+
+                            lineGraphCanvas.Children.Add(line);
+                        }
                     }
 
-                    
-                    
-
-
-                    System.Windows.Shapes.Rectangle rect;
-
-
-                    rect = new System.Windows.Shapes.Rectangle();
-
-                    rect.Height = Abs(output[i]);
-                    /* if (unitHeight != 0)
-                     {
-                         rect.Height = Abs((carry + output[i]) / unitHeight);
-                         carry = ((carry + output[i]) % unitHeight);
-                     }
-                     else
-                     {
-                         rect.Height = height;
-                     }
-                     */
-
-                    /* Label label = new Label();
-                     label.FontSize = 5;
-                     label.Content = "$" + output[i].ToString();
-                     Canvas.SetLeft(label, i * rect.Width);
-                     Canvas.SetTop(label, newZeroPoint);
-                     front_Canvas.Children.Add(label);
-                     */
-                    System.Windows.Shapes.Ellipse prevCircle;
-                    prevCircle = new System.Windows.Shapes.Ellipse();
-                    prevCircle = circle;
-                    
                 }
             }
 
         }
-          
+
+        private void UpdateLineGraph_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if(Year1Radio.IsChecked == true)
+            {
+                arrayStartValue = 0;
+                arrayEndValue = 368;
+                Console.WriteLine("Test print");
+            }
+            else if(Year2Radio.IsChecked == true)
+            {
+                arrayStartValue = 368;
+                arrayEndValue = 736;
+                Console.WriteLine("Year 2");
+            }
+            else if (Year3Radio.IsChecked == true)
+            {
+                arrayStartValue = 736;
+                arrayEndValue = 1104;
+            }
+            else if (Year4Radio.IsChecked == true)
+            {
+                arrayStartValue = 1104;
+                arrayEndValue = 1472;
+            }
+            else if (Year5Radio.IsChecked == true)
+            {
+                arrayStartValue = 1472;
+                arrayEndValue = 1840;
+            }
+            else if (AllYearsRadio.IsChecked == true)
+            {
+                arrayStartValue = 0;
+                arrayEndValue = 1840;
+            }
+            lineGraphCanvas.Children.Clear();
+            displayLineGraph(longerArray);
+        }
+
 
         private void SellerNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

@@ -76,5 +76,12 @@
             <Canvas x:Name="lineGraphCanvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="705"/>
         </Border>
 
+        <RadioButton x:Name="Year1Radio" GroupName="Years"  Margin="821,548,107,209">Year 1</RadioButton>
+        <RadioButton x:Name="Year2Radio" GroupName="Years"  Margin="821,575,107,182">Year 2</RadioButton>
+        <RadioButton x:Name="Year3Radio" GroupName="Years"  Margin="821,602,107,155">Year 3</RadioButton>
+        <RadioButton x:Name="Year4Radio" GroupName="Years"  Margin="821,629,107,128">Year 4</RadioButton>
+        <RadioButton x:Name="Year5Radio" GroupName="Years"  Margin="821,656,107,101">Year 5</RadioButton>
+        <RadioButton x:Name="AllYearsRadio" GroupName="Years"  IsChecked="True" Margin="821,683,81,74">Years 1-5</RadioButton>
+        <Button x:Name="UpdateLineGraphYearButton" Content="Update Line Graph" HorizontalAlignment="Left" Margin="821,705,0,0" VerticalAlignment="Top" Width="104" Height="35" Click="UpdateLineGraph_Click" />
     </Grid>
 </Window>
