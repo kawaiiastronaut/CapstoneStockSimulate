@@ -572,7 +572,7 @@ namespace Capstone
 
                 int n = buyerDataList.Count();
 
-                for (int ii = 1; ii < n; ii++)  //Insertion sort for buyers because the lists are mostly sorted, average case O(n) time; is sorted based on cost.
+                for (int ii = 1; ii < n; ii++)  //Insertion sort for buyers because the lists are mostly sorted, average case O(n) time; is sorted based on cost. 
                 {
 
                     Buyer deficitKey = buyerDeficitList[ii];
