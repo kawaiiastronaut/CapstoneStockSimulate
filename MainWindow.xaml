@@ -61,6 +61,7 @@
         <Label Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="428,212,0,0"/>
         <TextBox x:Name="debugSeller" HorizontalAlignment="Left" Height="23" Margin="137,711,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="debugBuyer" HorizontalAlignment="Left" Height="23" Margin="684,711,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="684,642,0,0" VerticalAlignment="Top" Width="218" Height="35" Click="RunButton_Click" />
 
     </Grid>
 </Window>
