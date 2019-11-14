@@ -66,11 +66,6 @@ namespace Capstone
             InitializeAutoBuyerSeller();
             //test
             //test 2
-            int i;
-            int j;
-            int k;
-            int count;
-            
 
         }
  
@@ -142,133 +137,12 @@ namespace Capstone
 
         }
 
-        private void SellerDataListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Seller selectedSeller;
-            selectedSeller = sellerDataList[SellerDataListBox.SelectedIndex];
-            SellerNameTextBox.Text = selectedSeller.SellerName;
-            SellVolTextBox.Text = selectedSeller.TotalVolume.ToString();
-            CostProductionTextBox.Text = selectedSeller.CostProduction.ToString();
-            IncentiveTextBox.Text = selectedSeller.IncentivePercent.ToString();
-            
-        }
-
-
-
-        private void displayOutput(long[] output)
-        {
-            front_Canvas.Children.Clear();
-            long[] minMaxValue = new long[20];
-            int i;
-            long minValue=0;
-            long maxValue=0;
-            long minMaxDiff;
-            long height = 200;
-            long prevBase = 0;
-            long carry = 0;
-            long unitHeight;
-            minMaxValue[0] = output[0];
-            for (i = 1; i <= 19; i++)
-            {
-                minMaxValue[i] = minMaxValue[i-1] + output[i];
-
-            }
-            for (i = 0; i <= 19; i++)
-            {
-                if (minMaxValue[i]>maxValue)
-                {
-                    maxValue = minMaxValue[i];
-                }
-                if (minMaxValue[i] < minValue)
-                {
-                    minValue = minMaxValue[i];
-                }
-
-            }
-            minMaxDiff = Abs(maxValue - minValue);
-            unitHeight = minMaxDiff/height;
-            prevBase = maxValue / unitHeight;
-            for (i = 0; i <= 19; i++)
-            {
-                if(output[i]<0)
-                {
-                    System.Windows.Shapes.Rectangle rect;
-                    rect = new System.Windows.Shapes.Rectangle();
-                    rect.Stroke = new SolidColorBrush(Colors.Red);
-                    rect.Fill = new SolidColorBrush(Colors.Red);
-                    rect.Width = 35;
-                    if (unitHeight != 0)
-                    {
-                        rect.Height = Abs((carry + output[i]) / unitHeight);
-                        carry = ((carry + output[i]) % unitHeight);
-                    }
-                    else
-                    {
-                        rect.Height = height;
-                    }
-                    Canvas.SetLeft(rect, i * rect.Width);
-                    prevBase = (long)rect.Height + prevBase;
-                    Canvas.SetTop(rect, prevBase-rect.Height);
-                    front_Canvas.Children.Add(rect);
-                    Label label = new Label();
-                    label.FontSize = 5;
-                    label.Content = "$" + output[i].ToString();
-                    Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetTop(label, prevBase-rect.Height-2);
-                    front_Canvas.Children.Add(label);
-                }
-                else
-                {
-                    System.Windows.Shapes.Rectangle rect;
-                    rect = new System.Windows.Shapes.Rectangle();
-                    rect.Stroke = new SolidColorBrush(Colors.Green);
-                    rect.Fill = new SolidColorBrush(Colors.Green);
-                    rect.Width = 35;
-                    if (unitHeight != 0)
-                    {
-                        rect.Height = (float)((carry + output[i]) / unitHeight);
-                        carry = (carry + output[i]) % unitHeight;
-                    }
-                    else
-                    {
-                        rect.Height = height/20;
-                        carry = (carry + output[i]);
-                    }
-                    Canvas.SetLeft(rect, i * rect.Width);
-                    prevBase = -(long)rect.Height + prevBase;
-                    Canvas.SetTop(rect, prevBase);
-                    front_Canvas.Children.Add(rect);
-                    Label label = new Label();
-                    label.Content = "$" + output[i].ToString();
-                    Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetTop(label, prevBase);
-                    label.FontSize = 5;
-                    front_Canvas.Children.Add(label);
-                }
-
-
-               
-                
-
-
-
-            }
-            Max.Content = "$" + maxValue.ToString();
-            Min.Content = "$" + minValue.ToString();
-            
 
 
 
 
+        
 
-
-
-        }
-
-        private void SellerNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         void transact(Seller seller, Buyer buyer)
 
@@ -702,38 +576,9 @@ namespace Capstone
 
  
 
-        private void AddSellerButton_Click(object sender, RoutedEventArgs e)
-        {
-           
+     
 
-            long sellVolume;
-            long costProduction;
-            int incentivePercent;
-            string hold;
-            hold = SellerNameTextBox.Text;
-            if (Int64.TryParse(SellVolTextBox.Text, out sellVolume) && Int64.TryParse(CostProductionTextBox.Text, out costProduction) && Int32.TryParse(IncentiveTextBox.Text, out incentivePercent)&& !(hold.Any(char.IsDigit)))
-            {
 
-                
-                Seller dataSeller = new Seller(hold, sellVolume, costProduction, incentivePercent);
-                sellerDataList.Add(dataSeller);
-                ListBoxItem stockListBoxItem = new ListBoxItem();
-                stockListBoxItem.Content = SellerNameTextBox.Text;
-                SellerDataListBox.Items.Add(stockListBoxItem);
-            }
-            else
-            {
-    
-            }
-        }
-
-        private void AddBuyerButton_Click(object sender, RoutedEventArgs e)
-        {
- 
-           
-                
-           
-        }
 
         private void AddMultipleBuyers_Click(object sender, RoutedEventArgs e)
         {
@@ -1114,33 +959,8 @@ namespace Capstone
 
         }
 
-        void transact(Seller seller, Buyer buyer)
-
-        {
-            if (seller.TotalVolume > buyer.TotalDemand)
-            {
-                buyEmptyFlag++;
-                seller.TotalVolume -= buyer.TotalDemand;
-                buyer.TotalDemand = 0;
-
-
-            }
-            else if (seller.TotalVolume < buyer.TotalDemand)
-            {
-                sellEmptyFlag++;
-                buyer.TotalDemand -= seller.TotalVolume;
-                seller.TotalVolume = 0;
-
-
-            }
-            else
-            {
-                buyEmptyFlag++;
-                sellEmptyFlag++;
-                seller.TotalVolume = 0;
-                buyer.TotalDemand = 0;
-            }
-        }
+      
+        
     }
 
 

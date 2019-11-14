@@ -69,9 +69,9 @@
         <Label FontSize="8" Content="Y5Q3" Margin="737,502,222,256"/>
         <Label  FontSize="8" Content="Y5Q4" Margin="772,502,187,256"/>
         <Label Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="438,160,0,0"/>
-        <TextBox x:Name="debugSeller" HorizontalAlignment="Left" Height="23" Margin="137,711,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="debugBuyer" HorizontalAlignment="Left" Height="23" Margin="684,711,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="684,642,0,0" VerticalAlignment="Top" Width="218" Height="35" Click="RunButton_Click" />
+        <TextBox x:Name="debugSeller" HorizontalAlignment="Left" Height="23" Margin="847,431,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="debugBuyer" HorizontalAlignment="Left" Height="23" Margin="848,459,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="818,487,0,0" VerticalAlignment="Top" Width="166" Height="37" Click="RunButton_Click" />
 
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="105,548,0,0" VerticalAlignment="Top" Width="700">
             <Canvas x:Name="lineGraphCanvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="705"/>
