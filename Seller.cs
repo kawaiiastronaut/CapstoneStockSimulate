@@ -52,6 +52,28 @@ namespace Capstone
                 totalVolume = value;
             }
         }
+        public float DailyVolume
+        {
+            get
+            {
+                return dailyVolume;
+            }
+            set
+            {
+                dailyVolume = value;
+            }
+        }
+        public float MinSellPrice
+        {
+            get
+            {
+                return minSellPrice;
+            }
+            set
+            {
+                minSellPrice = value;
+            }
+        }
         public long CostProduction
         {
             get

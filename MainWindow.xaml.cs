@@ -17,8 +17,11 @@ using static System.Math;
 namespace Capstone
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml j
+    /// Interaction logic for MainWindow.xaml 
+    /// 
     /// </summary>
+   
+       
     public partial class MainWindow : Window
     {
         float runningTotal = 0;
@@ -40,15 +43,25 @@ namespace Capstone
         private int buyEmptyFlag;
         private int sellEmptyFlag;
 
+        int buyerClickCounter = 0;
+        int sellerClickCounter = 0;
+        int arrayStartValue = 0;
+        int arrayEndValue = 1840;
+        int[] integer10Array = new int[1840];
+        long[] longerArray = new long[1840];
+
+
         public MainWindow()
         {
             InitializeComponent();
+            InitializeAutoBuyerSeller();
             //test
             //test 2
             int i;
             int j;
             int k;
             int count;
+            
 
             int buyFlagWatch;
             int sellFlagWatch;
@@ -56,16 +69,16 @@ namespace Capstone
             float[] surplusDeficit = new float[20];
 
             Seller dataSeller = new Seller("sell1", 20, 10, 0);
-            Buyer dataBuyer = new Buyer("buy1", 18, 50, 50);
+            Buyer dataBuyer = new Buyer("buy1", 18, 50, 40);
 
-            //Seller data2Seller = new Seller("sell2", 22, 10, 0);
+            Seller data2Seller = new Seller("sell2", 22, 10, 0);
             Buyer data2Buyer = new Buyer("buy2", 18, 50, 50);
 
             Buyer deficitBuyer = new Buyer(dataBuyer.BuyerName, 0, dataBuyer.NegotiationPercent, dataBuyer.MaxCost);
             Seller surplusSeller = new Seller(dataSeller.SellerName, 0, dataSeller.CostProduction, dataSeller.IncentivePercent);
 
             Buyer deficit2Buyer = new Buyer(data2Buyer.BuyerName, 0, data2Buyer.NegotiationPercent, data2Buyer.MaxCost);
-            //Seller surplus2Seller = new Seller(data2Seller.SellerName, 0, data2Seller.CostProduction, data2Seller.IncentivePercent);
+            Seller surplus2Seller = new Seller(data2Seller.SellerName, 0, data2Seller.CostProduction, data2Seller.IncentivePercent);
 
             ListBoxItem stockListBoxItem = new ListBoxItem();
             stockListBoxItem.Content = dataSeller.SellerName;
@@ -75,9 +88,9 @@ namespace Capstone
             buyerListBoxItem.Content = dataBuyer.BuyerName;
             BuyerDataListBox.Items.Add(buyerListBoxItem);
 
-            //ListBoxItem stock2ListBoxItem = new ListBoxItem();
-            //stock2ListBoxItem.Content = data2Seller.SellerName;
-            //SellerDataListBox.Items.Add(stock2ListBoxItem);
+            ListBoxItem stock2ListBoxItem = new ListBoxItem();
+            stock2ListBoxItem.Content = data2Seller.SellerName;
+            SellerDataListBox.Items.Add(stock2ListBoxItem);
 
             ListBoxItem buyer2ListBoxItem = new ListBoxItem();
             buyer2ListBoxItem.Content = data2Buyer.BuyerName;
@@ -86,17 +99,17 @@ namespace Capstone
             sellerDataList.Add(dataSeller);
             buyerDataList.Add(dataBuyer);
 
-            //sellerDataList.Add(data2Seller);
+            sellerDataList.Add(data2Seller);
             buyerDataList.Add(data2Buyer);
 
             sellerSurplusList.Add(surplusSeller);
             buyerDeficitList.Add(deficitBuyer);
 
-            //sellerSurplusList.Add(surplus2Seller);
+            sellerSurplusList.Add(surplus2Seller);
             buyerDeficitList.Add(deficit2Buyer);
 
 
-            for (i = 0; i < 368; i++)   // simulate 10 years each step being a day surrently modified to simulate only 1 day with total demand for testing purposes
+            for (i = 0; i < 368; i++)   // simulate 5-7 years 
             {
                 buyEmptyFlag = 0;
                 sellEmptyFlag = 0;
@@ -120,7 +133,7 @@ namespace Capstone
                 currDataSeller = new Seller(dataSeller.SellerName, dataSeller.TotalVolume , dataSeller.CostProduction, dataSeller.IncentivePercent);
                 currDataBuyer = new Buyer(dataBuyer.BuyerName, dataBuyer.TotalDemand, dataBuyer.NegotiationPercent, dataBuyer.MaxCost);
 
-                //currData2Seller = new Seller(data2Seller.SellerName, data2Seller.TotalVolume, data2Seller.CostProduction, data2Seller.IncentivePercent);
+                currData2Seller = new Seller(data2Seller.SellerName, data2Seller.TotalVolume, data2Seller.CostProduction, data2Seller.IncentivePercent);
                 currData2Buyer = new Buyer(data2Buyer.BuyerName, data2Buyer.TotalDemand, data2Buyer.NegotiationPercent, data2Buyer.MaxCost);
 
 
@@ -131,20 +144,20 @@ namespace Capstone
                 Seller currSurplusSeller = new Seller(surplusSeller.SellerName, 0, surplusSeller.CostProduction, surplusSeller.IncentivePercent);
 
                 Buyer currDeficit2Buyer = new Buyer(deficit2Buyer.BuyerName, 0, deficit2Buyer.NegotiationPercent, deficit2Buyer.MaxCost);
-                //Seller currSurplus2Seller = new Seller(surplus2Seller.SellerName, 0, surplus2Seller.CostProduction, surplus2Seller.IncentivePercent);
+                Seller currSurplus2Seller = new Seller(surplus2Seller.SellerName, 0, surplus2Seller.CostProduction, surplus2Seller.IncentivePercent);
 
 
                 sellerCurrDataList.Add(currDataSeller);
                 buyerCurrDataList.Add(currDataBuyer);
 
-                //sellerCurrDataList.Add(currData2Seller);
+                sellerCurrDataList.Add(currData2Seller);
                 buyerCurrDataList.Add(currData2Buyer);
 
 
                 sellerCurrSurplusList.Add(currSurplusSeller);
                 buyerCurrDeficitList.Add(currDeficitBuyer);
 
-                //sellerCurrSurplusList.Add(currSurplus2Seller);
+                sellerCurrSurplusList.Add(currSurplus2Seller);
                 buyerCurrDeficitList.Add(currDeficit2Buyer);
 
                 count = 0;
@@ -390,7 +403,7 @@ namespace Capstone
                         surplusDeficit[19] = total2 - total - runningTotal;
                         runningTotal += surplusDeficit[19];
                     }
-                }
+                } 
 
                 debugBuyer.Text = total.ToString();
                 debugSeller.Text = total2.ToString();
@@ -401,12 +414,120 @@ namespace Capstone
                 buyerWorkingList.Clear();
                 sellerWorkingList.Clear();
 
+                //START SORTING
+
+                int n = buyerDataList.Count();
+
+                for (int ii = 1; ii < n; ii++)  //Insertion sort for buyers because the lists are mostly sorted, average case O(n) time; is sorted based on cost.
+                {
+
+                    Buyer deficitKey = buyerDeficitList[ii];
+                    Buyer key = buyerDataList[ii];
+                    int jj = ii - 1;
+
+                    while ((jj > -1) && (buyerDataList[jj].RealCost < key.RealCost))
+                    {
+
+                        buyerDataList[jj + 1] = buyerDataList[jj];
+                        buyerDeficitList[jj + 1] = buyerDeficitList[jj];
+                        jj--;
+                    }
+                    buyerDeficitList[jj + 1] = deficitKey;
+                    buyerDataList[jj + 1] = key;
+                }
+
+                for (int ii = 1; ii < n; ii++)  //Insertion sort for sellers because the lists are mostly sorted, average case O(n) time; is sorted based on volume.
+                {
+
+                    Seller surplusKey = sellerSurplusList[ii];
+                    Seller key = sellerDataList[ii];
+                    int jj = ii - 1;
+
+                    while ((jj > -1) && (sellerSurplusList[jj].DailyVolume < surplusKey.DailyVolume)) 
+                    {
+
+                        sellerDataList[jj + 1] = sellerDataList[jj];
+                        sellerSurplusList[jj + 1] = sellerSurplusList[jj];
+                        jj--;
+                    }
+                    sellerSurplusList[jj + 1] = surplusKey;
+                    sellerDataList[jj + 1] = key;
+                }
+
             } //end final FOR loop
 
-           
+            int[] integerArray = new int[] { 21, 2, 3, 4, 5, -10, 75, -56, 87, -24, 21, 2, 3, 4, 5, -10, 75, -56, 87, -24 };
+            
+            Random rnd = new Random();
+            for(int a = 0; a < 1840; a++)
+            {
+                if(a < 367)
+                {
+                    if(a < 150)
+                    {
+                        integer10Array[a] = 25;
+                    }
+                    else
+                    {
+                        integer10Array[a] = 100;
+                    }
+                    //integer10Array[a] = 100;
+                }else if(a < 735){
+                    integer10Array[a] = a % 50;
+                }else if(a < 1103){
+                    integer10Array[a] = a % 150;
+                }
+                else if(a < 1471)
+                {
+                    integer10Array[a] = a % 150;
+                }
+                else
+                {
+                    integer10Array[a] = 150;
+                }
+                
+                
+                //int range = 100;
+               
+               // integer10Array[a] = rnd.Next(1, 200);
+
+                //integer100Array[a] = a % 200;
+                /* int rand = rnd.Next(0, 2);
+                if(a == 0){
+                    integer100Array[a] = 100;
+                }
+                else if(rand % 2 == 0)
+                {
+                    integer100Array[a] = integer100Array[a-1] + 2;
+                }
+                else
+                {
+                    integer100Array[a] = integer100Array[a-1] - 2;
+                }
+                */
+
+            }
 
 
-        }
+            long[] longArray = Array.ConvertAll<int, long>(integerArray,
+                delegate (int ie)
+                {
+                    return (long)ie;
+                });
+
+            longerArray = Array.ConvertAll<int, long>(integer10Array,
+                delegate (int ie)
+                {
+                    return (long)ie;
+                });
+
+            displayOutput(longArray);
+            displayLineGraph(longerArray);
+
+
+
+
+        } // end MAIN 
 
  
 
@@ -443,6 +564,96 @@ namespace Capstone
            
         }
 
+        private void AddMultipleBuyers_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("This is a test");
+        }
+
+        private void AddMultipleSellers_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("This is a test");
+        }
+
+
+        private void AutoBuyerButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if(buyerClickCounter % 2 == 0)
+            {
+                AddBuyerButton.Content = "Add Buyers";
+                //SellerNameLabel.Content = "Seller Names";
+                AddBuyerButton.Click -= AddBuyerButton_Click;
+                AddBuyerButton.Click += AddMultipleBuyers_Click;
+                 
+               
+                numberOfBuyersTextBox.Visibility = Visibility.Visible;
+                numberOfBuyersLabel.Visibility = Visibility.Visible;
+                RangeBuyCostTextBox.Visibility = Visibility.Visible;
+                RangeBuyCostLabel.Visibility = Visibility.Visible;
+
+
+            }
+            else
+            {
+                AddBuyerButton.Click += AddBuyerButton_Click;
+                AddBuyerButton.Click -= AddMultipleBuyers_Click;
+                AddBuyerButton.Content = "Add Buyer";
+                
+                numberOfBuyersTextBox.Visibility = Visibility.Hidden;
+                numberOfBuyersLabel.Visibility = Visibility.Hidden;
+                RangeBuyCostTextBox.Visibility = Visibility.Hidden;
+                RangeBuyCostLabel.Visibility = Visibility.Hidden;
+            }
+
+            buyerClickCounter++;
+        }
+
+        private void AutoSellerButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sellerClickCounter % 2 == 0)
+            {
+                AddSellerButton.Content = "Add Sellers";
+                // SellerNameLabel.Content = "Seller Names";
+                AddSellerButton.Click -= AddSellerButton_Click;
+                AddSellerButton.Click += AddMultipleSellers_Click;
+              //  AddSellerButton.Visibility = Visibility.Hidden;
+                //AddMultipleSellersButton.Visibility = Visibility.Visible;
+                numberOfSellersTextBox.Visibility = Visibility.Visible;
+                numberOfSellersLabel.Visibility = Visibility.Visible;
+                RangeCostProductionTextBox.Visibility = Visibility.Visible;
+                RangeCostProductionLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AddSellerButton.Content = "Add Seller";
+                // SellerNameLabel.Content = "Seller Name";
+                AddSellerButton.Click += AddSellerButton_Click;
+                AddSellerButton.Click -= AddMultipleSellers_Click;
+
+                numberOfSellersTextBox.Visibility = Visibility.Hidden;
+                numberOfSellersLabel.Visibility = Visibility.Hidden;
+                RangeCostProductionTextBox.Visibility = Visibility.Hidden;
+                RangeCostProductionLabel.Visibility = Visibility.Hidden;
+            }
+
+            sellerClickCounter++;
+
+        }
+
+        private void InitializeAutoBuyerSeller()
+        {
+            
+            numberOfSellersTextBox.Visibility = Visibility.Hidden;
+            numberOfSellersLabel.Visibility = Visibility.Hidden;
+            RangeCostProductionTextBox.Visibility = Visibility.Hidden;
+            RangeCostProductionLabel.Visibility = Visibility.Hidden;
+
+            numberOfBuyersTextBox.Visibility = Visibility.Hidden;
+            numberOfBuyersLabel.Visibility = Visibility.Hidden;
+            RangeBuyCostTextBox.Visibility = Visibility.Hidden;
+            RangeBuyCostLabel.Visibility = Visibility.Hidden;
+        }
+
         private void SellerDataListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Seller selectedSeller;
@@ -459,9 +670,10 @@ namespace Capstone
         private void displayOutput(long[] output)
         {
             front_Canvas.Children.Clear();
+            front_Canvas.Width = 35 * 20;
             long[] minMaxValue = new long[20];
             int i;
-            long minValue=0;
+            long minValue=10000;
             long maxValue=0;
             long minMaxDiff;
             long height = 200;
@@ -469,26 +681,34 @@ namespace Capstone
             long carry = 0;
             long unitHeight;
             minMaxValue[0] = output[0];
-            for (i = 1; i <= 19; i++)
-            {
-                minMaxValue[i] = minMaxValue[i-1] + output[i];
 
-            }
+            float centerGraph = 0;
+            float newZeroPoint = 0;
+
             for (i = 0; i <= 19; i++)
             {
-                if (minMaxValue[i]>maxValue)
+                if (output[i]>maxValue)
                 {
-                    maxValue = minMaxValue[i];
+                    maxValue = output[i];
                 }
-                if (minMaxValue[i] < minValue)
+                if (output[i] < minValue)
                 {
-                    minValue = minMaxValue[i];
+                    minValue = output[i];
                 }
 
             }
             minMaxDiff = Abs(maxValue - minValue);
             unitHeight = minMaxDiff/height;
-            prevBase = maxValue / unitHeight;
+            front_Canvas.Height = minMaxDiff;
+            barGraphBorder.Height = minMaxDiff;
+            
+
+            // prevBase = maxValue / unitHeight;
+           
+            centerGraph = 200 / (maxValue + Abs(minValue));
+            newZeroPoint = centerGraph * -(minValue);
+            
+
             for (i = 0; i <= 19; i++)
             {
                 if(output[i]<0)
@@ -497,8 +717,11 @@ namespace Capstone
                     rect = new System.Windows.Shapes.Rectangle();
                     rect.Stroke = new SolidColorBrush(Colors.Red);
                     rect.Fill = new SolidColorBrush(Colors.Red);
+                    
+                    
                     rect.Width = 35;
-                    if (unitHeight != 0)
+                    rect.Height = Abs(output[i]);
+                   /* if (unitHeight != 0)
                     {
                         rect.Height = Abs((carry + output[i]) / unitHeight);
                         carry = ((carry + output[i]) % unitHeight);
@@ -507,16 +730,22 @@ namespace Capstone
                     {
                         rect.Height = height;
                     }
+                    */
                     Canvas.SetLeft(rect, i * rect.Width);
                     prevBase = (long)rect.Height + prevBase;
-                    Canvas.SetTop(rect, prevBase-rect.Height);
+                    Canvas.SetBottom(rect, newZeroPoint - rect.Height);
+                    if(rect.IsMouseOver == true)
+                    {
+                        Console.WriteLine("This should print");
+                    }
                     front_Canvas.Children.Add(rect);
-                    Label label = new Label();
+                  /*  Label label = new Label();
                     label.FontSize = 5;
                     label.Content = "$" + output[i].ToString();
                     Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetTop(label, prevBase-rect.Height-2);
+                    Canvas.SetTop(label, newZeroPoint);
                     front_Canvas.Children.Add(label);
+                    */
                 }
                 else
                 {
@@ -525,7 +754,8 @@ namespace Capstone
                     rect.Stroke = new SolidColorBrush(Colors.Green);
                     rect.Fill = new SolidColorBrush(Colors.Green);
                     rect.Width = 35;
-                    if (unitHeight != 0)
+                    rect.Height = Abs(output[i]);
+                   /* if (unitHeight != 0)
                     {
                         rect.Height = (float)((carry + output[i]) / unitHeight);
                         carry = (carry + output[i]) % unitHeight;
@@ -535,36 +765,178 @@ namespace Capstone
                         rect.Height = height/20;
                         carry = (carry + output[i]);
                     }
+
+                   */
                     Canvas.SetLeft(rect, i * rect.Width);
-                    prevBase = -(long)rect.Height + prevBase;
-                    Canvas.SetTop(rect, prevBase);
+                    // prevBase = -(long)rect.Height + prevBase;
+                    Canvas.SetBottom(rect, newZeroPoint);
                     front_Canvas.Children.Add(rect);
                     Label label = new Label();
                     label.Content = "$" + output[i].ToString();
                     Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetTop(label, prevBase);
+                    Canvas.SetBottom(label, 100);
                     label.FontSize = 5;
                     front_Canvas.Children.Add(label);
                 }
 
-
-               
-                
-
-
-
             }
             Max.Content = "$" + maxValue.ToString();
             Min.Content = "$" + minValue.ToString();
-            
+           
+        }
+
+        private void displayLineGraph(long[] output)
+        {
+            lineGraphCanvas.Children.Clear();
+            // front_Canvas.Width = 35 * 20;
+
+            int i;
+            long minValue = 10000;
+            long maxValue = 0;
+            long height = 200;
+            long minMaxDiff = 0;
+
+            float centerGraph = 0;
+            float newZeroPoint = 0;
+
+            for (i = 0; i <= 19; i++)
+            {
+                if (output[i] > maxValue)
+                {
+                    maxValue = output[i];
+                }
+                if (output[i] < minValue)
+                {
+                    minValue = output[i];
+                }
+
+            }
+
+            //minMaxDiff = maxValue + minValue;
+            //lineGraphCanvas.Height = 200;
+
+            //makes line graph for years 1-5
+            if (arrayStartValue == 0 && arrayEndValue == 1840)
+            {
+                
+                for (i = 0; i < 1840; i++)
+                {
+                    if (i % 10 == 0)
+                    {
+
+                        System.Windows.Shapes.Ellipse circle;
+                        circle = new System.Windows.Shapes.Ellipse();
+                        circle.Stroke = new SolidColorBrush(Colors.Red);
+                        circle.Fill = new SolidColorBrush(Colors.Red);
+                        circle.Height = (lineGraphCanvas.Height / 184) * 3.5;
+                        circle.Width = (lineGraphCanvas.Height / 184) * 3.5;
+
+                        Canvas.SetLeft(circle, (i * circle.Width) / 10);
+                        Canvas.SetBottom(circle, output[i]);
+                        lineGraphCanvas.Children.Add(circle);
 
 
+                        if (i < 1840 - 10)
+                        {
+                            System.Windows.Shapes.Line line;
+                            line = new System.Windows.Shapes.Line();
+                            line.Stroke = new SolidColorBrush(Colors.Black);
+                            line.StrokeThickness = 0.5;
+
+                            line.X1 = ((i * circle.Width) / 10) + circle.Width;
+                            line.Y1 = -output[i] + 200;
+                            line.X2 = ((i + 10) * circle.Width) / 10;
+                            line.Y2 = -output[i + 10] + 200;
+
+                            lineGraphCanvas.Children.Add(line);
+                        }
+
+                    }
+                }
+            }
+            else //makes line graph for year 1, 2, 3, 4, or 5
+            {
+                for (i = arrayStartValue; i < arrayEndValue; i++)
+                {
+                    
+                    if (i % 2 == 0)
+                    {
+                        System.Windows.Shapes.Ellipse circle;
+                        circle = new System.Windows.Shapes.Ellipse();
+                        circle.Stroke = new SolidColorBrush(Colors.Red);
+                        circle.Fill = new SolidColorBrush(Colors.Red);
+                        circle.Height = (lineGraphCanvas.Width / 184);
+                        circle.Width = (lineGraphCanvas.Width / 184);
 
 
+                        //  Canvas.SetLeft(circle, -((i % 368 * circle.Width) / 2) + 700) ;
+                        Canvas.SetLeft(circle, ((i % 368) * circle.Width) / 2);
+                        Canvas.SetTop(circle, -output[i] + lineGraphCanvas.Height);
+                        lineGraphCanvas.Children.Add(circle);
 
 
+                        if (i < arrayEndValue - 2)
+                        {
+                            System.Windows.Shapes.Line line;
+                            line = new System.Windows.Shapes.Line();
+                            line.Stroke = new SolidColorBrush(Colors.Black);
+                            line.StrokeThickness = 0.5;
+
+
+                            line.X1 = (i % 368) * circle.Width / 2 + circle.Width;
+                            line.Y1 = -output[i] +  lineGraphCanvas.Height ;
+                            line.X2 = (i % 368 + 2) * circle.Width / 2;
+                            line.Y2 = -output[i + 2] + lineGraphCanvas.Height;
+
+                            lineGraphCanvas.Children.Add(line);
+                        }
+                    }
+
+                }
+            }
 
         }
+
+        private void UpdateLineGraph_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if(Year1Radio.IsChecked == true)
+            {
+                arrayStartValue = 0;
+                arrayEndValue = 368;
+                Console.WriteLine("Test print");
+            }
+            else if(Year2Radio.IsChecked == true)
+            {
+                arrayStartValue = 368;
+                arrayEndValue = 736;
+                Console.WriteLine("Year 2");
+            }
+            else if (Year3Radio.IsChecked == true)
+            {
+                arrayStartValue = 736;
+                arrayEndValue = 1104;
+            }
+            else if (Year4Radio.IsChecked == true)
+            {
+                arrayStartValue = 1104;
+                arrayEndValue = 1472;
+            }
+            else if (Year5Radio.IsChecked == true)
+            {
+                arrayStartValue = 1472;
+                arrayEndValue = 1840;
+            }
+            else if (AllYearsRadio.IsChecked == true)
+            {
+                arrayStartValue = 0;
+                arrayEndValue = 1840;
+            }
+            lineGraphCanvas.Children.Clear();
+            displayLineGraph(longerArray);
+        }
+
 
         private void SellerNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
