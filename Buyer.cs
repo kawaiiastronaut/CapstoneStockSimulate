@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Capstone
 {
-    class Buyer
+    public class Buyer
     {
         private string buyerName;
         private float totalDemand;
-        private int negotiationPercent;
+        private float negotiationPercent;
         private float maxCost;
 
         private float realCost;
         private float dailyDemand;
 
-        public Buyer( string buyerName, float totalDemand, int negotiationPercent, float maxCost )
+        public Buyer( string buyerName, float totalDemand, float negotiationPercent, float maxCost )
         {
             this.buyerName = buyerName;
             this.totalDemand = totalDemand;
@@ -78,7 +78,7 @@ namespace Capstone
                 realCost = value;
             }
         }
-        public int NegotiationPercent
+        public float NegotiationPercent
         {
             get
             {
@@ -109,6 +109,11 @@ namespace Capstone
             }
         }
 
+                public void Update()
+        {
+            this.dailyDemand = this.totalDemand/(float)368;
+            this.realCost = this.maxCost * ((float)this.negotiationPercent/(float)100);
+        }
 
 
 

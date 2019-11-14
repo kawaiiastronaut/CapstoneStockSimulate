@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Capstone
 {
-    class Seller
+    public class Seller
     {
         private string sellerName;
         private float totalVolume;
@@ -27,7 +27,7 @@ namespace Capstone
             this.IncentivePercent = incentivePercent;
 
             this.dailyVolume = this.totalVolume / 368;
-            this.minSellPrice = this.costProduction * (float)this.incentivePercent;
+            this.minSellPrice = this.costProduction * ((float)this.incentivePercent/(float)100 + 1);
         }
 
         public string SellerName
@@ -111,6 +111,11 @@ namespace Capstone
             set { outputArray = value; }
         }
 
+        public void Update()
+        {
+            this.DailyVolume = this.TotalVolume/(float)368;
+            this.minSellPrice = this.costProduction * ((float)this.incentivePercent/(float)100 + 1);
+        }
 
 
 
