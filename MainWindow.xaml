@@ -74,8 +74,9 @@
         <Label FontSize="8" Content="Y5Q3" Margin="738,568,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="29"/>
         <Label  FontSize="8" Content="Y5Q4" Margin="772,568,0,0" HorizontalAlignment="Left" Width="35" Height="34" VerticalAlignment="Top"/>
         <Label Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="438,160,0,0"/>
-        <TextBox x:Name="debugSeller" HorizontalAlignment="Left" Height="22" Margin="763,306,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="debugBuyer" HorizontalAlignment="Left" Height="22" Margin="916,306,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="debugSeller" HorizontalAlignment="Left" Height="23" Margin="847,431,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="debugBuyer" HorizontalAlignment="Left" Height="23" Margin="848,459,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="818,487,0,0" VerticalAlignment="Top" Width="166" Height="37" Click="RunButton_Click" />
 
         <TextBox x:Name="TextBoxTable1_1"  HorizontalAlignment="Left" Height="21" Margin="997,359,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
         <TextBox x:Name="TextBoxTable1_2"  HorizontalAlignment="Left" Height="21" Margin="997,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />

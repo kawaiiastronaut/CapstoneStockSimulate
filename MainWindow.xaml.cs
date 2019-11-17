@@ -25,20 +25,22 @@ namespace Capstone
     public partial class MainWindow : Window
     {
         float runningTotal = 0;
-        List<Seller> sellerWorkingList = new List<Seller>();
-        List<Buyer> buyerWorkingList = new List<Buyer>();
+        public List<Seller> sellerWorkingList = new List<Seller>();
+        public List<Buyer> buyerWorkingList = new List<Buyer>();
 
-        List<Seller> sellerDataList = new List<Seller>();
-        List<Buyer> buyerDataList = new List<Buyer>();
+        public List<Seller> sellerDataList = new List<Seller>();
+        public List<Buyer> buyerDataList = new List<Buyer>();
 
-        List<Seller> sellerCurrDataList = new List<Seller>();
-        List<Buyer> buyerCurrDataList = new List<Buyer>();
+        public List<Seller> sellerCurrDataList = new List<Seller>();
+        public List<Buyer> buyerCurrDataList = new List<Buyer>();
 
-        List<Seller> sellerSurplusList = new List<Seller>();
-        List<Buyer> buyerDeficitList = new List<Buyer>();
+        public List<Seller> sellerSurplusList = new List<Seller>();
+        public List<Buyer> buyerDeficitList = new List<Buyer>();
 
-        List<Seller> sellerCurrSurplusList = new List<Seller>();
-        List<Buyer> buyerCurrDeficitList = new List<Buyer>();
+        public float[] surplusDeficit = new float[20];
+
+        public List<Seller> sellerCurrSurplusList = new List<Seller>();
+        public List<Buyer> buyerCurrDeficitList = new List<Buyer>();
 
         private int buyEmptyFlag;
         private int sellEmptyFlag;
@@ -51,6 +53,13 @@ namespace Capstone
         int[] integer10Array = new int[1840];
         long[] longerArray = new long[1840];
 
+        public int i;
+        public int j;
+        public int k;
+        public int count = 0;
+
+        public int buyFlagWatch;
+        public int sellFlagWatch;
 
         public MainWindow()
         {
@@ -58,140 +67,174 @@ namespace Capstone
             InitializeAutoBuyerSeller();
             //test
             //test 2
-            int i;
-            int j;
-            int k;
-            int count;
-            
 
-            int buyFlagWatch;
-            int sellFlagWatch;
+        }
+ 
 
-            float[] surplusDeficit = new float[20];
+        private void AddSellerButton_Click(object sender, RoutedEventArgs e)
+        {
+           
 
-            Seller dataSeller = new Seller("sell1", 20, 10, 0);
-            Buyer dataBuyer = new Buyer("buy1", 18, 50, 40);
+            float sellVolume;
+            long costProduction;
+            int incentivePercent;
+            string hold;
+            hold = SellerNameTextBox.Text;
+            if (float.TryParse(SellVolTextBox.Text, out sellVolume) && Int64.TryParse(CostProductionTextBox.Text, out costProduction) && Int32.TryParse(IncentiveTextBox.Text, out incentivePercent))
+            {
 
-            Seller data2Seller = new Seller("sell2", 22, 10, 0);
-            Buyer data2Buyer = new Buyer("buy2", 18, 50, 50);
+                
+                Seller dataSeller = new Seller(hold, sellVolume, costProduction, incentivePercent);
+                sellerDataList.Add(dataSeller);
+                ListBoxItem stockListBoxItem = new ListBoxItem();
+                stockListBoxItem.Content = SellerNameTextBox.Text;
+                SellerDataListBox.Items.Add(stockListBoxItem);
 
-            Buyer deficitBuyer = new Buyer(dataBuyer.BuyerName, 0, dataBuyer.NegotiationPercent, dataBuyer.MaxCost);
-            Seller surplusSeller = new Seller(dataSeller.SellerName, 0, dataSeller.CostProduction, dataSeller.IncentivePercent);
-
-            Buyer deficit2Buyer = new Buyer(data2Buyer.BuyerName, 0, data2Buyer.NegotiationPercent, data2Buyer.MaxCost);
-            Seller surplus2Seller = new Seller(data2Seller.SellerName, 0, data2Seller.CostProduction, data2Seller.IncentivePercent);
-
-            ListBoxItem stockListBoxItem = new ListBoxItem();
-            stockListBoxItem.Content = dataSeller.SellerName;
-            SellerDataListBox.Items.Add(stockListBoxItem);
-
-            ListBoxItem buyerListBoxItem = new ListBoxItem();
-            buyerListBoxItem.Content = dataBuyer.BuyerName;
-            BuyerDataListBox.Items.Add(buyerListBoxItem);
-
-            ListBoxItem stock2ListBoxItem = new ListBoxItem();
-            stock2ListBoxItem.Content = data2Seller.SellerName;
-            SellerDataListBox.Items.Add(stock2ListBoxItem);
-
-            ListBoxItem buyer2ListBoxItem = new ListBoxItem();
-            buyer2ListBoxItem.Content = data2Buyer.BuyerName;
-            BuyerDataListBox.Items.Add(buyer2ListBoxItem);
-
-            sellerDataList.Add(dataSeller);
-            buyerDataList.Add(dataBuyer);
-
-            sellerDataList.Add(data2Seller);
-            buyerDataList.Add(data2Buyer);
-
-            sellerSurplusList.Add(surplusSeller);
-            buyerDeficitList.Add(deficitBuyer);
-
-            sellerSurplusList.Add(surplus2Seller);
-            buyerDeficitList.Add(deficit2Buyer);
+               
 
 
-            for (i = 0; i < 368; i++)   // simulate 5-7 years 
+                Seller surplusSeller = new Seller(dataSeller.SellerName, 0, dataSeller.CostProduction, dataSeller.IncentivePercent);
+                stockListBoxItem.Content = dataSeller.SellerName;
+                sellerSurplusList.Add(surplusSeller);
+
+            }
+            else
+            {
+    
+            }
+        }
+
+        private void AddBuyerButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            float buyVolume;
+            float maxCost;
+            float negotiationPercent;
+            string hold;
+            hold = BuyerNameTextBox.Text;
+            if (float.TryParse(TotalDemandTextbox.Text, out buyVolume) && float.TryParse(MaxCostTextBox.Text, out maxCost) && float.TryParse(NegotiationTextBox.Text, out negotiationPercent))
+            {
+
+
+                Buyer dataBuyer = new Buyer(hold, buyVolume, negotiationPercent,maxCost);
+                buyerDataList.Add(dataBuyer);
+                ListBoxItem buyerListBoxItem = new ListBoxItem();
+                buyerListBoxItem.Content = BuyerNameTextBox.Text;
+                BuyerDataListBox.Items.Add(buyerListBoxItem);
+
+
+
+
+                Buyer deficitBuyer = new Buyer(dataBuyer.BuyerName, 0, dataBuyer.NegotiationPercent, dataBuyer.MaxCost);
+                buyerListBoxItem.Content = dataBuyer.BuyerName;
+                buyerDeficitList.Add(deficitBuyer);
+
+            }
+            else
+            {
+
+            }
+
+
+        }
+
+
+
+
+
+        
+
+
+        void transact(Seller seller, Buyer buyer)
+
+        {
+            if (seller.DailyVolume > buyer.DailyDemand)
+            {
+                buyEmptyFlag++;
+                seller.DailyVolume -= buyer.DailyDemand;
+                buyer.DailyDemand = 0;
+
+
+            }
+            else if (seller.DailyVolume < buyer.DailyDemand)
+            {
+                sellEmptyFlag++;
+                buyer.DailyDemand -= seller.DailyVolume;
+                seller.DailyVolume = 0;
+
+
+            }
+            else
+            {
+                buyEmptyFlag++;
+                sellEmptyFlag++;
+                seller.DailyVolume = 0;
+                buyer.DailyDemand = 0;
+            }
+        }
+
+        private void RunButton_Click(object sender, RoutedEventArgs e)
+        {
+            int i = 0;
+            int count = 0;
+            for (i = 0; i < 368; i++)   // simulate 5 years 
             {
                 buyEmptyFlag = 0;
                 sellEmptyFlag = 0;
 
 
+                foreach (Seller index in sellerDataList)
+                {
+                    sellerCurrDataList.Add(new Seller(index.SellerName, index.TotalVolume, index.CostProduction, index.IncentivePercent));
+                }
 
-                //filler code to test functionality
+                foreach (Buyer index in buyerDataList)
+                {
+                    buyerCurrDataList.Add(new Buyer(index.BuyerName, index.TotalDemand, index.NegotiationPercent, index.MaxCost));
+                }
 
-                //Seller dataSeller = new Seller("sell1", 20, 10, 0);
-                //Buyer dataBuyer = new Buyer("buy1", 18, 50, 50);
+                int counter = 0;
 
-                Seller currDataSeller;
-
-                Buyer currDataBuyer;
-
-                Seller currData2Seller;
-
-                Buyer currData2Buyer;
-
-
-                currDataSeller = new Seller(dataSeller.SellerName, dataSeller.TotalVolume , dataSeller.CostProduction, dataSeller.IncentivePercent);
-                currDataBuyer = new Buyer(dataBuyer.BuyerName, dataBuyer.TotalDemand, dataBuyer.NegotiationPercent, dataBuyer.MaxCost);
-
-                currData2Seller = new Seller(data2Seller.SellerName, data2Seller.TotalVolume, data2Seller.CostProduction, data2Seller.IncentivePercent);
-                currData2Buyer = new Buyer(data2Buyer.BuyerName, data2Buyer.TotalDemand, data2Buyer.NegotiationPercent, data2Buyer.MaxCost);
+                foreach (Buyer index in buyerDeficitList)
+                {
+                    buyerCurrDeficitList.Add(new Buyer(index.BuyerName, 0, index.NegotiationPercent, index.MaxCost));
+                }
 
 
 
 
+                counter = 0;
 
-                Buyer currDeficitBuyer = new Buyer(deficitBuyer.BuyerName, 0, deficitBuyer.NegotiationPercent, deficitBuyer.MaxCost);
-                Seller currSurplusSeller = new Seller(surplusSeller.SellerName, 0, surplusSeller.CostProduction, surplusSeller.IncentivePercent);
-
-                Buyer currDeficit2Buyer = new Buyer(deficit2Buyer.BuyerName, 0, deficit2Buyer.NegotiationPercent, deficit2Buyer.MaxCost);
-                Seller currSurplus2Seller = new Seller(surplus2Seller.SellerName, 0, surplus2Seller.CostProduction, surplus2Seller.IncentivePercent);
-
-
-                sellerCurrDataList.Add(currDataSeller);
-                buyerCurrDataList.Add(currDataBuyer);
-
-                sellerCurrDataList.Add(currData2Seller);
-                buyerCurrDataList.Add(currData2Buyer);
-
-
-                sellerCurrSurplusList.Add(currSurplusSeller);
-                buyerCurrDeficitList.Add(currDeficitBuyer);
-
-                sellerCurrSurplusList.Add(currSurplus2Seller);
-                buyerCurrDeficitList.Add(currDeficit2Buyer);
+                foreach (Seller index in sellerSurplusList)
+                {
+                    sellerCurrSurplusList.Add(new Seller(index.SellerName, 0, index.CostProduction, index.IncentivePercent));
+                }
 
                 count = 0;
 
                 foreach (Seller index in sellerSurplusList)
                 {
-                    sellerCurrSurplusList[count].TotalVolume += index.TotalVolume;
+                    sellerCurrSurplusList[count].DailyVolume += index.DailyVolume;
                     count++;
-                    index.TotalVolume = 0;
+                    index.DailyVolume = 0;
                 }
                 count = 0;
                 foreach (Buyer index in buyerDeficitList)
                 {
-                     buyerCurrDeficitList[count].TotalDemand += index.TotalDemand;
-                     count++;
-                    index.TotalDemand = 0;
+                    buyerCurrDeficitList[count].DailyDemand += index.DailyDemand;
+                    count++;
+                    index.DailyDemand = 0;
                 }
 
 
-                /*ListBoxItem stockListBoxItem = new ListBoxItem();
-                stockListBoxItem.Content = dataSeller.SellerName;
-                SellerDataListBox.Items.Add(stockListBoxItem);
 
-                ListBoxItem buyerListBoxItem = new ListBoxItem();
-                buyerListBoxItem.Content = dataBuyer.BuyerName;
-                BuyerDataListBox.Items.Add(buyerListBoxItem); */
 
                 sellerWorkingList = sellerCurrDataList.Concat(sellerCurrSurplusList).ToList();
                 buyerWorkingList = buyerCurrDataList.Concat(buyerCurrDeficitList).ToList();
 
 
-                    for (k = buyEmptyFlag; k < buyerWorkingList.Count; k++)
-	                {
+                for (k = buyEmptyFlag; k < buyerWorkingList.Count; k++)
+                {
 
                     for (j = sellEmptyFlag; j < sellerWorkingList.Count; j++)
                     {
@@ -207,7 +250,7 @@ namespace Capstone
                         {
                             break;
                         }
-                        if (sellFlagWatch == (sellerWorkingList.Count - 1) && sellerWorkingList[sellFlagWatch].TotalVolume == 0 )
+                        if (sellFlagWatch == (sellerWorkingList.Count - 1) && sellerWorkingList[sellFlagWatch].DailyVolume == 0)
                         {
                             break;
                         }
@@ -216,15 +259,15 @@ namespace Capstone
                         {
                             if (buyEmptyFlag >= buyerDataList.Count)
                             {
-                                buyerDeficitList[buyEmptyFlag - buyerDataList.Count].TotalDemand += buyerWorkingList[buyEmptyFlag].TotalDemand;
-            
+                                buyerDeficitList[buyEmptyFlag - buyerDataList.Count].DailyDemand += buyerWorkingList[buyEmptyFlag].DailyDemand;
+
                             }
                             else
                             {
-                                buyerDeficitList[buyEmptyFlag].TotalDemand += buyerWorkingList[buyEmptyFlag].TotalDemand; // need to change this
-            
+                                buyerDeficitList[buyEmptyFlag].DailyDemand += buyerWorkingList[buyEmptyFlag].DailyDemand; // need to change this
+
                             }
-                            buyerWorkingList[buyEmptyFlag].TotalDemand = 0;
+                            buyerWorkingList[buyEmptyFlag].DailyDemand = 0;
                             buyEmptyFlag++;
                         }
 
@@ -243,42 +286,42 @@ namespace Capstone
 
                 }   // end second FOR loop
 
-                if (sellEmptyFlag < sellerWorkingList.Count )
+                if (sellEmptyFlag < sellerWorkingList.Count)
                 {
                     int s;
                     for (s = sellEmptyFlag; s < sellerWorkingList.Count; s++)
                     {
                         if (s >= sellerDataList.Count)
                         {
-                            sellerSurplusList[s - sellerDataList.Count].TotalVolume += sellerWorkingList[s].TotalVolume;
+                            sellerSurplusList[s - sellerDataList.Count].DailyVolume += sellerWorkingList[s].DailyVolume;
 
                         }
                         else
                         {
-                            sellerSurplusList[s].TotalVolume += sellerWorkingList[s].TotalVolume; // need to change this
+                            sellerSurplusList[s].DailyVolume += sellerWorkingList[s].DailyVolume; // need to change this
 
                         }
-                        sellerWorkingList[s].TotalVolume = 0;
+                        sellerWorkingList[s].DailyVolume = 0;
 
                     }
                 }
-                
-                if (buyEmptyFlag < buyerWorkingList.Count )
+
+                if (buyEmptyFlag < buyerWorkingList.Count)
                 {
                     int b;
                     for (b = buyEmptyFlag; b < buyerWorkingList.Count; b++)
                     {
                         if (b >= buyerDataList.Count)
                         {
-                            buyerDeficitList[b - buyerDataList.Count].TotalDemand += buyerWorkingList[b].TotalDemand;
+                            buyerDeficitList[b - buyerDataList.Count].DailyDemand += buyerWorkingList[b].DailyDemand;
 
                         }
                         else
                         {
-                            buyerDeficitList[b].TotalDemand += buyerWorkingList[b].TotalDemand; // need to change this
+                            buyerDeficitList[b].DailyDemand += buyerWorkingList[b].DailyDemand; // need to change this
 
                         }
-                        buyerWorkingList[b].TotalDemand = 0;
+                        buyerWorkingList[b].DailyDemand = 0;
 
                     }
                 }
@@ -287,12 +330,12 @@ namespace Capstone
 
                 }
 
-                float total = buyerDeficitList.Sum(item => item.TotalDemand);
-                float total2 = sellerSurplusList.Sum(item => item.TotalVolume);
+                float total = buyerDeficitList.Sum(item => item.DailyDemand);
+                float total2 = sellerSurplusList.Sum(item => item.DailyVolume);
 
-                if (i/368 == 0) //yr 1
+                if (i / 368 == 0) //yr 1
                 {
-                    if (i%368 == 91) //q1
+                    if (i % 368 == 91) //q1
                     {
                         surplusDeficit[0] = total2 - total;
                         runningTotal += surplusDeficit[0];
@@ -313,7 +356,7 @@ namespace Capstone
                         runningTotal += surplusDeficit[3];
                     }
                 }
-                else if(i/368 ==1) //yr 2
+                else if (i / 368 == 1) //yr 2
                 {
                     if (i % 368 == 91) //q1
                     {
@@ -404,7 +447,7 @@ namespace Capstone
                         surplusDeficit[19] = total2 - total - runningTotal;
                         runningTotal += surplusDeficit[19];
                     }
-                } 
+                }
 
                 debugBuyer.Text = total.ToString();
                 debugSeller.Text = total2.ToString();
@@ -414,7 +457,7 @@ namespace Capstone
                 sellerCurrSurplusList.Clear();
                 buyerWorkingList.Clear();
                 sellerWorkingList.Clear();
-
+                
                 //START SORTING
 
                 int n = buyerDataList.Count();
@@ -437,6 +480,8 @@ namespace Capstone
                     buyerDataList[jj + 1] = key;
                 }
 
+                n = sellerDataList.Count();
+
                 for (int ii = 1; ii < n; ii++)  //Insertion sort for sellers because the lists are mostly sorted, average case O(n) time; is sorted based on volume.
                 {
 
@@ -444,7 +489,7 @@ namespace Capstone
                     Seller key = sellerDataList[ii];
                     int jj = ii - 1;
 
-                    while ((jj > -1) && (sellerSurplusList[jj].DailyVolume < surplusKey.DailyVolume)) 
+                    while ((jj > -1) && (sellerSurplusList[jj].DailyVolume < surplusKey.DailyVolume))
                     {
 
                         sellerDataList[jj + 1] = sellerDataList[jj];
@@ -532,38 +577,9 @@ namespace Capstone
 
  
 
-        private void AddSellerButton_Click(object sender, RoutedEventArgs e)
-        {
-           
+     
 
-            long sellVolume;
-            long costProduction;
-            int incentivePercent;
-            string hold;
-            hold = SellerNameTextBox.Text;
-            if (Int64.TryParse(SellVolTextBox.Text, out sellVolume) && Int64.TryParse(CostProductionTextBox.Text, out costProduction) && Int32.TryParse(IncentiveTextBox.Text, out incentivePercent)&& !(hold.Any(char.IsDigit)))
-            {
 
-                
-                Seller dataSeller = new Seller(hold, sellVolume, costProduction, incentivePercent);
-                sellerDataList.Add(dataSeller);
-                ListBoxItem stockListBoxItem = new ListBoxItem();
-                stockListBoxItem.Content = SellerNameTextBox.Text;
-                SellerDataListBox.Items.Add(stockListBoxItem);
-            }
-            else
-            {
-    
-            }
-        }
-
-        private void AddBuyerButton_Click(object sender, RoutedEventArgs e)
-        {
- 
-           
-                
-           
-        }
 
         private void AddMultipleBuyers_Click(object sender, RoutedEventArgs e)
         {
@@ -994,33 +1010,8 @@ namespace Capstone
 
         }
 
-        void transact(Seller seller, Buyer buyer)
-
-        {
-            if (seller.TotalVolume > buyer.TotalDemand)
-            {
-                buyEmptyFlag++;
-                seller.TotalVolume -= buyer.TotalDemand;
-                buyer.TotalDemand = 0;
-
-
-            }
-            else if (seller.TotalVolume < buyer.TotalDemand)
-            {
-                sellEmptyFlag++;
-                buyer.TotalDemand -= seller.TotalVolume;
-                seller.TotalVolume = 0;
-
-
-            }
-            else
-            {
-                buyEmptyFlag++;
-                sellEmptyFlag++;
-                seller.TotalVolume = 0;
-                buyer.TotalDemand = 0;
-            }
-        }
+      
+        
     }
 
 
