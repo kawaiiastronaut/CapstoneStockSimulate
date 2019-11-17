@@ -507,19 +507,20 @@ namespace Capstone
             Random rnd = new Random();
             for(int a = 0; a < 1840; a++)
             {
-                if(a < 367)
+                if(a < 368)
                 {
                     if(a < 150)
                     {
-                        integer10Array[a] = 25;
+                       // integer10Array[a] = a % 550;
+                        integer10Array[a] = 325;
                     }
                     else
                     {
-                        integer10Array[a] = 100;
+                        integer10Array[a] = -100;
                     }
                     //integer10Array[a] = 100;
                 }else if(a < 735){
-                    integer10Array[a] = a % 50;
+                    integer10Array[a] = a % 550;
                 }else if(a < 1103){
                     integer10Array[a] = a % 150;
                 }
@@ -529,26 +530,27 @@ namespace Capstone
                 }
                 else
                 {
-                    integer10Array[a] = 150;
+                    integer10Array[a] = a % 550;
                 }
+                
                 
                 
                 //int range = 100;
                
-               // integer10Array[a] = rnd.Next(1, 200);
+               //integer10Array[a] = rnd.Next(1, 400);
 
                 //integer100Array[a] = a % 200;
-                /* int rand = rnd.Next(0, 2);
+                /*int rand = rnd.Next(0, 2);
                 if(a == 0){
-                    integer100Array[a] = 100;
+                    integer10Array[a] = 100;
                 }
                 else if(rand % 2 == 0)
                 {
-                    integer100Array[a] = integer100Array[a-1] + 2;
+                    integer10Array[a] = integer10Array[a-1] + 2;
                 }
                 else
                 {
-                    integer100Array[a] = integer100Array[a-1] - 2;
+                    integer10Array[a] = integer10Array[a-1] - 2;
                 }
                 */
 
@@ -838,6 +840,7 @@ namespace Capstone
             int i;
             long minValue = 10000;
             long maxValue = 0;
+            float minMaxAvg = 0;
             long height = 200;
             float minMaxDiff = 0;
             float unitHeight;
@@ -856,9 +859,16 @@ namespace Capstone
                 }
 
             }
-            minMaxDiff = (float)Abs(maxValue - minValue);
+            //minMaxDiff = (float)Abs(maxValue - minValue);
+            Console.WriteLine("Max -> Min" + maxValue + minValue);
+            minMaxDiff = (float)Abs(maxValue) + Abs(minValue);
             
-            if(minMaxDiff != 0)
+            centerGraph = ((float)(maxValue + minValue) / 2);
+            Console.WriteLine("Diffes" + minMaxDiff);
+            Console.WriteLine("center" + centerGraph);
+            // centerGraph = (float)(maxValue + minValue) / 2;
+
+            if (minMaxDiff != 0)
             {
                 unitHeight = (float)lineGraphCanvas.Height / minMaxDiff;
             }
@@ -866,6 +876,7 @@ namespace Capstone
             {
                 unitHeight = 1;
             }
+            Console.WriteLine("unit" + unitHeight);
             
 
             // prevBase = maxValue / unitHeight;
@@ -892,7 +903,8 @@ namespace Capstone
                         circle.Width = (lineGraphCanvas.Height / 184) * 3.5;
 
                         Canvas.SetLeft(circle, (i * circle.Width) / 10);
-                        Canvas.SetBottom(circle, output[i] * unitHeight);
+                        Canvas.SetBottom(circle, ((output[i] - centerGraph) * unitHeight) + lineGraphCanvas.Height/2);
+                       // ((output[i] - centerGraph) * unitHeight) + (lineGraphCanvas.Height / 2)
                         lineGraphCanvas.Children.Add(circle);
 
 
@@ -904,10 +916,15 @@ namespace Capstone
                             line.StrokeThickness = 0.5;
 
                             line.X1 = ((i * circle.Width) / 10) + circle.Width;
-                            line.Y1 = (-output[i] * unitHeight) + lineGraphCanvas.Height;
-                            
+                            line.Y1 = (-(output[i] - centerGraph) * unitHeight) + lineGraphCanvas.Height /2;
                             line.X2 = ((i + 10) * circle.Width) / 10;
-                            line.Y2 = (-output[i + 10] * unitHeight) + lineGraphCanvas.Height;
+                            line.Y2 = (-(output[i + 10] - centerGraph) * unitHeight) + lineGraphCanvas.Height / 2;
+                            /*
+                            line.X1 = (i % 368) * circle.Width / 2 + circle.Width;
+                            line.Y1 = (-(output[i] - centerGraph) * unitHeight) + lineGraphCanvas.Height / 2;
+                            line.X2 = (i % 368 + 2) * circle.Width / 2;
+                            line.Y2 = (-(output[i + 2] - centerGraph) * unitHeight) + lineGraphCanvas.Height / 2;
+                            */
                             lineGraphCanvas.Children.Add(line);
                         }
 
@@ -916,6 +933,8 @@ namespace Capstone
             }
             else //makes line graph for year 1, 2, 3, 4, or 5
             {
+               // Console.WriteLine(minMaxDiff + "diff");
+                //Console.WriteLine(unitHeight + "unit");
                 for (i = arrayStartValue; i < arrayEndValue; i++)
                 {
                     
@@ -932,7 +951,15 @@ namespace Capstone
 
                         //  Canvas.SetLeft(circle, -((i % 368 * circle.Width) / 2) + 700) ;
                         Canvas.SetLeft(circle, ((i % 368) * circle.Width) / 2);
-                        Canvas.SetBottom(circle, output[i] * unitHeight);
+                        if(unitHeight == 1)
+                        {
+                            Canvas.SetBottom(circle, lineGraphCanvas.Height/ 2);
+                        }
+                        else
+                        {
+                            Canvas.SetBottom(circle, ((output[i] - centerGraph) * unitHeight) + (lineGraphCanvas.Height / 2));
+                        }
+                        
                         lineGraphCanvas.Children.Add(circle);
 
 
@@ -942,19 +969,25 @@ namespace Capstone
                             line = new System.Windows.Shapes.Line();
                             line.Stroke = new SolidColorBrush(Colors.Black);
                             line.StrokeThickness = 0.5;
-                            /*
-                            line.X1 = ((i * circle.Width) / 10) + circle.Width;
-                            line.Y1 = (-output[i] * unitHeight) + lineGraphCanvas.Height;
 
-                            line.X2 = ((i + 10) * circle.Width) / 10;
-                            line.Y2 = (-output[i + 10] * unitHeight) + lineGraphCanvas.Height;
-                            */
-                            
-                            line.X1 = (i % 368) * circle.Width / 2 + circle.Width;
-                            line.Y1 = (-output[i] *unitHeight) +  lineGraphCanvas.Height;
-                            line.X2 = (i % 368 + 2) * circle.Width / 2;
-                            line.Y2 = (-output[i + 2] *unitHeight) + lineGraphCanvas.Height;
+
+                            if(unitHeight == 1)
+                            {
+                                line.X1 = (i % 368) * circle.Width / 2 + circle.Width;
+                                line.Y1 = lineGraphCanvas.Height / 2;
+                                line.X2 = (i % 368 + 2) * circle.Width / 2;
+                                line.Y2 = lineGraphCanvas.Height / 2;
+                            }
+                            else
+                            {
+                                line.X1 = (i % 368) * circle.Width / 2 + circle.Width;
+                                line.Y1 = (-(output[i] - centerGraph) * unitHeight) + lineGraphCanvas.Height / 2;
+                                line.X2 = (i % 368 + 2) * circle.Width / 2;
+                                line.Y2 = (-(output[i + 2] - centerGraph) * unitHeight) + lineGraphCanvas.Height / 2;
+
+            }
                             lineGraphCanvas.Children.Add(line);
+
 
                         }
                     }
