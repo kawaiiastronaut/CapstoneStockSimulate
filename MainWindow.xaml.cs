@@ -860,12 +860,14 @@ namespace Capstone
 
             }
             //minMaxDiff = (float)Abs(maxValue - minValue);
-            Console.WriteLine("Max -> Min" + maxValue + minValue);
+           // Console.WriteLine("Max -> Min" + maxValue + minValue);
             minMaxDiff = (float)Abs(maxValue) + Abs(minValue);
             
             centerGraph = ((float)(maxValue + minValue) / 2);
-            Console.WriteLine("Diffes" + minMaxDiff);
-            Console.WriteLine("center" + centerGraph);
+            maxLineGraph.Content = maxValue;
+            minLineGraph.Content = minValue;
+           // Console.WriteLine("Diffes" + minMaxDiff);
+           // Console.WriteLine("center" + centerGraph);
             // centerGraph = (float)(maxValue + minValue) / 2;
 
             if (minMaxDiff != 0)

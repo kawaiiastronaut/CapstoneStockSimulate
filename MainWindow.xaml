@@ -129,7 +129,9 @@
             <Canvas x:Name="lineGraphCanvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="705"/>
         </Border>
         <Label x:Name="lineGraphTitle" Content="Line Graph Title" FontSize="30" FontWeight="Bold" Margin="349,632,0,0" Height="56" VerticalAlignment="Top" HorizontalAlignment="Left" Width="239"></Label>
-
+        <Label x:Name="maxLineGraph" Margin="42,688,1087,96"></Label>
+        <Label x:Name="minLineGraph" Margin="42,40,1087,81" Grid.Row="1"></Label>
+        
 
         <RadioButton x:Name="Year1Radio" GroupName="Years"  Margin="821,696,0,0" HorizontalAlignment="Left" Width="84" Height="22" VerticalAlignment="Top">Year 1</RadioButton>
         <RadioButton x:Name="Year2Radio" GroupName="Years"  Margin="821,724,0,0" HorizontalAlignment="Left" Width="66" Height="22" VerticalAlignment="Top">Year 2</RadioButton>
