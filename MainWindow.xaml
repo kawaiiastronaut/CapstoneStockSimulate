@@ -15,7 +15,7 @@
         <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="191" Margin="34,47,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="SellerDataListBox_SelectionChanged" >
 
         </ListBox>
-        <TextBox Name="SellerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="SellerNameTextBox_TextChanged"/>
+        <TextBox Name="SellerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Name="SellerNameLabel" Content="Seller Name" HorizontalAlignment="Left" Margin="185,47,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="SellVolTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Total Volume avaliable" HorizontalAlignment="Left" Margin="185,75,0,0" VerticalAlignment="Top"/>
