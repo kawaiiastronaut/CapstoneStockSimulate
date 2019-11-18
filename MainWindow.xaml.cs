@@ -38,6 +38,7 @@ namespace Capstone
         public List<Buyer> buyerDeficitList = new List<Buyer>();
 
         public float[] surplusDeficit = new float[20];
+        public float[] lineGraph = new float[1840];
 
         public List<Seller> sellerCurrSurplusList = new List<Seller>();
         public List<Buyer> buyerCurrDeficitList = new List<Buyer>();
@@ -147,6 +148,31 @@ namespace Capstone
         void transact(Seller seller, Buyer buyer)
 
         {
+            if (buyEmptyFlag >= buyerDataList.Count)
+            {
+                if (sellEmptyFlag >= sellerDataList.Count)
+                {
+                    buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent -= sellerCurrSurplusList[sellEmptyFlag-sellerDataList.Count].DailyVolume/sellerCurrDataList[sellEmptyFlag- sellerDataList.Count].TotalVolume;
+                }
+                else
+                {
+                    buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent -= sellerCurrSurplusList[sellEmptyFlag].DailyVolume/sellerCurrDataList[sellEmptyFlag].TotalVolume;
+                }
+                buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent += buyerCurrDeficitList[buyEmptyFlag - buyerDataList.Count].DailyDemand / buyerCurrDataList[buyEmptyFlag - buyerDataList.Count].TotalDemand;
+            }
+            else
+            {
+                if (sellEmptyFlag >= sellerDataList.Count)
+                {
+                    buyerDataList[buyEmptyFlag].NegotiationPercent -= sellerCurrSurplusList[sellEmptyFlag - sellerDataList.Count].DailyVolume / sellerDataList[sellEmptyFlag - sellerDataList.Count].TotalVolume;
+                }
+                else
+                {
+                    buyerDataList[buyEmptyFlag].NegotiationPercent -= sellerCurrSurplusList[sellEmptyFlag].DailyVolume / sellerDataList[sellEmptyFlag].TotalVolume;
+                }
+                buyerDataList[buyEmptyFlag].NegotiationPercent += buyerCurrDeficitList[buyEmptyFlag].DailyDemand / buyerCurrDataList[buyEmptyFlag].TotalDemand;
+
+            }
             if (seller.DailyVolume > buyer.DailyDemand)
             {
                 buyEmptyFlag++;
@@ -176,7 +202,7 @@ namespace Capstone
         {
             int i = 0;
             int count = 0;
-            for (i = 0; i < 368; i++)   // simulate 5 years 
+            for (i = 0; i < 1840; i++)   // simulate 5 years 
             {
                 buyEmptyFlag = 0;
                 sellEmptyFlag = 0;
@@ -263,7 +289,7 @@ namespace Capstone
                             }
                             else
                             {
-                                buyerDeficitList[buyEmptyFlag].DailyDemand += buyerWorkingList[buyEmptyFlag].DailyDemand; // need to change this
+                                buyerDeficitList[buyEmptyFlag].DailyDemand += buyerWorkingList[buyEmptyFlag].DailyDemand; 
 
                             }
                             buyerWorkingList[buyEmptyFlag].DailyDemand = 0;
@@ -300,7 +326,32 @@ namespace Capstone
                             sellerSurplusList[s].DailyVolume += sellerWorkingList[s].DailyVolume; // need to change this
 
                         }
-                        sellerWorkingList[s].DailyVolume = 0;
+                        if (buyEmptyFlag >= buyerDataList.Count)
+                        {
+                            if (s >= sellerDataList.Count)
+                            {
+                                buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent -= sellerSurplusList[s - sellerDataList.Count].DailyVolume / sellerCurrDataList[s - sellerDataList.Count].TotalVolume;
+                            }
+                            else
+                            {
+                                buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent -= sellerSurplusList[s].DailyVolume / sellerCurrDataList[s].TotalVolume;
+                            }
+                            buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent += buyerCurrDeficitList[buyEmptyFlag - buyerDataList.Count].DailyDemand / buyerCurrDataList[buyEmptyFlag - buyerDataList.Count].TotalDemand;
+                        }
+                        else
+                        {
+                            if (s >= sellerDataList.Count)
+                            {
+                                buyerDataList[buyEmptyFlag].NegotiationPercent -= sellerSurplusList[s - sellerDataList.Count].DailyVolume / sellerDataList[s - sellerDataList.Count].TotalVolume;
+                            }
+                            else
+                            {
+                                buyerDataList[buyEmptyFlag].NegotiationPercent -= sellerSurplusList[sellEmptyFlag].DailyVolume / sellerDataList[s].TotalVolume;
+                            }
+                            buyerDataList[buyEmptyFlag].NegotiationPercent += buyerCurrDeficitList[buyEmptyFlag].DailyDemand / buyerCurrDataList[buyEmptyFlag].TotalDemand;
+                        }
+                            sellerWorkingList[s].DailyVolume = 0;
+
 
                     }
                 }
@@ -322,6 +373,32 @@ namespace Capstone
                         }
                         buyerWorkingList[b].DailyDemand = 0;
 
+                        if (b >= buyerDataList.Count)
+                        {
+                            if (sellEmptyFlag >= sellerDataList.Count)
+                            {
+                                buyerDataList[b - buyerDataList.Count].NegotiationPercent -= sellerSurplusList[sellEmptyFlag - sellerDataList.Count].DailyVolume / sellerCurrDataList[sellEmptyFlag - sellerDataList.Count].TotalVolume;
+                            }
+                            else
+                            {
+                                buyerDataList[b - buyerDataList.Count].NegotiationPercent -= sellerSurplusList[sellEmptyFlag].DailyVolume / sellerCurrDataList[sellEmptyFlag].TotalVolume;
+                            }
+                            buyerDataList[b - buyerDataList.Count].NegotiationPercent += buyerDeficitList[b - buyerDataList.Count].DailyDemand / buyerCurrDataList[b - buyerDataList.Count].TotalDemand;
+                        }
+                        else
+                        {
+                            if (sellEmptyFlag >= sellerDataList.Count)
+                            {
+                                buyerDataList[b].NegotiationPercent -= sellerSurplusList[sellEmptyFlag - sellerDataList.Count].DailyVolume / sellerDataList[sellEmptyFlag - sellerDataList.Count].TotalVolume;
+                            }
+                            else
+                            {
+                                buyerDataList[b].NegotiationPercent -= sellerSurplusList[sellEmptyFlag].DailyVolume / sellerDataList[sellEmptyFlag].TotalVolume;
+                            }
+                            buyerDataList[b].NegotiationPercent += buyerDeficitList[b].DailyDemand / buyerCurrDataList[b].TotalDemand;
+                           
+                        }
+                        buyerWorkingList[b].DailyDemand = 0;
                     }
                 }
                 else
@@ -498,6 +575,21 @@ namespace Capstone
                     sellerSurplusList[jj + 1] = surplusKey;
                     sellerDataList[jj + 1] = key;
                 }
+                float sum = 0;
+                foreach (Buyer index in buyerDataList)
+                {
+                    sum += index.RealCost;
+                }
+                int kk = 0;
+                foreach (Buyer index in buyerDataList)
+                {
+                    index.Update();
+                    buyerDeficitList[kk].NegotiationPercent = index.NegotiationPercent;
+                    //buyerDeficitList[kk].Update();
+                    buyerDeficitList[kk].RealCost = index.RealCost;
+                    kk++; 
+                }
+                lineGraph[i] = sum / (float)buyerDataList.Count;
 
             } //end final FOR loop
 
@@ -566,8 +658,8 @@ namespace Capstone
                     return (long)ie;
                 });
 
-            displayOutput(longArray);
-            displayLineGraph(longerArray);
+            displayOutput(surplusDeficit);
+            displayLineGraph(lineGraph);
 
 
 
@@ -683,19 +775,19 @@ namespace Capstone
 
 
 
-        private void displayOutput(long[] output)
+        private void displayOutput(float[] output)
         {
             front_Canvas.Children.Clear();
             front_Canvas.Width = 35 * 20;
-            long[] minMaxValue = new long[20];
+            float[] minMaxValue = new float[20];
             int i;
-            long minValue=10000;
-            long maxValue=0;
-            long minMaxDiff;
+            float minValue=10000;
+            float maxValue=0;
+            float minMaxDiff;
             long height = 200;
             long prevBase = 0;
             long carry = 0;
-            long unitHeight;
+            float unitHeight;
             minMaxValue[0] = output[0];
 
             float centerGraph = 0;
@@ -801,14 +893,14 @@ namespace Capstone
            
         }
 
-        private void displayLineGraph(long[] output)
+        private void displayLineGraph (float[] output)
         {
             lineGraphCanvas.Children.Clear();
             // front_Canvas.Width = 35 * 20;
 
             int i;
-            long minValue = 10000;
-            long maxValue = 0;
+            float minValue = 10000;
+            float maxValue = 0;
             long height = 200;
             long minMaxDiff = 0;
 
@@ -950,14 +1042,9 @@ namespace Capstone
                 arrayEndValue = 1840;
             }
             lineGraphCanvas.Children.Clear();
-            displayLineGraph(longerArray);
+            displayLineGraph(lineGraph);
         }
 
-
-        private void SellerNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
       
         
