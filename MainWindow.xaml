@@ -124,7 +124,7 @@
 
 
 
-        <CheckBox x:Name="showHideBarValueBox" Margin="821,568,0,212.5" Click="showHideBarGraphValues" HorizontalAlignment="Left" Width="164">Show Bar Graph Values</CheckBox>
+        <CheckBox x:Name="showHideBarValueBox" Margin="643,346,0,434" Click="showHideBarGraphValues" HorizontalAlignment="Left" Width="164">Show Bar Graph Values</CheckBox>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="105,688,0,0" VerticalAlignment="Top" Width="700" Grid.RowSpan="2">
             <Canvas x:Name="lineGraphCanvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="705"/>
         </Border>

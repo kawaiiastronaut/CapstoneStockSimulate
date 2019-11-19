@@ -50,7 +50,7 @@ namespace Capstone
         int sellerClickCounter = 0;
         int arrayStartValue = 0;
         int arrayEndValue = 1840;
-        long[] barGraphValues = new long[20];
+        float[] barGraphValues = new float[20];
         int[] integer10Array = new int[1840];
         long[] longerArray = new long[1840];
 
@@ -594,7 +594,7 @@ namespace Capstone
 
             } //end final FOR loop
 
-            int[] integerArray = new int[] { 21, 2, 3, 4, 5, -10, 75, -50, 100, -24, 21, 2, 3, 4, 5, -10, 75, -50, 87, -24 };
+            float[] integerArray = new float[] { -21, -2, -3, -4, -5, -10, -250, 5000, -100, -24, -21, -2, -3, -4, -5, -10, -75, -50, -87, -24 };
             
             Random rnd = new Random();
             for(int a = 0; a < 1840; a++)
@@ -649,12 +649,12 @@ namespace Capstone
             }
 
 
-            long[] longArray = Array.ConvertAll<int, long>(integerArray,
+            /*long[] longArray = Array.ConvertAll<int, long>(integerArray,
                 delegate (int ie)
                 {
                     return (long)ie;
                 });
-
+                */
             longerArray = Array.ConvertAll<int, long>(integer10Array,
                 delegate (int ie)
                 {
@@ -662,6 +662,7 @@ namespace Capstone
                 });
 
             displayOutput(surplusDeficit);
+            //displayOutput(integerArray);
             displayLineGraph(lineGraph);
 
 
@@ -678,6 +679,7 @@ namespace Capstone
         private void AddMultipleBuyers_Click(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("This is a test");
+        
         }
 
         private void AddMultipleSellers_Click(object sender, RoutedEventArgs e)
@@ -786,7 +788,9 @@ namespace Capstone
             float[] minMaxValue = new float[20];
             int i;
             float minValue=10000;
-            float maxValue=0;
+            float maxValue=-10000;
+            float totalUnits = 0;
+            float maxValPercent = 0;
             float minMaxDiff;
             long height = 200;
             long prevBase = 0;
@@ -809,7 +813,26 @@ namespace Capstone
                 }
 
             }
-            minMaxDiff = (float) Abs(maxValue - minValue);
+
+            if(minValue < 0 && maxValue > 0)
+            {
+                totalUnits = maxValue + Abs(minValue);
+                maxValPercent = maxValue / totalUnits;
+            }
+            else if(minValue > 0 && maxValue > 0)
+            {
+                totalUnits = maxValue + minValue;
+                maxValPercent = maxValue / totalUnits;
+            }else if(minValue < 0 && maxValue < 0)
+            {
+                //totalUnits = Abs(maxValue) + Abs(minValue);
+                totalUnits = maxValue - minValue;
+                Console.WriteLine("Total" + totalUnits);
+                Console.WriteLine(maxValue +"max");
+                maxValPercent = maxValue / totalUnits;
+            }
+            minMaxDiff = (float) Abs(maxValue + minValue);
+            //Console.WriteLine("BarDiff" + minMaxDiff);
             if(minMaxDiff != 0)
             {
                 unitHeight = (float)front_Canvas.Height / minMaxDiff;
@@ -818,11 +841,14 @@ namespace Capstone
             {
                 unitHeight = 1;
             }
-            
-            
+
+
             // prevBase = maxValue / unitHeight;
             // centerGraph = 200 / (maxValue + Abs(minValue));
-            newZeroPoint = unitHeight * -(minValue);
+            centerGraph =  ((float) front_Canvas.Height / 2 ) - ((float) front_Canvas.Height * maxValPercent);
+            //centerGraph = ((float)(maxValue + minValue) / 2);
+            // newZeroPoint = unitHeight * -(minValue);
+            //Console.WriteLine("CenterGraph:" + centerGraph);
             
 
             for (i = 0; i <= 19; i++)
@@ -836,22 +862,25 @@ namespace Capstone
                     
                     
                     rect.Width = 35;
-                    rect.Height = Abs(output[i]) * unitHeight;
-                    
-                   /* if (unitHeight != 0)
-                    {
-                        rect.Height = Abs((carry + output[i]) / unitHeight);
-                        carry = ((carry + output[i]) % unitHeight);
-                    }
-                    else
-                    {
-                        rect.Height = height;
-                    }
-                    */
+                    rect.Height = (Abs(output[i]) / totalUnits) * front_Canvas.Height;
+                    //Console.WriteLine("Value" + output[i]);
+
+
+                    /* if (unitHeight != 0)
+                     {
+                         rect.Height = Abs((carry + output[i]) / unitHeight);
+                         carry = ((carry + output[i]) % unitHeight);
+                     }
+                     else
+                     {
+                         rect.Height = height;
+                     }
+                     */
                     Canvas.SetLeft(rect, i * rect.Width);
                     prevBase = (long)rect.Height + prevBase;
-                    Canvas.SetBottom(rect, newZeroPoint - rect.Height);
-                   
+                    Canvas.SetTop(rect, front_Canvas.Height / 2 - centerGraph);
+                    //((output[i] - centerGraph) * unitHeight) + lineGraphCanvas.Height / 2);
+
                     front_Canvas.Children.Add(rect);
                     Label label = new Label();
                     label.FontSize = 8;
@@ -876,23 +905,26 @@ namespace Capstone
                     rect.Stroke = new SolidColorBrush(Colors.Green);
                     rect.Fill = new SolidColorBrush(Colors.Green);
                     rect.Width = 35;
-                    rect.Height = Abs(output[i]) * unitHeight;
-                   // Console.WriteLine(rect.Height);
-                   /* if (unitHeight != 0)
-                    {
-                        rect.Height = (float)((carry + output[i]) / unitHeight);
-                        carry = (carry + output[i]) % unitHeight;
-                    }
-                    else
-                    {
-                        rect.Height = height/20;
-                        carry = (carry + output[i]);
-                    }
+                    rect.Height = (output[i] / totalUnits) * front_Canvas.Height;
+                    
+                   
+                    //rect.Height = Abs(output[i]) * unitHeight;
+                    // Console.WriteLine(rect.Height);
+                    /* if (unitHeight != 0)
+                     {
+                         rect.Height = (float)((carry + output[i]) / unitHeight);
+                         carry = (carry + output[i]) % unitHeight;
+                     }
+                     else
+                     {
+                         rect.Height = height/20;
+                         carry = (carry + output[i]);
+                     }
 
-                   */
+                    */
                     Canvas.SetLeft(rect, i * rect.Width);
                     // prevBase = -(long)rect.Height + prevBase;
-                    Canvas.SetBottom(rect, newZeroPoint);
+                    Canvas.SetBottom(rect, front_Canvas.Height /2 + centerGraph);
                     front_Canvas.Children.Add(rect);
                     
                     Label label = new Label();
@@ -932,8 +964,8 @@ namespace Capstone
             lineGraphCanvas.Children.Clear();
 
             int i;
-            long minValue = 10000;
-            long maxValue = 0;
+            float minValue = 10000;
+            float maxValue = 0;
             float minMaxAvg = 0;
             long height = 200;
             float minMaxDiff = 0;
@@ -954,9 +986,9 @@ namespace Capstone
 
             }
             //minMaxDiff = (float)Abs(maxValue - minValue);
-           // Console.WriteLine("Max -> Min" + maxValue + minValue);
+            // Console.WriteLine("Max -> Min" + maxValue + minValue);
             minMaxDiff = (float)Abs(maxValue) + Abs(minValue);
-            
+            // minMaxDiff = (float)Abs(maxValue + minValue);
             centerGraph = ((float)(maxValue + minValue) / 2);
             maxLineGraph.Content = maxValue;
             minLineGraph.Content = minValue;
