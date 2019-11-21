@@ -5,141 +5,149 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1200">
+        Title="MainWindow" Height="1000" Width="1600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="163*"/>
             <RowDefinition Height="31*"/>
         </Grid.RowDefinitions>
         <Label Content="Sellers" HorizontalAlignment="Left" Margin="34,22,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="191" Margin="34,47,0,0" VerticalAlignment="Top" Width="138" SelectionChanged="SellerDataListBox_SelectionChanged" >
+        <ListBox Name="SellerDataListBox" HorizontalAlignment="Left" Height="191" Margin="34,47,0,0" VerticalAlignment="Top" Width="127" SelectionChanged="SellerDataListBox_SelectionChanged" >
 
         </ListBox>
-        <TextBox Name="SellerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Name="SellerNameLabel" Content="Seller Name" HorizontalAlignment="Left" Margin="185,47,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="SellVolTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Total Volume avaliable" HorizontalAlignment="Left" Margin="185,75,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="CostProductionTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label Content="Cost of production" HorizontalAlignment="Left" Margin="185,103,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="RangeCostProductionTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label Name="RangeCostProductionLabel" Content="Range of Prod. Cost" HorizontalAlignment="Left" Margin="185,130,0,0" VerticalAlignment="Top"/>
-        <Label Content="Incentive proportion&#xA;" HorizontalAlignment="Left" Margin="185,159,0,0" VerticalAlignment="Top" Height="27"/>
-        <TextBox x:Name="IncentiveTextBox"  HorizontalAlignment="Left" Height="23" Margin="318,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="25"/>
-        <Label Name="numberOfSellersLabel" Content="Number of Sellers" HorizontalAlignment="Left" Margin="185,186,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
-        <TextBox x:Name="numberOfSellersTextBox"  HorizontalAlignment="Left" Height="23" Margin="316,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Name="AddSellerButton" Content="Add Seller" HorizontalAlignment="Left" Margin="183,221,0,0" VerticalAlignment="Top" Width="120" Height="35" Click="AddSellerButton_Click" />
-        <Button Name="AutoGenerateSellerButton" Content="Auto Generate Sellers" HorizontalAlignment="Left" Margin="318,221,0,0" VerticalAlignment="Top" Width="120" Height="35" Click="AutoSellerButton_Click" />
-        <Label Content="Buyers" HorizontalAlignment="Left" Margin="513,22,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="BuyerDataListBox" HorizontalAlignment="Left" Height="191" Margin="513,47,0,0" VerticalAlignment="Top" Width="171"/>
-        <TextBox x:Name="BuyerNameTextBox"  HorizontalAlignment="Left" Height="23" Margin="830,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label Content="Buyer Name" HorizontalAlignment="Left" Margin="700,47,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TotalDemandTextbox"  HorizontalAlignment="Left" Height="23" Margin="830,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.901,0.698"/>
-        <Label Content="Total Demand" HorizontalAlignment="Left" Margin="700,75,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="MaxCostTextBox"  HorizontalAlignment="Left" Height="23" Margin="830,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Max Cost Per Unit&#xA;" HorizontalAlignment="Left" Margin="700,103,0,0" VerticalAlignment="Top" Height="28"/>
-        <TextBox x:Name="RangeBuyCostTextBox"  HorizontalAlignment="Left" Height="23" Margin="830,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label Name="RangeBuyCostLabel" Content="Range of Buy Cost" HorizontalAlignment="Left" Margin="700,131,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="NegotiationTextBox"  HorizontalAlignment="Left" Height="23" Margin="830,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="50"/>
-        <Label Content="Negotiation percent" HorizontalAlignment="Left" Margin="700,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
-        <Label Name="numberOfBuyersLabel" Content="Number of Buyers" HorizontalAlignment="Left" Margin="700,187,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
-        <TextBox x:Name="numberOfBuyersTextBox"  HorizontalAlignment="Left" Height="23" Margin="830,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="AddBuyerButton" Content="Add Buyer" HorizontalAlignment="Left" Margin="705,221,0,0" VerticalAlignment="Top" Width="120" Height="35" Click="AddBuyerButton_Click" />
-        <Button x:Name="AutoGenerateBuyerButton" Content="Auto Generate Buyers" HorizontalAlignment="Left" Margin="848,221,0,0" VerticalAlignment="Top" Width="120" Height="35" Click="AutoBuyerButton_Click" />
-        <Border x:Name="barGraphBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="103,362,0,0" VerticalAlignment="Top" Width="700">
-            <Canvas x:Name="front_Canvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="705"/>
+        <TextBox Name="SellerNameTextBox"  HorizontalAlignment="Left" Height="22" Margin="298,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Name="SellerNameLabel" Content="Seller Name" HorizontalAlignment="Left" Margin="165,46,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="SellVolTextBox"  HorizontalAlignment="Left" Height="22" Margin="298,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Total Volume avaliable" HorizontalAlignment="Left" Margin="165,73,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="CostProductionTextBox"  HorizontalAlignment="Left" Height="22" Margin="298,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label Content="Cost of production" HorizontalAlignment="Left" Margin="166,100,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="RangeCostProductionTextBox"  HorizontalAlignment="Left" Height="22" Margin="298,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label Name="RangeCostProductionLabel" Content="Range of Prod. Cost" HorizontalAlignment="Left" Margin="165,127,0,0" VerticalAlignment="Top"/>
+        <Label Content="Incentive proportion&#xA;" HorizontalAlignment="Left" Margin="165,154,0,0" VerticalAlignment="Top" Height="26"/>
+        <TextBox x:Name="IncentiveTextBox"  HorizontalAlignment="Left" Height="22" Margin="298,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="25"/>
+        <Label Name="numberOfSellersLabel" Content="Number of Sellers" HorizontalAlignment="Left" Margin="166,181,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
+        <TextBox x:Name="numberOfSellersTextBox"  HorizontalAlignment="Left" Height="22" Margin="298,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Name="AddSellerButton" Content="Add Seller" HorizontalAlignment="Left" Margin="166,246,0,0" VerticalAlignment="Top" Width="120" Height="35" Click="AddSellerButton_Click" />
+        <Button Name="AutoGenerateSellerButton" Content="Auto Generate Sellers" HorizontalAlignment="Left" Margin="298,246,0,0" VerticalAlignment="Top" Width="120" Height="35" Click="AutoSellerButton_Click" />
+        <Label Content="Buyers" HorizontalAlignment="Left" Margin="24,279,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="BuyerDataListBox" HorizontalAlignment="Left" Height="191" Margin="24,304,0,0" VerticalAlignment="Top" Width="137"/>
+        <TextBox x:Name="BuyerNameTextBox"  HorizontalAlignment="Left" Height="24" Margin="290,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label Content="Buyer Name" HorizontalAlignment="Left" Margin="165,300,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TotalDemandTextbox"  HorizontalAlignment="Left" Height="24" Margin="290,330,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.901,0.698"/>
+        <Label Content="Total Demand" HorizontalAlignment="Left" Margin="165,330,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="MaxCostTextBox"  HorizontalAlignment="Left" Height="24" Margin="290,358,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Max Cost Per Unit&#xA;" HorizontalAlignment="Left" Margin="165,358,0,0" VerticalAlignment="Top" Height="28"/>
+        <TextBox x:Name="RangeBuyCostTextBox"  HorizontalAlignment="Left" Height="24" Margin="290,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label Name="RangeBuyCostLabel" Content="Range of Buy Cost" HorizontalAlignment="Left" Margin="165,386,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NegotiationTextBox"  HorizontalAlignment="Left" Height="24" Margin="290,414,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="50"/>
+        <Label Content="Negotiation percent" HorizontalAlignment="Left" Margin="165,414,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
+        <Label Name="numberOfBuyersLabel" Content="Number of Buyers" HorizontalAlignment="Left" Margin="165,440,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
+        <TextBox x:Name="numberOfBuyersTextBox"  HorizontalAlignment="Left" Height="24" Margin="290,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="AddBuyerButton" Content="Add Buyer" HorizontalAlignment="Left" Margin="165,476,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="AddBuyerButton_Click" />
+        <Button x:Name="AutoGenerateBuyerButton" Content="Auto Generate Buyers" HorizontalAlignment="Left" Margin="298,476,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="AutoBuyerButton_Click" />
+        <Border x:Name="barGraphBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="720,73,0,0" VerticalAlignment="Top" Width="700">
+            <Canvas x:Name="front_Canvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="700"/>
         </Border>
-        <Label x:Name="barGraphTitle" Content="Bar Graph Title" FontSize="30" FontWeight="Bold" Margin="349,295,0,0" HorizontalAlignment="Left" Width="239" Height="56" VerticalAlignment="Top"></Label>
-        <Label Name="Max" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,306,0,0"/>
-        <Label Name="Min" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,380,0,0"/>
-        <Label Content="%" HorizontalAlignment="Left" Margin="955,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="29.87,-12.594"/>
-        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="958,157,0,0" RenderTransformOrigin="-0.6,-1.5"/>
-        <Label FontSize="8" Content="Y1Q1" Margin="105,568,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-        <Label FontSize="8" Content="Y1Q2" Margin="139,568,0,0" HorizontalAlignment="Left" Width="29" Height="34" VerticalAlignment="Top"/>
-        <Label FontSize="8" Content="Y1Q3" RenderTransformOrigin="0.488,0.521" Margin="173,568,0,0" HorizontalAlignment="Left" Width="38" Height="34" VerticalAlignment="Top"/>
-        <Label FontSize="8" Content="Y1Q4" Margin="211,568,0,0" HorizontalAlignment="Left" Width="35" Height="34" VerticalAlignment="Top"/>
-        <Label FontSize="8" Content="Y2Q1" Margin="246,568,0,0" HorizontalAlignment="Left" Width="35" Height="34" VerticalAlignment="Top"/>
-        <Label FontSize="8" Content="Y2Q2" Margin="281,568,0,0" HorizontalAlignment="Left" Width="35" Height="34" VerticalAlignment="Top"/>
-        <Label FontSize="8" Content ="Y2Q3" Margin="316,568,0,0" HorizontalAlignment="Left" Width="30" Height="34" VerticalAlignment="Top"/>
-        <Label FontSize="8" Content="Y2Q4" Margin="351,568,0,0" HorizontalAlignment="Left" Width="35" Height="34" VerticalAlignment="Top"/>
-        <Label FontSize="8" Content="Y3Q1" Margin="386,568,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
-        <Label FontSize="8" Content="Y3Q2" Margin="421,568,0,0" HorizontalAlignment="Left" Width="30" Height="34" VerticalAlignment="Top"/>
-        <Label FontSize="8" Content="Y3Q3" Margin="456,568,0,0" HorizontalAlignment="Left" Width="30" Height="34" VerticalAlignment="Top"/>
-        <Label FontSize="8" Content="Y3Q4" Margin="491,568,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
-        <Label FontSize="8" Content="Y4Q1" Margin="526,568,581,212.5"/>
-        <Label FontSize="8" Content="Y4Q2" Margin="561,568,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35"/>
-        <Label FontSize="8" Content="Y4Q3" Margin="596,568,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35"/>
-        <Label FontSize="8" Content="Y4Q4" Margin="631,568,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35"/>
-        <Label FontSize="8" Content="Y5Q1" Margin="666,568,0,0" HorizontalAlignment="Left" Width="34" Height="34" VerticalAlignment="Top"/>
-        <Label FontSize="8" Content="Y5Q2" Margin="700,568,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33"/>
-        <Label FontSize="8" Content="Y5Q3" Margin="738,568,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="29"/>
-        <Label  FontSize="8" Content="Y5Q4" Margin="772,568,0,0" HorizontalAlignment="Left" Width="35" Height="34" VerticalAlignment="Top"/>
-        <Label Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="438,160,0,0"/>
-        <TextBox x:Name="debugSeller" HorizontalAlignment="Left" Height="23" Margin="847,431,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="debugBuyer" HorizontalAlignment="Left" Height="23" Margin="848,459,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="818,487,0,0" VerticalAlignment="Top" Width="166" Height="37" Click="RunButton_Click" />
 
-        <TextBox x:Name="TextBoxTable1_1"  HorizontalAlignment="Left" Height="21" Margin="997,359,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_2"  HorizontalAlignment="Left" Height="21" Margin="997,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_3"  HorizontalAlignment="Left" Height="21" Margin="997,401,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_4"  HorizontalAlignment="Left" Height="21" Margin="997,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_5"  HorizontalAlignment="Left" Height="21" Margin="997,443,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_6"  HorizontalAlignment="Left" Height="21" Margin="997,464,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_7"  HorizontalAlignment="Left" Height="21" Margin="997,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_8"  HorizontalAlignment="Left" Height="21" Margin="997,506,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_9"  HorizontalAlignment="Left" Height="21" Margin="997,527,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_10"  HorizontalAlignment="Left" Height="21" Margin="997,548,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_11"  HorizontalAlignment="Left" Height="21" Margin="997,569,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_12"  HorizontalAlignment="Left" Height="21" Margin="997,590,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_13"  HorizontalAlignment="Left" Height="21" Margin="997,611,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_14"  HorizontalAlignment="Left" Height="21" Margin="997,632,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_15"  HorizontalAlignment="Left" Height="21" Margin="997,653,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_16"  HorizontalAlignment="Left" Height="21" Margin="997,674,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_17"  HorizontalAlignment="Left" Height="21" Margin="997,695,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_18"  HorizontalAlignment="Left" Height="21" Margin="997,716,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_19"  HorizontalAlignment="Left" Height="21" Margin="997,737,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable1_20"  HorizontalAlignment="Left" Height="21" Margin="997,758,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <Label x:Name="barGraphTitle" Content="Bar Graph Title" FontSize="30" FontWeight="Bold" Margin="953,22,0,0" HorizontalAlignment="Left" Width="238" Height="56" VerticalAlignment="Top"></Label>
+        <Label Name="Max" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="660,73,0,0" RenderTransformOrigin="-1.281,1.769"/>
+        <Label Name="Min" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="660,246,0,0" RenderTransformOrigin="1.281,-5.942"/>
+        <Label x:Name="avgBarGraph" Margin="649,163,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
+        <Label x:Name="upperQuartileBarGraph" Margin="649,118,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
+        <Label x:Name="lowerQuartileBarGraph" Margin="649,202,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
 
-        <TextBox x:Name="TextBoxTable2_1"  HorizontalAlignment="Left" Height="21" Margin="1082,359,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_2"  HorizontalAlignment="Left" Height="21" Margin="1082,380,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_3"  HorizontalAlignment="Left" Height="21" Margin="1082,401,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_4"  HorizontalAlignment="Left" Height="21" Margin="1082,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_5"  HorizontalAlignment="Left" Height="21" Margin="1082,443,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_6"  HorizontalAlignment="Left" Height="21" Margin="1082,464,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_7"  HorizontalAlignment="Left" Height="21" Margin="1082,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_8"  HorizontalAlignment="Left" Height="21" Margin="1082,506,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_9"  HorizontalAlignment="Left" Height="21" Margin="1082,527,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_10"  HorizontalAlignment="Left" Height="21" Margin="1082,548,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_11"  HorizontalAlignment="Left" Height="21" Margin="1082,569,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_12"  HorizontalAlignment="Left" Height="21" Margin="1082,590,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_13"  HorizontalAlignment="Left" Height="21" Margin="1082,611,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_14"  HorizontalAlignment="Left" Height="21" Margin="1082,632,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_15"  HorizontalAlignment="Left" Height="21" Margin="1082,653,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_16"  HorizontalAlignment="Left" Height="21" Margin="1082,674,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_17"  HorizontalAlignment="Left" Height="21" Margin="1082,695,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_18"  HorizontalAlignment="Left" Height="21" Margin="1082,716,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_19"  HorizontalAlignment="Left" Height="21" Margin="1082,737,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
-        <TextBox x:Name="TextBoxTable2_20"  HorizontalAlignment="Left" Height="21" Margin="1082,758,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <Label Content="%" HorizontalAlignment="Left" Margin="415,412,0,0" VerticalAlignment="Top" RenderTransformOrigin="29.87,-12.594"/>
+        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="418,412,0,0" RenderTransformOrigin="-0.6,-1.5"/>
+        <Label FontSize="8" Content="Y1Q1" Margin="718,273,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+        <Label FontSize="8" Content="Y1Q2" Margin="752,273,0,0" HorizontalAlignment="Left" Width="28" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content="Y1Q3" RenderTransformOrigin="0.488,0.521" Margin="786,273,0,0" HorizontalAlignment="Left" Width="38" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content="Y1Q4" Margin="824,273,0,0" HorizontalAlignment="Left" Width="34" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content="Y2Q1" Margin="858,273,0,0" HorizontalAlignment="Left" Width="36" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content="Y2Q2" Margin="894,273,0,0" HorizontalAlignment="Left" Width="34" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content ="Y2Q3" Margin="928,273,0,0" HorizontalAlignment="Left" Width="30" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content="Y2Q4" Margin="964,273,0,0" HorizontalAlignment="Left" Width="34" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content="Y3Q1" Margin="998,273,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
+        <Label FontSize="8" Content="Y3Q2" Margin="1034,273,0,0" HorizontalAlignment="Left" Width="30" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content="Y3Q3" Margin="1068,273,0,0" HorizontalAlignment="Left" Width="30" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content="Y3Q4" Margin="1104,273,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
+        <Label FontSize="8" Content="Y4Q1" Margin="1138,273,0,0" HorizontalAlignment="Left" Width="34" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content="Y4Q2" Margin="1174,273,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+        <Label FontSize="8" Content="Y4Q3" Margin="1208,273,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="36"/>
+        <Label FontSize="8" Content="Y4Q4" Margin="1244,273,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+        <Label FontSize="8" Content="Y5Q1" Margin="1278,273,0,0" HorizontalAlignment="Left" Width="34" Height="34" VerticalAlignment="Top"/>
+        <Label FontSize="8" Content="Y5Q2" Margin="1312,273,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+        <Label FontSize="8" Content="Y5Q3" Margin="1350,273,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
+        <Label  FontSize="8" Content="Y5Q4" Margin="1384,273,0,0" HorizontalAlignment="Left" Width="36" Height="34" VerticalAlignment="Top"/>
+        <Label Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="418,154,0,0"/>
+        <TextBox x:Name="debugSeller" HorizontalAlignment="Left" Height="23" Margin="439,481,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="debugBuyer" HorizontalAlignment="Left" Height="24" Margin="439,517,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="439,553,0,0" VerticalAlignment="Top" Width="166" Height="38" Click="RunButton_Click" />
+
+        <TextBox x:Name="TextBoxTable1_1"  HorizontalAlignment="Left" Height="21" Margin="454,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_2"  HorizontalAlignment="Left" Height="21" Margin="454,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_3"  HorizontalAlignment="Left" Height="21" Margin="454,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_4"  HorizontalAlignment="Left" Height="21" Margin="454,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_5"  HorizontalAlignment="Left" Height="21" Margin="454,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_6"  HorizontalAlignment="Left" Height="21" Margin="454,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_7"  HorizontalAlignment="Left" Height="21" Margin="454,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_8"  HorizontalAlignment="Left" Height="21" Margin="454,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_9"  HorizontalAlignment="Left" Height="21" Margin="454,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_10"  HorizontalAlignment="Left" Height="21" Margin="454,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_11"  HorizontalAlignment="Left" Height="21" Margin="454,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_12"  HorizontalAlignment="Left" Height="21" Margin="454,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_13"  HorizontalAlignment="Left" Height="21" Margin="454,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_14"  HorizontalAlignment="Left" Height="21" Margin="454,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_15"  HorizontalAlignment="Left" Height="21" Margin="454,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_16"  HorizontalAlignment="Left" Height="21" Margin="454,358,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_17"  HorizontalAlignment="Left" Height="21" Margin="454,379,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_18"  HorizontalAlignment="Left" Height="21" Margin="454,400,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_19"  HorizontalAlignment="Left" Height="21" Margin="454,421,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable1_20"  HorizontalAlignment="Left" Height="21" Margin="454,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+
+        <TextBox x:Name="TextBoxTable2_1"  HorizontalAlignment="Left" Height="21" Margin="539,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_2"  HorizontalAlignment="Left" Height="21" Margin="539,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_3"  HorizontalAlignment="Left" Height="21" Margin="539,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_4"  HorizontalAlignment="Left" Height="21" Margin="539,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_5"  HorizontalAlignment="Left" Height="21" Margin="539,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_6"  HorizontalAlignment="Left" Height="21" Margin="539,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_7"  HorizontalAlignment="Left" Height="21" Margin="539,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_8"  HorizontalAlignment="Left" Height="21" Margin="539,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_9"  HorizontalAlignment="Left" Height="21" Margin="539,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_10"  HorizontalAlignment="Left" Height="21" Margin="539,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_11"  HorizontalAlignment="Left" Height="21" Margin="539,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_12"  HorizontalAlignment="Left" Height="21" Margin="539,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_13"  HorizontalAlignment="Left" Height="21" Margin="539,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_14"  HorizontalAlignment="Left" Height="21" Margin="539,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_15"  HorizontalAlignment="Left" Height="21" Margin="539,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_16"  HorizontalAlignment="Left" Height="21" Margin="539,358,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_17"  HorizontalAlignment="Left" Height="21" Margin="539,379,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_18"  HorizontalAlignment="Left" Height="21" Margin="539,400,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_19"  HorizontalAlignment="Left" Height="21" Margin="539,421,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
+        <TextBox x:Name="TextBoxTable2_20"  HorizontalAlignment="Left" Height="21" Margin="539,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
 
 
 
 
 
-        <CheckBox x:Name="showHideBarValueBox" Margin="643,346,0,434" Click="showHideBarGraphValues" HorizontalAlignment="Left" Width="164">Show Bar Graph Values</CheckBox>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="105,688,0,0" VerticalAlignment="Top" Width="700" Grid.RowSpan="2">
-            <Canvas x:Name="lineGraphCanvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="705"/>
+        <CheckBox x:Name="showHideBarValueBox" Margin="1425,247,0,541" Click="showHideBarGraphValues" HorizontalAlignment="Left" Width="164">Show Bar Graph Values</CheckBox>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="718,364,0,0" VerticalAlignment="Top" Width="700">
+            <Canvas x:Name="lineGraphCanvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="700"/>
         </Border>
-        <Label x:Name="lineGraphTitle" Content="Line Graph Title" FontSize="30" FontWeight="Bold" Margin="349,632,0,0" Height="56" VerticalAlignment="Top" HorizontalAlignment="Left" Width="239"></Label>
-        <Label x:Name="maxLineGraph" Margin="42,688,1087,96"></Label>
-        <Label x:Name="minLineGraph" Margin="42,40,1087,81" Grid.Row="1"></Label>
-        
+        <Label x:Name="lineGraphTitle" Content="Line Graph Title" FontSize="30" FontWeight="Bold" Margin="953,312,0,0" Height="56" VerticalAlignment="Top" HorizontalAlignment="Left" Width="238"></Label>
+        <Label x:Name="maxLineGraph" Margin="649,365,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
+        <Label x:Name="avgLineGraph" Margin="649,455,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
+        <Label x:Name="minLineGraph" Margin="649,535,0,0" HorizontalAlignment="Left" Width="49" Height="30" VerticalAlignment="Top"/>
+        <Label x:Name="upperQuartileLineGraph" Margin="649,408,0,0" HorizontalAlignment="Left" Width="49" Height="30" VerticalAlignment="Top"/>
+        <Label x:Name="lowerQuartileLineGraph" Margin="649,500,0,0" HorizontalAlignment="Left" Width="49" Height="30" VerticalAlignment="Top"/>
 
-        <RadioButton x:Name="Year1Radio" GroupName="Years"  Margin="821,696,0,0" HorizontalAlignment="Left" Width="84" Height="22" VerticalAlignment="Top">Year 1</RadioButton>
-        <RadioButton x:Name="Year2Radio" GroupName="Years"  Margin="821,724,0,0" HorizontalAlignment="Left" Width="66" Height="22" VerticalAlignment="Top">Year 2</RadioButton>
-        <RadioButton x:Name="Year3Radio" GroupName="Years"  Margin="821,750,0,0" HorizontalAlignment="Left" Width="62" Height="22" VerticalAlignment="Top">Year 3</RadioButton>
-        <RadioButton x:Name="Year4Radio" GroupName="Years"  Margin="821,778,0,0" HorizontalAlignment="Left" Width="66" Height="22" VerticalAlignment="Top">Year 4</RadioButton>
-        <RadioButton x:Name="Year5Radio" GroupName="Years"  Margin="821,804,0,0" HorizontalAlignment="Left" Width="62" Height="22" VerticalAlignment="Top" Grid.RowSpan="2">Year 5</RadioButton>
-        <RadioButton x:Name="AllYearsRadio" GroupName="Years"  IsChecked="True" Margin="821,17.5,0,0" HorizontalAlignment="Left" Width="84" Height="22" VerticalAlignment="Top" Grid.Row="1">Years 1-5</RadioButton>
-        <Button x:Name="UpdateLineGraphYearButton" Content="Update Line Graph" HorizontalAlignment="Left" Margin="821,39.5,0,0" VerticalAlignment="Top" Width="104" Height="34" Click="UpdateLineGraph_Click" Grid.Row="1" />
+
+        <RadioButton x:Name="Year1Radio" GroupName="Years"  Margin="1425,373,0,0" HorizontalAlignment="Left" Width="84" Height="22" VerticalAlignment="Top">Year 1</RadioButton>
+        <RadioButton x:Name="Year2Radio" GroupName="Years"  Margin="1425,401,0,0" HorizontalAlignment="Left" Width="66" Height="22" VerticalAlignment="Top">Year 2</RadioButton>
+        <RadioButton x:Name="Year3Radio" GroupName="Years"  Margin="1425,427,0,0" HorizontalAlignment="Left" Width="62" Height="22" VerticalAlignment="Top">Year 3</RadioButton>
+        <RadioButton x:Name="Year4Radio" GroupName="Years"  Margin="1425,455,0,0" HorizontalAlignment="Left" Width="66" Height="22" VerticalAlignment="Top">Year 4</RadioButton>
+        <RadioButton x:Name="Year5Radio" GroupName="Years"  Margin="1425,481,0,0" HorizontalAlignment="Left" Width="62" Height="22" VerticalAlignment="Top">Year 5</RadioButton>
+        <RadioButton x:Name="AllYearsRadio" GroupName="Years"  IsChecked="True" Margin="1425,509,0,0" HorizontalAlignment="Left" Width="84" Height="22" VerticalAlignment="Top">Years 1-5</RadioButton>
+        <Button x:Name="UpdateLineGraphYearButton" Content="Update Line Graph" HorizontalAlignment="Left" Margin="1425,531,0,0" VerticalAlignment="Top" Width="104" Height="34" Click="UpdateLineGraph_Click" />
 
 
     </Grid>
