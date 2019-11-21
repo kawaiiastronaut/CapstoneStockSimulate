@@ -594,7 +594,7 @@ namespace Capstone
 
             } //end final FOR loop
 
-            int[] integerArray = new int[] { 21, 2, 3, 4, 5, -10, 75, -50, 100, -24, 21, 2, 3, 4, 5, -10, 75, -50, 87, -24 };
+            float[] integerArray = new float[] { -21, -2, -3, -4, 125, -10, -250, 500, -100, -24, 250, -2, -3, -4, -5, -10, 75, -50, -87, -24 };
             
             Random rnd = new Random();
             for(int a = 0; a < 1840; a++)
@@ -649,19 +649,20 @@ namespace Capstone
             }
 
 
-            long[] longArray = Array.ConvertAll<int, long>(integerArray,
+            /*long[] longArray = Array.ConvertAll<int, long>(integerArray,
                 delegate (int ie)
                 {
                     return (long)ie;
                 });
-
+                */
             longerArray = Array.ConvertAll<int, long>(integer10Array,
                 delegate (int ie)
                 {
                     return (long)ie;
                 });
 
-            displayOutput(surplusDeficit);
+            //displayOutput(surplusDeficit);
+            displayOutput(integerArray);
             displayLineGraph(lineGraph);
 
 
@@ -678,6 +679,7 @@ namespace Capstone
         private void AddMultipleBuyers_Click(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("This is a test");
+        
         }
 
         private void AddMultipleSellers_Click(object sender, RoutedEventArgs e)
@@ -786,12 +788,18 @@ namespace Capstone
             float[] minMaxValue = new float[20];
             int i;
             float minValue=10000;
-            float maxValue=0;
+            float maxValue=-10000;
+            float totalUnits = 0;
+            float maxValPercent = 0;
+            float barGraphAvgVal = 0;
+
             float minMaxDiff;
             long height = 200;
             long prevBase = 0;
             long carry = 0;
             float unitHeight;
+            float startingPoint;
+            float zeroPoint = 0;
             minMaxValue[0] = output[0];
 
             float centerGraph = 0;
@@ -809,7 +817,30 @@ namespace Capstone
                 }
 
             }
-            minMaxDiff = (float) Abs(maxValue - minValue);
+
+            if(minValue < 0 && maxValue > 0)
+            {
+                totalUnits = maxValue + Abs(minValue);
+                maxValPercent = maxValue / totalUnits;
+                zeroPoint = (float) front_Canvas.Height - (maxValPercent * (float) front_Canvas.Height);
+            }
+            else if(minValue > 0 && maxValue > 0)
+            {
+                totalUnits = maxValue + minValue;
+                maxValPercent = maxValue / totalUnits;
+                zeroPoint = 0;
+
+            }else if(minValue < 0 && maxValue < 0)
+            {
+                //totalUnits = Abs(maxValue) + Abs(minValue);
+                totalUnits = Abs(maxValue + minValue);
+                //Console.WriteLine("Total" + totalUnits);
+                //Console.WriteLine(maxValue +"max");
+                maxValPercent = maxValue / totalUnits;
+                zeroPoint = (float) front_Canvas.Height;
+            }
+            minMaxDiff = (float) Abs(maxValue + minValue);
+            //Console.WriteLine("BarDiff" + minMaxDiff);
             if(minMaxDiff != 0)
             {
                 unitHeight = (float)front_Canvas.Height / minMaxDiff;
@@ -818,12 +849,20 @@ namespace Capstone
             {
                 unitHeight = 1;
             }
-            
-            
+
+
             // prevBase = maxValue / unitHeight;
             // centerGraph = 200 / (maxValue + Abs(minValue));
-            newZeroPoint = unitHeight * -(minValue);
-            
+            centerGraph =  ((float) front_Canvas.Height / 2 ) - ((float) front_Canvas.Height * maxValPercent);
+            //centerGraph = ((float)(maxValue + minValue) / 2);
+            // newZeroPoint = unitHeight * -(minValue);
+            //Console.WriteLine("CenterGraph:" + centerGraph);
+
+            barGraphAvgVal = (minValue + maxValue) / 2;
+            avgBarGraph.Content = barGraphAvgVal.ToString();
+            lowerQuartileBarGraph.Content = ((barGraphAvgVal + minValue) / 2).ToString();
+            upperQuartileBarGraph.Content = ((barGraphAvgVal + maxValue) / 2).ToString();
+            graphGridLines(front_Canvas);
 
             for (i = 0; i <= 19; i++)
             {
@@ -836,22 +875,28 @@ namespace Capstone
                     
                     
                     rect.Width = 35;
-                    rect.Height = Abs(output[i]) * unitHeight;
-                    
-                   /* if (unitHeight != 0)
-                    {
-                        rect.Height = Abs((carry + output[i]) / unitHeight);
-                        carry = ((carry + output[i]) % unitHeight);
-                    }
-                    else
-                    {
-                        rect.Height = height;
-                    }
-                    */
+                    rect.Height = Abs(output[i]) * Abs(zeroPoint / minValue);
+                    //Console.WriteLine("negRect" + rect.Height);
+                    //rect.Height = (Abs(output[i]) / totalUnits) * front_Canvas.Height;
+                    //Console.WriteLine("Value" + output[i]);
+
+
+                    /* if (unitHeight != 0)
+                     {
+                         rect.Height = Abs((carry + output[i]) / unitHeight);
+                         carry = ((carry + output[i]) % unitHeight);
+                     }
+                     else
+                     {
+                         rect.Height = height;
+                     }
+                     */
                     Canvas.SetLeft(rect, i * rect.Width);
                     prevBase = (long)rect.Height + prevBase;
-                    Canvas.SetBottom(rect, newZeroPoint - rect.Height);
-                   
+                    // Canvas.SetTop(rect, front_Canvas.Height / 2 - centerGraph);
+                    Canvas.SetTop(rect, front_Canvas.Height - zeroPoint);
+                    //((output[i] - centerGraph) * unitHeight) + lineGraphCanvas.Height / 2);
+
                     front_Canvas.Children.Add(rect);
                     Label label = new Label();
                     label.FontSize = 8;
@@ -861,7 +906,7 @@ namespace Capstone
 
                   
                     Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetBottom(label, newZeroPoint - rect.Height - 5);
+                    Canvas.SetBottom(label, zeroPoint);
                     front_Canvas.Children.Add(label);
                     if (showHideBarValueBox.IsChecked == true)
                     {
@@ -876,23 +921,28 @@ namespace Capstone
                     rect.Stroke = new SolidColorBrush(Colors.Green);
                     rect.Fill = new SolidColorBrush(Colors.Green);
                     rect.Width = 35;
-                    rect.Height = Abs(output[i]) * unitHeight;
-                   // Console.WriteLine(rect.Height);
-                   /* if (unitHeight != 0)
-                    {
-                        rect.Height = (float)((carry + output[i]) / unitHeight);
-                        carry = (carry + output[i]) % unitHeight;
-                    }
-                    else
-                    {
-                        rect.Height = height/20;
-                        carry = (carry + output[i]);
-                    }
+                    rect.Height = Abs(output[i]) * Abs((front_Canvas.Height - zeroPoint) / maxValue);
+                   // Console.WriteLine("PosRect" + rect.Height);
+                    //rect.Height = (output[i] / totalUnits) * front_Canvas.Height;
+                    
+                   
+                    //rect.Height = Abs(output[i]) * unitHeight;
+                    // Console.WriteLine(rect.Height);
+                    /* if (unitHeight != 0)
+                     {
+                         rect.Height = (float)((carry + output[i]) / unitHeight);
+                         carry = (carry + output[i]) % unitHeight;
+                     }
+                     else
+                     {
+                         rect.Height = height/20;
+                         carry = (carry + output[i]);
+                     }
 
-                   */
+                    */
                     Canvas.SetLeft(rect, i * rect.Width);
                     // prevBase = -(long)rect.Height + prevBase;
-                    Canvas.SetBottom(rect, newZeroPoint);
+                    Canvas.SetBottom(rect, zeroPoint);
                     front_Canvas.Children.Add(rect);
                     
                     Label label = new Label();
@@ -904,7 +954,7 @@ namespace Capstone
                     label.Visibility = Visibility.Hidden;
 
                     Canvas.SetLeft(label, i * rect.Width);
-                    Canvas.SetBottom(label, output[i] + 35);
+                    Canvas.SetBottom(label, zeroPoint - 20);
                     
                     front_Canvas.Children.Add(label);
                     if (showHideBarValueBox.IsChecked == true)
@@ -918,7 +968,47 @@ namespace Capstone
             }
             Max.Content = "$" + maxValue.ToString();
             Min.Content = "$" + minValue.ToString();
-           
+            
+
+        }
+
+        private void graphGridLines(Canvas canvas)
+        {
+
+            for(int i = 0; i <= 2; i++)
+            {
+                System.Windows.Shapes.Line line;
+                line = new System.Windows.Shapes.Line();
+                line.Stroke = new SolidColorBrush(Colors.Black);
+                line.StrokeThickness = 1;
+
+                if(i == 0) //upper quartile
+                {
+                    line.X1 = 0;
+                    line.Y1 = canvas.Height * .75;
+                    line.X2 = canvas.Width;
+                    line.Y2 = canvas.Height * .75;
+                }
+                else if(i == 1) //middle
+                {
+                    line.X1 = 0;
+                    line.Y1 = canvas.Height / 2;
+                    line.X2 = canvas.Width;
+                    line.Y2 = canvas.Height / 2;
+                }
+                else if(i == 2) // lower quartile
+                {
+                    line.X1 = 0;
+                    line.Y1 = canvas.Height * .25;
+                    line.X2 = canvas.Width;
+                    line.Y2 = canvas.Height * .25;
+                }
+
+                canvas.Children.Add(line);
+
+            }
+            
+            
         }
 
         private void showHideBarGraphValues(object sender, RoutedEventArgs e)
@@ -940,6 +1030,7 @@ namespace Capstone
             float unitHeight;
             float centerGraph = 0;
             float newZeroPoint = 0;
+            float lineGraphAvgVal = 0;
 
             for (i = arrayStartValue; i < arrayEndValue; i++)
             {
@@ -954,9 +1045,9 @@ namespace Capstone
 
             }
             //minMaxDiff = (float)Abs(maxValue - minValue);
-           // Console.WriteLine("Max -> Min" + maxValue + minValue);
+            // Console.WriteLine("Max -> Min" + maxValue + minValue);
             minMaxDiff = (float)Abs(maxValue) + Abs(minValue);
-            
+            // minMaxDiff = (float)Abs(maxValue + minValue);
             centerGraph = ((float)(maxValue + minValue) / 2);
             maxLineGraph.Content = maxValue;
             minLineGraph.Content = minValue;
@@ -973,7 +1064,13 @@ namespace Capstone
                 unitHeight = 1;
             }
             Console.WriteLine("unit" + unitHeight);
-            
+
+            lineGraphAvgVal = (minValue + maxValue) / 2;
+            avgLineGraph.Content = lineGraphAvgVal.ToString();
+            lowerQuartileLineGraph.Content = ((lineGraphAvgVal + minValue) / 2).ToString();
+            upperQuartileLineGraph.Content = ((lineGraphAvgVal + maxValue) / 2).ToString();
+
+            graphGridLines(lineGraphCanvas);
 
             // prevBase = maxValue / unitHeight;
             // centerGraph = 200 / (maxValue + Abs(minValue));
