@@ -50,7 +50,7 @@ namespace Capstone
         int sellerClickCounter = 0;
         int arrayStartValue = 0;
         int arrayEndValue = 1840;
-        long[] barGraphValues = new long[20];
+        float[] barGraphValues = new float[20];
         int[] integer10Array = new int[1840];
         long[] longerArray = new long[1840];
 
@@ -932,8 +932,8 @@ namespace Capstone
             lineGraphCanvas.Children.Clear();
 
             int i;
-            long minValue = 10000;
-            long maxValue = 0;
+            float minValue = 10000;
+            float maxValue = 0;
             float minMaxAvg = 0;
             long height = 200;
             float minMaxDiff = 0;
