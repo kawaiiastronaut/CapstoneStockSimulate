@@ -49,7 +49,7 @@
             <Canvas x:Name="front_Canvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="700"/>
         </Border>
 
-        <Label x:Name="barGraphTitle" Content="Bar Graph Title" FontSize="30" FontWeight="Bold" Margin="953,22,0,0" HorizontalAlignment="Left" Width="238" Height="56" VerticalAlignment="Top"></Label>
+        <Label x:Name="barGraphTitle" Content="Quarterly Surplus/deficit" FontSize="30" FontWeight="Bold" Margin="953,22,0,0" HorizontalAlignment="Left" Width="393" Height="56" VerticalAlignment="Top"></Label>
         <Label Name="Max" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="660,73,0,0" RenderTransformOrigin="-1.281,1.769"/>
         <Label Name="Min" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="660,246,0,0" RenderTransformOrigin="1.281,-5.942"/>
         <Label x:Name="avgBarGraph" Margin="649,163,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
@@ -128,12 +128,12 @@
 
 
 
-
-        <CheckBox x:Name="showHideBarValueBox" Margin="34,535,0,224.2" Click="showHideBarGraphValues" HorizontalAlignment="Left" Width="246">Show bar Graph Values</CheckBox>
+        <CheckBox x:Name="showHideBarValueBox" Click="showHideBarGraphValues" HorizontalAlignment="Left" Width="190" Height="42" VerticalAlignment="Top" Margin="1228,300,0,0">Show Bar Graph Values</CheckBox>
+       
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="718,364,0,0" VerticalAlignment="Top" Width="700">
             <Canvas x:Name="lineGraphCanvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="700"/>
         </Border>
-        <Label x:Name="lineGraphTitle" Content="Line Graph Title" FontSize="30" FontWeight="Bold" Margin="953,312,0,0" Height="56" VerticalAlignment="Top" HorizontalAlignment="Left" Width="238"></Label>
+        <Label x:Name="lineGraphTitle" Content="Price Estimation&#xD;&#xA;" FontSize="30" FontWeight="Bold" Margin="953,312,0,0" Height="56" VerticalAlignment="Top" HorizontalAlignment="Left" Width="238"></Label>
         <Label x:Name="maxLineGraph" Margin="649,365,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
         <Label x:Name="avgLineGraph" Margin="649,455,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
         <Label x:Name="minLineGraph" Margin="649,535,0,0" HorizontalAlignment="Left" Width="49" Height="30" VerticalAlignment="Top"/>
