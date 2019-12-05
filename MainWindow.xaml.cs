@@ -1389,9 +1389,28 @@ namespace Capstone
             displayLineGraph(lineGraph);
         }
 
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            //clears bar graph
+            front_Canvas.Children.Clear();
+            Max.Content = "";
+            Min.Content = "";
+            avgBarGraph.Content = "";
+            lowerQuartileBarGraph.Content = "";
+            upperQuartileBarGraph.Content = "";
 
-      
-        
+            //clears line graph
+            lineGraphCanvas.Children.Clear();
+            maxLineGraph.Content = "";
+            minLineGraph.Content = "";
+            avgLineGraph.Content = "";
+            lowerQuartileLineGraph.Content = "";
+            upperQuartileLineGraph.Content = "";
+        }
+
+
+
+
     }
 
 
