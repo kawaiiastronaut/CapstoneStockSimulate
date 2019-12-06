@@ -1125,8 +1125,8 @@ namespace Capstone
                 
 
             }
-            Max.Content = "$" + maxValue.ToString();
-            Min.Content = "$" + minValue.ToString();
+            Max.Content = maxValue.ToString();
+            Min.Content = minValue.ToString();
             
 
         }

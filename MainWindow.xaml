@@ -50,8 +50,8 @@
         </Border>
 
         <Label x:Name="barGraphTitle" Content="Quarterly Surplus/deficit" FontSize="30" FontWeight="Bold" Margin="953,22,0,0" HorizontalAlignment="Left" Width="393" Height="56" VerticalAlignment="Top"></Label>
-        <Label Name="Max" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="660,73,0,0" RenderTransformOrigin="-1.281,1.769"/>
-        <Label Name="Min" Content="$" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="660,246,0,0" RenderTransformOrigin="1.281,-5.942"/>
+        <Label Name="Max" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="660,73,0,0" RenderTransformOrigin="-1.281,1.769"/>
+        <Label Name="Min" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="660,246,0,0" RenderTransformOrigin="1.281,-5.942"/>
         <Label x:Name="avgBarGraph" Margin="649,163,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
         <Label x:Name="upperQuartileBarGraph" Margin="649,118,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
         <Label x:Name="lowerQuartileBarGraph" Margin="649,202,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"></Label>
