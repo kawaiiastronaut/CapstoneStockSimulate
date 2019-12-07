@@ -1018,9 +1018,9 @@ namespace Capstone
             //Console.WriteLine("CenterGraph:" + centerGraph);
 
             barGraphAvgVal = (minValue + maxValue) / 2;
-            avgBarGraph.Content = barGraphAvgVal.ToString();
-            lowerQuartileBarGraph.Content = ((barGraphAvgVal + minValue) / 2).ToString();
-            upperQuartileBarGraph.Content = ((barGraphAvgVal + maxValue) / 2).ToString();
+            avgBarGraph.Content = Decimal.Round( (decimal) barGraphAvgVal, 2).ToString();
+            lowerQuartileBarGraph.Content = Decimal.Round( (decimal) ((barGraphAvgVal + minValue) / 2), 2).ToString();
+            upperQuartileBarGraph.Content = Decimal.Round( (decimal) ((barGraphAvgVal + maxValue) / 2), 2).ToString();
             graphGridLines(front_Canvas);
 
             for (i = 0; i <= 19; i++)
@@ -1060,7 +1060,8 @@ namespace Capstone
                     Label label = new Label();
                     label.FontSize = 8;
                     label.FontWeight = FontWeights.Bold;
-                    label.Content = "$" + output[i].ToString();
+                    label.Content = Decimal.Round( (decimal) output[i], 2).ToString();
+                    //label.Content = "$" + output[i].ToString();
                     label.Visibility = Visibility.Hidden;
 
                   
@@ -1105,7 +1106,7 @@ namespace Capstone
                     front_Canvas.Children.Add(rect);
                     
                     Label label = new Label();
-                    label.Content = "$" + output[i].ToString();
+                    label.Content = Decimal.Round( (decimal) output[i], 2).ToString();
                     label.FontSize = 8;
                     label.FontWeight = FontWeights.Bold;
                     
@@ -1125,8 +1126,8 @@ namespace Capstone
                 
 
             }
-            Max.Content = maxValue.ToString();
-            Min.Content = minValue.ToString();
+            Max.Content = Decimal.Round((decimal) maxValue, 2).ToString();
+            Min.Content = Decimal.Round((decimal) minValue, 2).ToString();
             
 
         }
@@ -1208,8 +1209,8 @@ namespace Capstone
             minMaxDiff = (float)Abs(maxValue) + Abs(minValue);
             // minMaxDiff = (float)Abs(maxValue + minValue);
             centerGraph = ((float)(maxValue + minValue) / 2);
-            maxLineGraph.Content = maxValue;
-            minLineGraph.Content = minValue;
+            maxLineGraph.Content = Decimal.Round( (decimal) maxValue, 2);
+            minLineGraph.Content = Decimal.Round( (decimal) minValue, 2);
            // Console.WriteLine("Diffes" + minMaxDiff);
            // Console.WriteLine("center" + centerGraph);
             // centerGraph = (float)(maxValue + minValue) / 2;
@@ -1225,9 +1226,9 @@ namespace Capstone
             Console.WriteLine("unit" + unitHeight);
 
             lineGraphAvgVal = (minValue + maxValue) / 2;
-            avgLineGraph.Content = lineGraphAvgVal.ToString();
-            lowerQuartileLineGraph.Content = ((lineGraphAvgVal + minValue) / 2).ToString();
-            upperQuartileLineGraph.Content = ((lineGraphAvgVal + maxValue) / 2).ToString();
+            avgLineGraph.Content = Decimal.Round((decimal) lineGraphAvgVal, 2).ToString();
+            lowerQuartileLineGraph.Content = Decimal.Round( (decimal) ((lineGraphAvgVal + minValue) / 2), 2).ToString();
+            upperQuartileLineGraph.Content = Decimal.Round( (decimal) ((lineGraphAvgVal + maxValue) / 2), 2).ToString();
 
             graphGridLines(lineGraphCanvas);
 
