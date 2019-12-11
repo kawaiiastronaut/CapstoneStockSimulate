@@ -958,6 +958,7 @@ namespace Capstone
             if(buyerClickCounter % 2 == 0)
             {
                 AddBuyerButton.Content = "Add Buyers";
+                AutoGenerateBuyerButton.Content = "Manual Entry";
                 //SellerNameLabel.Content = "Seller Names";
                 AddBuyerButton.Click -= AddBuyerButton_Click;
                 AddBuyerButton.Click += AddMultipleBuyers_Click;
@@ -975,7 +976,8 @@ namespace Capstone
                 AddBuyerButton.Click += AddBuyerButton_Click;
                 AddBuyerButton.Click -= AddMultipleBuyers_Click;
                 AddBuyerButton.Content = "Add Buyer";
-                
+                AutoGenerateBuyerButton.Content = "Auto Generate Buyers";
+
                 numberOfBuyersTextBox.Visibility = Visibility.Hidden;
                 numberOfBuyersLabel.Visibility = Visibility.Hidden;
                 RangeBuyCostTextBox.Visibility = Visibility.Hidden;
@@ -990,6 +992,7 @@ namespace Capstone
             if (sellerClickCounter % 2 == 0)
             {
                 AddSellerButton.Content = "Add Sellers";
+                AutoGenerateSellerButton.Content = "Manual Entry";
                 // SellerNameLabel.Content = "Seller Names";
                 AddSellerButton.Click -= AddSellerButton_Click;
                 AddSellerButton.Click += AddMultipleSellers_Click;
@@ -1003,6 +1006,7 @@ namespace Capstone
             else
             {
                 AddSellerButton.Content = "Add Seller";
+                AutoGenerateSellerButton.Content = "Auto Generate Sellers";
                 // SellerNameLabel.Content = "Seller Name";
                 AddSellerButton.Click += AddSellerButton_Click;
                 AddSellerButton.Click -= AddMultipleSellers_Click;
