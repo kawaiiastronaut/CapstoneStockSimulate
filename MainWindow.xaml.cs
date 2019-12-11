@@ -46,6 +46,12 @@ namespace Capstone
         public float[] buyList =  { 92.51f, 92.84f, 93.96f, 94.47f, 94.34f, 95.16f, 96.84f, 96.25f, 96.01f, 96.48f, 97.44f, 97.50f, 97.18f, 98.93f, 99.39f, 99.77f, 99.50f, 99.83f, 100.73f, 100.53f, 99.92f, 100.19f, 101.61f, 101.87f };
         public float[] sellList = { 92.71f, 93.36f, 94.70f, 96.29f, 95.79f, 96.86f, 97.79f, 97.94f, 97.33f, 96.67f, 97.28f, 98.66f, 97.23f, 97.54f, 98.59f, 99.07f, 99.40f, 99.88f, 101.55f, 102.47f, 100.47f, 100.45f, 100.46f, 102.10f };
 
+        public float[] buy1List = { 92.51f, 92.84f, 93.96f, 94.47f, 94.34f, 95.16f, 96.84f, 96.25f, 96.01f, 96.48f, 97.44f, 97.50f, 97.18f, 98.93f, 99.39f, 99.77f, 99.50f, 99.83f, 100.73f, 100.53f, 99.92f, 100.19f, 101.61f, 101.87f } ;
+        public float[] sell1List = { 92.71f, 93.36f, 94.70f, 96.29f, 95.79f, 96.86f, 97.79f, 97.94f, 97.33f, 96.67f, 97.28f, 98.66f, 97.23f, 97.54f, 98.59f, 99.07f, 99.40f, 99.88f, 101.55f, 102.47f, 100.47f, 100.45f, 100.46f, 102.10f } ;
+
+
+        public float[] currSellList = new float[20];
+        public float[] currBuyList = new float[20];
 
         public float[] surplusDeficit = new float[20];
         public float[] lineGraph = new float[1840];
@@ -161,7 +167,7 @@ namespace Capstone
         {
             if (buyEmptyFlag >= buyerDataList.Count)
             {
-                if (buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent > 0)
+                if (buyerDataList[buyEmptyFlag - buyerDataList.Count].RealCost > sellerCurrDataList[sellerCurrDataList.Count-1].MinSellPrice)
                 {
                     if (sellEmptyFlag >= sellerDataList.Count)
                     {
@@ -179,7 +185,7 @@ namespace Capstone
             else
             {
 
-                if (buyerDataList[buyEmptyFlag].NegotiationPercent > 0)
+                if (buyerDataList[buyEmptyFlag].RealCost > sellerCurrDataList[sellerCurrDataList.Count - 1].MinSellPrice)
                 {
                     if (sellEmptyFlag >= sellerDataList.Count)
                     {
@@ -226,6 +232,47 @@ namespace Capstone
             buyStand = buyerDataList.Sum(item => item.TotalDemand);
             sellStand = sellerDataList.Sum(item => item.TotalVolume);
 
+            float.TryParse(TextBoxTable1_1.Text, out currSellList[0]);
+            float.TryParse(TextBoxTable1_2.Text, out currSellList[1]);
+            float.TryParse(TextBoxTable1_3.Text, out currSellList[2]);
+            float.TryParse(TextBoxTable1_4.Text, out currSellList[3]);
+            float.TryParse(TextBoxTable1_5.Text, out currSellList[4]);
+            float.TryParse(TextBoxTable1_6.Text, out currSellList[5]);
+            float.TryParse(TextBoxTable1_7.Text, out currSellList[6]);
+            float.TryParse(TextBoxTable1_8.Text, out currSellList[7]);
+            float.TryParse(TextBoxTable1_9.Text, out currSellList[8]);
+            float.TryParse(TextBoxTable1_10.Text, out currSellList[9]);
+            float.TryParse(TextBoxTable1_11.Text, out currSellList[10]);
+            float.TryParse(TextBoxTable1_12.Text, out currSellList[11]);
+            float.TryParse(TextBoxTable1_13.Text, out currSellList[12]);
+            float.TryParse(TextBoxTable1_14.Text, out currSellList[13]);
+            float.TryParse(TextBoxTable1_15.Text, out currSellList[14]);
+            float.TryParse(TextBoxTable1_16.Text, out currSellList[15]);
+            float.TryParse(TextBoxTable1_17.Text, out currSellList[16]);
+            float.TryParse(TextBoxTable1_18.Text, out currSellList[17]);
+            float.TryParse(TextBoxTable1_19.Text, out currSellList[18]);
+            float.TryParse(TextBoxTable1_20.Text, out currSellList[19]);
+
+            float.TryParse(TextBoxTable2_1.Text, out currBuyList[0]);
+            float.TryParse(TextBoxTable2_2.Text, out currBuyList[1]);
+            float.TryParse(TextBoxTable2_3.Text, out currBuyList[2]);
+            float.TryParse(TextBoxTable2_4.Text, out currBuyList[3]);
+            float.TryParse(TextBoxTable2_5.Text, out currBuyList[4]);
+            float.TryParse(TextBoxTable2_6.Text, out currBuyList[5]);
+            float.TryParse(TextBoxTable2_7.Text, out currBuyList[6]);
+            float.TryParse(TextBoxTable2_8.Text, out currBuyList[7]);
+            float.TryParse(TextBoxTable2_9.Text, out currBuyList[8]);
+            float.TryParse(TextBoxTable2_10.Text, out currBuyList[9]);
+            float.TryParse(TextBoxTable2_11.Text, out currBuyList[10]);
+            float.TryParse(TextBoxTable2_12.Text, out currBuyList[11]);
+            float.TryParse(TextBoxTable2_13.Text, out currBuyList[12]);
+            float.TryParse(TextBoxTable2_14.Text, out currBuyList[13]);
+            float.TryParse(TextBoxTable2_15.Text, out currBuyList[14]);
+            float.TryParse(TextBoxTable2_16.Text, out currBuyList[15]);
+            float.TryParse(TextBoxTable2_17.Text, out currBuyList[16]);
+            float.TryParse(TextBoxTable2_18.Text, out currBuyList[17]);
+            float.TryParse(TextBoxTable2_19.Text, out currBuyList[18]);
+            float.TryParse(TextBoxTable2_20.Text, out currBuyList[19]);
             for (i = 0; i < 1840; i++)   // simulate 5 years 
             {
                 buyEmptyFlag = 0;
@@ -236,115 +283,115 @@ namespace Capstone
                 {
                     if (i % 368 == 0) //q1
                     {
-                        buyMult =  buyList[0] / buyStand;
-                        sellMult = sellList[0] / sellStand;
+                        buyMult =  currBuyList[0] / buyStand;
+                        sellMult = currSellList[0] / sellStand;
                     }
                     else if (i % 368 == 92) //q2
                     {
-                        buyMult = buyList[1] / buyStand;
-                        sellMult = sellList[1] / sellStand;
+                        buyMult = currBuyList[1] / buyStand;
+                        sellMult = currSellList[1] / sellStand;
                     }
                     else if (i % 368 == 184) //q3
                     {
-                        buyMult = buyList[2] / buyStand;
-                        sellMult = sellList[2] / sellStand;
+                        buyMult = currBuyList[2] / buyStand;
+                        sellMult = currSellList[2] / sellStand;
                     }
                     else if (i % 368 == 276) //q4
                     {
-                        buyMult = buyList[3] / buyStand;
-                        sellMult = sellList[3] / sellStand;
+                        buyMult = currBuyList[3] / buyStand;
+                        sellMult = currSellList[3] / sellStand;
                     }
                 }
                 else if (i / 368 == 1) //yr 2
                 {
                     if (i % 368 == 0) //q1
                     {
-                        buyMult = buyList[4] / buyStand;
-                        sellMult = sellList[4] / sellStand;
+                        buyMult = currBuyList[4] / buyStand;
+                        sellMult = currSellList[4] / sellStand;
                     }
                     else if (i % 368 == 92) //q2
                     {
-                        buyMult = buyList[5] / buyStand;
-                        sellMult = sellList[5] / sellStand;
+                        buyMult = currBuyList[5] / buyStand;
+                        sellMult = currSellList[5] / sellStand;
                     }
                     else if (i % 368 == 184) //q3
                     {
-                        buyMult = buyList[6] / buyStand;
-                        sellMult = sellList[6] / sellStand;
+                        buyMult = currBuyList[6] / buyStand;
+                        sellMult = currSellList[6] / sellStand;
                     }
                     else if (i % 368 == 276) //q4
                     {
-                        buyMult = buyList[7] / buyStand;
-                        sellMult = sellList[7] / sellStand;
+                        buyMult = currBuyList[7] / buyStand;
+                        sellMult = currSellList[7] / sellStand;
                     }
                 }
                 else if (i / 368 == 2) //yr 3
                 {
                     if (i % 368 == 0) //q1
                     {
-                        buyMult = buyList[8] / buyStand;
-                        sellMult = sellList[8] / sellStand;
+                        buyMult = currBuyList[8] / buyStand;
+                        sellMult = currSellList[8] / sellStand;
                     }
                     else if (i % 368 == 92) //q2
                     {
-                        buyMult = buyList[9] / buyStand;
-                        sellMult = sellList[9] / sellStand;
+                        buyMult = currBuyList[9] / buyStand;
+                        sellMult = currSellList[9] / sellStand;
                     }
                     else if (i % 368 == 184) //q3
                     {
-                        buyMult = buyList[10] / buyStand;
-                        sellMult = sellList[10] / sellStand;
+                        buyMult = currBuyList[10] / buyStand;
+                        sellMult = currSellList[10] / sellStand;
                     }
                     else if (i % 368 == 276) //q4
                     {
-                        buyMult = buyList[11] / buyStand;
-                        sellMult = sellList[11] / sellStand;
+                        buyMult = currBuyList[11] / buyStand;
+                        sellMult = currSellList[11] / sellStand;
                     }
                 }
                 else if (i / 368 == 3) //yr 4
                 {
                     if (i % 368 == 0) //q1
                     {
-                        buyMult = buyList[12] / buyStand;
-                        sellMult = sellList[12] / sellStand;
+                        buyMult = currBuyList[12] / buyStand;
+                        sellMult = currSellList[12] / sellStand;
                     }
                     else if (i % 368 == 92) //q2
                     {
-                        buyMult = buyList[13] / buyStand;
-                        sellMult = sellList[13] / sellStand;
+                        buyMult = currBuyList[13] / buyStand;
+                        sellMult = currSellList[13] / sellStand;
                     }
                     else if (i % 368 == 184) //q3
                     {
-                        buyMult = buyList[14] / buyStand;
-                        sellMult = sellList[14] / sellStand;
+                        buyMult = currBuyList[14] / buyStand;
+                        sellMult = currSellList[14] / sellStand;
                     }
                     else if (i % 368 == 276) //q4
                     {
-                        buyMult = buyList[15] / buyStand;
-                        sellMult = sellList[15] / sellStand;
+                        buyMult = currBuyList[15] / buyStand;
+                        sellMult = currSellList[15] / sellStand;
                     }
                 }
                 else if (i / 368 == 4) //yr 5
                 {
                     if (i % 368 == 0) //q1
                     {
-                        buyMult = buyList[16] / buyStand;
-                        sellMult = sellList[16] / sellStand;
+                        buyMult = currBuyList[16] / buyStand;
+                        sellMult = currSellList[16] / sellStand;
                     }
                     else if (i % 368 == 92) //q2
                     {
-                        buyMult = buyList[17] / buyStand;
-                        sellMult = sellList[17] / sellStand;
+                        buyMult = currBuyList[17] / buyStand;
+                        sellMult = currSellList[17] / sellStand;
                     }
                     else if (i % 368 == 184) //q3
                     {
-                        buyMult = buyList[18] / buyStand;
-                        sellMult = sellList[18] / sellStand;
+                        buyMult = currBuyList[18] / buyStand;
+                        sellMult = currSellList[18] / sellStand;
                     }
                     else if (i % 368 == 276) //q4
                     {
-                        buyMult = buyList[19] / buyStand;
-                        sellMult = sellList[19] / sellStand;
+                        buyMult = currBuyList[19] / buyStand;
+                        sellMult = currSellList[19] / sellStand;
                     }
                 }
                 else { }
@@ -472,12 +519,12 @@ namespace Capstone
                         {
                             if (s >= sellerDataList.Count)
                             {
-                                if (buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent > 0)
+                                if (buyerDataList[buyEmptyFlag - buyerDataList.Count].RealCost > sellerCurrDataList[sellerCurrDataList.Count - 1].MinSellPrice)
                                     buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent -= sellerSurplusList[s - sellerDataList.Count].DailyVolume / sellerCurrDataList[s - sellerDataList.Count].TotalVolume;
                             }
                             else
                             {
-                                if (buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent > 0)
+                                if (buyerDataList[buyEmptyFlag - buyerDataList.Count].RealCost > sellerCurrDataList[sellerCurrDataList.Count - 1].MinSellPrice)
                                     buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent -= sellerSurplusList[s].DailyVolume / sellerCurrDataList[s].TotalVolume;
                             }
                             if (buyerDataList[buyEmptyFlag - buyerDataList.Count].NegotiationPercent < 100)
@@ -487,12 +534,12 @@ namespace Capstone
                         {
                             if (s >= sellerDataList.Count)
                             {
-                                if (buyerDataList[buyEmptyFlag].NegotiationPercent > 0)
+                                if (buyerDataList[buyEmptyFlag].RealCost > sellerCurrDataList[sellerCurrDataList.Count - 1].MinSellPrice)
                                     buyerDataList[buyEmptyFlag].NegotiationPercent -= sellerSurplusList[s - sellerDataList.Count].DailyVolume / sellerDataList[s - sellerDataList.Count].TotalVolume;
                             }
                             else
                             {
-                                if (buyerDataList[buyEmptyFlag].NegotiationPercent > 0)
+                                if (buyerDataList[buyEmptyFlag].RealCost > sellerCurrDataList[sellerCurrDataList.Count - 1].MinSellPrice)
                                     buyerDataList[buyEmptyFlag].NegotiationPercent -= sellerSurplusList[s].DailyVolume / sellerDataList[s].TotalVolume;
                             }
                             if (buyerDataList[buyEmptyFlag ].NegotiationPercent < 100)
@@ -519,7 +566,7 @@ namespace Capstone
                         }
                         else
                         {
-                            buyerDeficitList[b].DailyDemand += buyerWorkingList[b].DailyDemand; // need to change this
+                            buyerDeficitList[b].DailyDemand += buyerWorkingList[b].DailyDemand; 
 
                         }
                         buyerWorkingList[b].DailyDemand = 0;
@@ -682,8 +729,7 @@ namespace Capstone
                     }
                 }
 
-                debugBuyer.Text = total.ToString();
-                debugSeller.Text = total2.ToString();
+
                 sellerCurrDataList.Clear();
                 buyerCurrDataList.Clear();
                 buyerCurrDeficitList.Clear();
@@ -829,21 +875,80 @@ namespace Capstone
 
         } // end MAIN 
 
- 
 
-     
+
+
 
 
 
         private void AddMultipleBuyers_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("This is a test");
-        
+            float buyVolume;
+            float maxCost;
+            float negotiationPercent;
+            string hold;
+            hold = BuyerNameTextBox.Text;
+            int number;
+            float range;
+            float halfRange;
+            float increment;
+            int i = 0;
+            if (float.TryParse(TotalDemandTextbox.Text, out buyVolume) && float.TryParse(RangeBuyCostTextBox.Text, out range) && Int32.TryParse(numberOfBuyersTextBox.Text, out number) && float.TryParse(MaxCostTextBox.Text, out maxCost) && float.TryParse(NegotiationTextBox.Text, out negotiationPercent))
+            {
+                halfRange = range / 2;
+                increment = range / (number - 1);
+                for (i = 0; i < number; i++)
+                {
+                    Buyer dataBuyer = new Buyer(hold+(i+1), buyVolume/number, negotiationPercent, maxCost-halfRange+increment*(float)i);
+                    buyerDataList.Add(dataBuyer);
+                    ListBoxItem buyerListBoxItem = new ListBoxItem();
+                    buyerListBoxItem.Content = BuyerNameTextBox.Text;
+                    BuyerDataListBox.Items.Add(buyerListBoxItem);
+
+
+
+
+                    Buyer deficitBuyer = new Buyer(dataBuyer.BuyerName, 0, dataBuyer.NegotiationPercent, dataBuyer.MaxCost);
+                    buyerListBoxItem.Content = dataBuyer.BuyerName;
+                    buyerDeficitList.Add(deficitBuyer);
+
+                }
+            }
         }
 
-        private void AddMultipleSellers_Click(object sender, RoutedEventArgs e)
+            private void AddMultipleSellers_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("This is a test");
+            float sellVolume;
+            long costProduction;
+            int incentivePercent;
+            float range;
+            int number;
+            string hold;
+            float halfRange;
+            float increment;
+            int i = 0;
+            hold = SellerNameTextBox.Text;
+            if (float.TryParse(SellVolTextBox.Text, out sellVolume)&& float.TryParse(RangeCostProductionTextBox.Text, out range) && Int32.TryParse(numberOfSellersTextBox.Text, out number) && Int64.TryParse(CostProductionTextBox.Text, out costProduction) && Int32.TryParse(IncentiveTextBox.Text, out incentivePercent))
+            {
+
+                halfRange = range / 2;
+                increment = range / (number-1);
+                for (i = 0; i < number; i++)
+                {
+                    Seller dataSeller = new Seller(hold+(i+1), sellVolume/number, (long)(costProduction-halfRange+increment*(float)i), incentivePercent);
+                    sellerDataList.Add(dataSeller);
+                    ListBoxItem stockListBoxItem = new ListBoxItem();
+                    stockListBoxItem.Content = SellerNameTextBox.Text;
+                    SellerDataListBox.Items.Add(stockListBoxItem);
+
+
+
+
+                    Seller surplusSeller = new Seller(dataSeller.SellerName, 0, dataSeller.CostProduction, dataSeller.IncentivePercent);
+                    stockListBoxItem.Content = dataSeller.SellerName;
+                    sellerSurplusList.Add(surplusSeller);
+                }
+            }
         }
 
 
@@ -937,7 +1042,7 @@ namespace Capstone
             
         }
 
-        
+
 
         private void displayOutput(float[] output)
         {
@@ -946,8 +1051,8 @@ namespace Capstone
             front_Canvas.Width = 35 * 20;
             float[] minMaxValue = new float[20];
             int i;
-            float minValue=10000;
-            float maxValue=-10000;
+            float minValue = 10000;
+            float maxValue = -10000;
             float totalUnits = 0;
             float maxValPercent = 0;
             float barGraphAvgVal = 0;
@@ -961,12 +1066,17 @@ namespace Capstone
             float zeroPoint = 0;
             minMaxValue[0] = output[0];
 
+            for(i=0;i<20;i++)
+            {
+                output[i] = output[i] * (float)4;      //REEE
+            }
+
             float centerGraph = 0;
             float newZeroPoint = 0;
 
             for (i = 0; i <= 19; i++)
             {
-                if (output[i]>maxValue)
+                if (output[i] > maxValue)
                 {
                     maxValue = output[i];
                 }
@@ -977,30 +1087,31 @@ namespace Capstone
 
             }
 
-            if(minValue < 0 && maxValue > 0)
+            if (minValue < 0 && maxValue > 0)
             {
                 totalUnits = maxValue + Abs(minValue);
                 maxValPercent = maxValue / totalUnits;
-                zeroPoint = (float) front_Canvas.Height - (maxValPercent * (float) front_Canvas.Height);
+                zeroPoint = (float)front_Canvas.Height - (maxValPercent * (float)front_Canvas.Height);
             }
-            else if(minValue > 0 && maxValue > 0)
+            else if (minValue > 0 && maxValue > 0)
             {
                 totalUnits = maxValue + minValue;
                 maxValPercent = maxValue / totalUnits;
                 zeroPoint = 0;
 
-            }else if(minValue < 0 && maxValue < 0)
+            }
+            else if (minValue < 0 && maxValue < 0)
             {
                 //totalUnits = Abs(maxValue) + Abs(minValue);
                 totalUnits = Abs(maxValue + minValue);
                 //Console.WriteLine("Total" + totalUnits);
                 //Console.WriteLine(maxValue +"max");
                 maxValPercent = maxValue / totalUnits;
-                zeroPoint = (float) front_Canvas.Height;
+                zeroPoint = (float)front_Canvas.Height;
             }
-            minMaxDiff = (float) Abs(maxValue + minValue);
+            minMaxDiff = (float)Abs(maxValue + minValue);
             //Console.WriteLine("BarDiff" + minMaxDiff);
-            if(minMaxDiff != 0)
+            if (minMaxDiff != 0)
             {
                 unitHeight = (float)front_Canvas.Height / minMaxDiff;
             }
@@ -1012,27 +1123,27 @@ namespace Capstone
 
             // prevBase = maxValue / unitHeight;
             // centerGraph = 200 / (maxValue + Abs(minValue));
-            centerGraph =  ((float) front_Canvas.Height / 2 ) - ((float) front_Canvas.Height * maxValPercent);
+            centerGraph = ((float)front_Canvas.Height / 2) - ((float)front_Canvas.Height * maxValPercent);
             //centerGraph = ((float)(maxValue + minValue) / 2);
             // newZeroPoint = unitHeight * -(minValue);
             //Console.WriteLine("CenterGraph:" + centerGraph);
 
             barGraphAvgVal = (minValue + maxValue) / 2;
-            avgBarGraph.Content = barGraphAvgVal.ToString();
-            lowerQuartileBarGraph.Content = ((barGraphAvgVal + minValue) / 2).ToString();
-            upperQuartileBarGraph.Content = ((barGraphAvgVal + maxValue) / 2).ToString();
+            avgBarGraph.Content = Decimal.Round((decimal)barGraphAvgVal, 2).ToString();
+            lowerQuartileBarGraph.Content = Decimal.Round((decimal)((barGraphAvgVal + minValue) / 2), 2).ToString();
+            upperQuartileBarGraph.Content = Decimal.Round((decimal)((barGraphAvgVal + maxValue) / 2), 2).ToString();
             graphGridLines(front_Canvas);
 
             for (i = 0; i <= 19; i++)
             {
-                if(output[i]<0)
+                if (output[i] < 0)
                 {
                     System.Windows.Shapes.Rectangle rect;
                     rect = new System.Windows.Shapes.Rectangle();
                     rect.Stroke = new SolidColorBrush(Colors.Red);
                     rect.Fill = new SolidColorBrush(Colors.Red);
-                    
-                    
+
+
                     rect.Width = 35;
                     rect.Height = Abs(output[i]) * Abs(zeroPoint / minValue);
                     //Console.WriteLine("negRect" + rect.Height);
@@ -1060,10 +1171,11 @@ namespace Capstone
                     Label label = new Label();
                     label.FontSize = 8;
                     label.FontWeight = FontWeights.Bold;
-                    label.Content = "$" + output[i].ToString();
+                    label.Content = Decimal.Round((decimal)output[i], 2).ToString();
+                    //label.Content = "$" + output[i].ToString();
                     label.Visibility = Visibility.Hidden;
 
-                  
+
                     Canvas.SetLeft(label, i * rect.Width);
                     Canvas.SetBottom(label, zeroPoint);
                     front_Canvas.Children.Add(label);
@@ -1081,10 +1193,10 @@ namespace Capstone
                     rect.Fill = new SolidColorBrush(Colors.Green);
                     rect.Width = 35;
                     rect.Height = Abs(output[i]) * Abs((front_Canvas.Height - zeroPoint) / maxValue);
-                   // Console.WriteLine("PosRect" + rect.Height);
+                    // Console.WriteLine("PosRect" + rect.Height);
                     //rect.Height = (output[i] / totalUnits) * front_Canvas.Height;
-                    
-                   
+
+
                     //rect.Height = Abs(output[i]) * unitHeight;
                     // Console.WriteLine(rect.Height);
                     /* if (unitHeight != 0)
@@ -1097,24 +1209,23 @@ namespace Capstone
                          rect.Height = height/20;
                          carry = (carry + output[i]);
                      }
-
                     */
                     Canvas.SetLeft(rect, i * rect.Width);
                     // prevBase = -(long)rect.Height + prevBase;
                     Canvas.SetBottom(rect, zeroPoint);
                     front_Canvas.Children.Add(rect);
-                    
+
                     Label label = new Label();
-                    label.Content = "$" + output[i].ToString();
+                    label.Content = Decimal.Round((decimal)output[i], 2).ToString();
                     label.FontSize = 8;
                     label.FontWeight = FontWeights.Bold;
-                    
-                  
+
+
                     label.Visibility = Visibility.Hidden;
 
                     Canvas.SetLeft(label, i * rect.Width);
                     Canvas.SetBottom(label, zeroPoint - 20);
-                    
+
                     front_Canvas.Children.Add(label);
                     if (showHideBarValueBox.IsChecked == true)
                     {
@@ -1122,15 +1233,14 @@ namespace Capstone
                     }
                 }
 
-                
+
 
             }
-            Max.Content = "$" + maxValue.ToString();
-            Min.Content = "$" + minValue.ToString();
-            
+            Max.Content = Decimal.Round((decimal)maxValue, 2).ToString();
+            Min.Content = Decimal.Round((decimal)minValue, 2).ToString();
+
 
         }
-
         private void graphGridLines(Canvas canvas)
         {
 
@@ -1391,10 +1501,15 @@ namespace Capstone
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
+            sellerDataList.Clear();
+            buyerDataList.Clear();
+            buyerDeficitList.Clear();
+            sellerSurplusList.Clear();
+            SellerDataListBox.Items.Clear();
+            BuyerDataListBox.Items.Clear();
+            runningTotal = 0;
             //clears bar graph
             front_Canvas.Children.Clear();
-            Max.Content = "";
-            Min.Content = "";
             avgBarGraph.Content = "";
             lowerQuartileBarGraph.Content = "";
             upperQuartileBarGraph.Content = "";
@@ -1408,9 +1523,140 @@ namespace Capstone
             upperQuartileLineGraph.Content = "";
         }
 
+        private void Default1Radio_Checked(object sender, RoutedEventArgs e)
+        {
+            TextBoxTable1_1.Text = sellList[0].ToString();
+            TextBoxTable1_2.Text = sellList[1].ToString();
+            TextBoxTable1_3.Text = sellList[2].ToString();
+            TextBoxTable1_4.Text = sellList[3].ToString();
+            TextBoxTable1_5.Text = sellList[4].ToString();
+            TextBoxTable1_6.Text = sellList[5].ToString();
+            TextBoxTable1_7.Text = sellList[6].ToString();
+            TextBoxTable1_8.Text = sellList[7].ToString();
+            TextBoxTable1_9.Text = sellList[8].ToString();
+            TextBoxTable1_10.Text = sellList[9].ToString();
+            TextBoxTable1_11.Text = sellList[10].ToString();
+            TextBoxTable1_12.Text = sellList[11].ToString();
+            TextBoxTable1_13.Text = sellList[12].ToString();
+            TextBoxTable1_14.Text = sellList[13].ToString();
+            TextBoxTable1_15.Text = sellList[14].ToString();
+            TextBoxTable1_16.Text = sellList[15].ToString();
+            TextBoxTable1_17.Text = sellList[16].ToString();
+            TextBoxTable1_18.Text = sellList[17].ToString();
+            TextBoxTable1_19.Text = sellList[18].ToString();
+            TextBoxTable1_20.Text = sellList[19].ToString();
 
+            TextBoxTable2_1.Text = buyList[0].ToString();
+            TextBoxTable2_2.Text = buyList[1].ToString();
+            TextBoxTable2_3.Text = buyList[2].ToString();
+            TextBoxTable2_4.Text = buyList[3].ToString();
+            TextBoxTable2_5.Text = buyList[4].ToString();
+            TextBoxTable2_6.Text = buyList[5].ToString();
+            TextBoxTable2_7.Text = buyList[6].ToString();
+            TextBoxTable2_8.Text = buyList[7].ToString();
+            TextBoxTable2_9.Text = buyList[8].ToString();
+            TextBoxTable2_10.Text = buyList[9].ToString();
+            TextBoxTable2_11.Text = buyList[10].ToString();
+            TextBoxTable2_12.Text = buyList[11].ToString();
+            TextBoxTable2_13.Text = buyList[12].ToString();
+            TextBoxTable2_14.Text = buyList[13].ToString();
+            TextBoxTable2_15.Text = buyList[14].ToString();
+            TextBoxTable2_16.Text = buyList[15].ToString();
+            TextBoxTable2_17.Text = buyList[16].ToString();
+            TextBoxTable2_18.Text = buyList[17].ToString();
+            TextBoxTable2_19.Text = buyList[18].ToString();
+            TextBoxTable2_20.Text = buyList[19].ToString();
+        }
 
+        private void ManaualInputRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            TextBoxTable1_1.Text = "";
+            TextBoxTable1_2.Text = "";
+            TextBoxTable1_3.Text = "";
+            TextBoxTable1_4.Text = "";
+            TextBoxTable1_5.Text = "";
+            TextBoxTable1_6.Text = "";
+            TextBoxTable1_7.Text = "";
+            TextBoxTable1_8.Text = "";
+            TextBoxTable1_9.Text = "";
+            TextBoxTable1_10.Text = "";
+            TextBoxTable1_11.Text = "";
+            TextBoxTable1_12.Text = "";
+            TextBoxTable1_13.Text = "";
+            TextBoxTable1_14.Text = "";
+            TextBoxTable1_15.Text = "";
+            TextBoxTable1_16.Text = "";
+            TextBoxTable1_17.Text = ""; 
+            TextBoxTable1_18.Text = "";
+            TextBoxTable1_19.Text = "";
+            TextBoxTable1_20.Text = "";
 
+            TextBoxTable2_1.Text = "";
+            TextBoxTable2_2.Text = "";
+            TextBoxTable2_3.Text = "";
+            TextBoxTable2_4.Text = "";
+            TextBoxTable2_5.Text = "";
+            TextBoxTable2_6.Text = "";
+            TextBoxTable2_7.Text = "";
+            TextBoxTable2_8.Text = "";
+            TextBoxTable2_9.Text = "";
+            TextBoxTable2_10.Text = "";
+            TextBoxTable2_11.Text = "";
+            TextBoxTable2_12.Text = "";
+            TextBoxTable2_13.Text = "";
+            TextBoxTable2_14.Text = "";
+            TextBoxTable2_15.Text = "";
+            TextBoxTable2_16.Text = "";
+            TextBoxTable2_17.Text = "";
+            TextBoxTable2_18.Text = "";
+            TextBoxTable2_19.Text = "";
+            TextBoxTable2_20.Text =  "";
+        }
+
+        private void Default2Radio_Checked(object sender, RoutedEventArgs e)
+        {
+            TextBoxTable1_1.Text = buyList[0].ToString();
+            TextBoxTable1_2.Text = buyList[1].ToString();
+            TextBoxTable1_3.Text = buyList[2].ToString();
+            TextBoxTable1_4.Text = buyList[3].ToString();
+            TextBoxTable1_5.Text = buyList[4].ToString();
+            TextBoxTable1_6.Text = buyList[5].ToString();
+            TextBoxTable1_7.Text = buyList[6].ToString();
+            TextBoxTable1_8.Text = buyList[7].ToString();
+            TextBoxTable1_9.Text = buyList[8].ToString();
+            TextBoxTable1_10.Text = buyList[9].ToString();
+            TextBoxTable1_11.Text = buyList[10].ToString();
+            TextBoxTable1_12.Text = buyList[11].ToString();
+            TextBoxTable1_13.Text = buyList[12].ToString();
+            TextBoxTable1_14.Text = buyList[13].ToString();
+            TextBoxTable1_15.Text = buyList[14].ToString();
+            TextBoxTable1_16.Text = buyList[15].ToString();
+            TextBoxTable1_17.Text = buyList[16].ToString();
+            TextBoxTable1_18.Text = buyList[17].ToString();
+            TextBoxTable1_19.Text = buyList[18].ToString();
+            TextBoxTable1_20.Text = buyList[19].ToString();
+
+            TextBoxTable2_1.Text = sellList[0].ToString();
+            TextBoxTable2_2.Text = sellList[1].ToString();
+            TextBoxTable2_3.Text = sellList[2].ToString();
+            TextBoxTable2_4.Text = sellList[3].ToString();
+            TextBoxTable2_5.Text = sellList[4].ToString();
+            TextBoxTable2_6.Text = sellList[5].ToString();
+            TextBoxTable2_7.Text = sellList[6].ToString();
+            TextBoxTable2_8.Text = sellList[7].ToString();
+            TextBoxTable2_9.Text = sellList[8].ToString();
+            TextBoxTable2_10.Text = sellList[9].ToString();
+            TextBoxTable2_11.Text = sellList[10].ToString();
+            TextBoxTable2_12.Text = sellList[11].ToString();
+            TextBoxTable2_13.Text = sellList[12].ToString();
+            TextBoxTable2_14.Text = sellList[13].ToString();
+            TextBoxTable2_15.Text = sellList[14].ToString();
+            TextBoxTable2_16.Text = sellList[15].ToString();
+            TextBoxTable2_17.Text = sellList[16].ToString();
+            TextBoxTable2_18.Text = sellList[17].ToString();
+            TextBoxTable2_19.Text = sellList[18].ToString();
+            TextBoxTable2_20.Text = sellList[19].ToString();
+        }
     }
 
 
