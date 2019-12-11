@@ -24,7 +24,7 @@
         <TextBox x:Name="RangeCostProductionTextBox"  HorizontalAlignment="Left" Height="22" Margin="298,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <Label Name="RangeCostProductionLabel" Content="Range of Prod. Cost" HorizontalAlignment="Left" Margin="165,127,0,0" VerticalAlignment="Top"/>
         <Label Content="Incentive proportion&#xA;" HorizontalAlignment="Left" Margin="165,154,0,0" VerticalAlignment="Top" Height="26"/>
-        <TextBox x:Name="IncentiveTextBox"  HorizontalAlignment="Left" Height="22" Margin="298,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="25"/>
+        <TextBox x:Name="IncentiveTextBox"  HorizontalAlignment="Left" Height="22" Margin="298,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text=""/>
         <Label Name="numberOfSellersLabel" Content="Number of Sellers" HorizontalAlignment="Left" Margin="166,181,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
         <TextBox x:Name="numberOfSellersTextBox"  HorizontalAlignment="Left" Height="22" Margin="298,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button Name="AddSellerButton" Content="Add Seller" HorizontalAlignment="Left" Margin="166,246,0,0" VerticalAlignment="Top" Width="120" Height="35" Click="AddSellerButton_Click" />
@@ -39,7 +39,7 @@
         <Label Content="Max Cost Per Unit&#xA;" HorizontalAlignment="Left" Margin="165,358,0,0" VerticalAlignment="Top" Height="28"/>
         <TextBox x:Name="RangeBuyCostTextBox"  HorizontalAlignment="Left" Height="24" Margin="290,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <Label Name="RangeBuyCostLabel" Content="Range of Buy Cost" HorizontalAlignment="Left" Margin="165,386,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="NegotiationTextBox"  HorizontalAlignment="Left" Height="24" Margin="290,414,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="50"/>
+        <TextBox x:Name="NegotiationTextBox"  HorizontalAlignment="Left" Height="24" Margin="290,414,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text=""/>
         <Label Content="Negotiation percent" HorizontalAlignment="Left" Margin="165,414,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
         <Label Name="numberOfBuyersLabel" Content="Number of Buyers" HorizontalAlignment="Left" Margin="165,440,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.647,0.498"/>
         <TextBox x:Name="numberOfBuyersTextBox"  HorizontalAlignment="Left" Height="24" Margin="290,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -79,11 +79,8 @@
         <Label FontSize="8" Content="Y5Q3" Margin="1350,273,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
         <Label  FontSize="8" Content="Y5Q4" Margin="1384,273,0,0" HorizontalAlignment="Left" Width="36" Height="34" VerticalAlignment="Top"/>
         <Label Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="418,154,0,0"/>
-
-        <TextBox x:Name="debugSeller" HorizontalAlignment="Left" Height="23" Margin="89,553,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="debugBuyer" HorizontalAlignment="Left" Height="24" Margin="271,563,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="439,553,0,0" VerticalAlignment="Top" Width="100" Height="38" Click="RunButton_Click" />
-        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Left" Margin="549,553,0,0" VerticalAlignment="Top" Width="100" Height="38" Click="ResetButton_Click" />
+        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="211,545,0,0" VerticalAlignment="Top" Width="166" Height="38" Click="RunButton_Click" />
+        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Left" Margin="724,569,0,0" VerticalAlignment="Top" Width="100" Height="38" Click="ResetButton_Click" RenderTransformOrigin="-3.246,0.626" />
 
         <TextBox x:Name="TextBoxTable1_1"  HorizontalAlignment="Left" Height="21" Margin="454,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
         <TextBox x:Name="TextBoxTable1_2"  HorizontalAlignment="Left" Height="21" Margin="454,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
@@ -127,13 +124,11 @@
         <TextBox x:Name="TextBoxTable2_19"  HorizontalAlignment="Left" Height="21" Margin="539,421,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
         <TextBox x:Name="TextBoxTable2_20"  HorizontalAlignment="Left" Height="21" Margin="539,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" />
 
-        <RadioButton x:Name="ManaualInputRadio" GroupName="Years"  Margin="454,473,0,0" HorizontalAlignment="Left" Width="128" Height="22" VerticalAlignment="Top">Manual Input</RadioButton>
-        <RadioButton x:Name="Default1Radio" GroupName="Years"  Margin="454,497,0,0" HorizontalAlignment="Left" Width="109" Height="22" VerticalAlignment="Top">Default Input 1</RadioButton>
-        <RadioButton x:Name="Default2Radio" GroupName="Years"  Margin="454,519,0,0" HorizontalAlignment="Left" Width="113" Height="22" VerticalAlignment="Top">Default Input 2</RadioButton>
 
 
-        <CheckBox x:Name="showHideBarValueBox" Click="showHideBarGraphValues" HorizontalAlignment="Left" Width="190" Height="42" VerticalAlignment="Top" Margin="1228,300,0,0">Show Bar Graph Values</CheckBox>
-       
+
+
+        <CheckBox x:Name="showHideBarValueBox" Margin="1244,304,0,484.2" Click="showHideBarGraphValues" HorizontalAlignment="Left" Width="164">Show Bar Graph Values</CheckBox>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="200" Margin="718,364,0,0" VerticalAlignment="Top" Width="700">
             <Canvas x:Name="lineGraphCanvas" HorizontalAlignment="Left" Height="200" Margin="-1,-1,-6,-1" VerticalAlignment="Top" Width="700"/>
         </Border>
@@ -144,6 +139,8 @@
         <Label x:Name="upperQuartileLineGraph" Margin="669,408,0,0" HorizontalAlignment="Left" Width="49" Height="30" VerticalAlignment="Top"/>
         <Label x:Name="lowerQuartileLineGraph" Margin="669,500,0,0" HorizontalAlignment="Left" Width="49" Height="30" VerticalAlignment="Top"/>
 
+        <RadioButton x:Name="ManaualInputRadio" GroupName="Years"  Margin="454,473,0,0" HorizontalAlignment="Left" Width="128" Height="22" VerticalAlignment="Top" Checked="ManaualInputRadio_Checked">Manual Input</RadioButton>
+        <RadioButton x:Name="Default1Radio" GroupName="Years"  Margin="454,497,0,0" HorizontalAlignment="Left" Width="109" Height="22" VerticalAlignment="Top" Checked="Default1Radio_Checked">Oil 2014-2018</RadioButton>
 
         <RadioButton x:Name="Year1Radio" GroupName="Years"  Margin="1425,373,0,0" HorizontalAlignment="Left" Width="84" Height="22" VerticalAlignment="Top">Year 1</RadioButton>
         <RadioButton x:Name="Year2Radio" GroupName="Years"  Margin="1425,401,0,0" HorizontalAlignment="Left" Width="66" Height="22" VerticalAlignment="Top">Year 2</RadioButton>
@@ -152,6 +149,8 @@
         <RadioButton x:Name="Year5Radio" GroupName="Years"  Margin="1425,481,0,0" HorizontalAlignment="Left" Width="62" Height="22" VerticalAlignment="Top">Year 5</RadioButton>
         <RadioButton x:Name="AllYearsRadio" GroupName="Years"  IsChecked="True" Margin="1425,509,0,0" HorizontalAlignment="Left" Width="84" Height="22" VerticalAlignment="Top">Years 1-5</RadioButton>
         <Button x:Name="UpdateLineGraphYearButton" Content="Update Line Graph" HorizontalAlignment="Left" Margin="1425,531,0,0" VerticalAlignment="Top" Width="104" Height="34" Click="UpdateLineGraph_Click" />
+        <RadioButton x:Name="Default1Radio_Copy" GroupName="Years"  Margin="454,523,0,0" HorizontalAlignment="Left" Width="170" Height="41" VerticalAlignment="Top" Checked="Default2Radio_Checked" Content="Oil 2014-2018 inverted"/>
+        <CheckBox x:Name="showHideBarValueBox_Copy" Margin="1244,304,0,484.2" Click="showHideBarGraphValues" HorizontalAlignment="Left" Width="164" Content="Show Bar Graph Values"/>
 
 
     </Grid>
