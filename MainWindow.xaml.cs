@@ -1070,7 +1070,7 @@ namespace Capstone
             {
                 output[i] = output[i] * (float)4;      //REEE
             }
-
+            
             float centerGraph = 0;
             float newZeroPoint = 0;
 
@@ -1173,13 +1173,14 @@ namespace Capstone
                     label.FontWeight = FontWeights.Bold;
                     label.Content = Decimal.Round((decimal)output[i], 2).ToString();
                     //label.Content = "$" + output[i].ToString();
+                    Console.WriteLine("Red" +output[i]);
                     label.Visibility = Visibility.Hidden;
 
 
                     Canvas.SetLeft(label, i * rect.Width);
                     Canvas.SetBottom(label, zeroPoint);
                     front_Canvas.Children.Add(label);
-                    if (showHideBarValueBox.IsChecked == true)
+                    if (showHideBarValueBox_Copy.IsChecked == true)
                     {
                         label.Visibility = Visibility.Visible;
                     }
@@ -1222,12 +1223,13 @@ namespace Capstone
 
 
                     label.Visibility = Visibility.Hidden;
+                    //Console.WriteLine("Green" + output[i]);
 
                     Canvas.SetLeft(label, i * rect.Width);
                     Canvas.SetBottom(label, zeroPoint - 20);
 
                     front_Canvas.Children.Add(label);
-                    if (showHideBarValueBox.IsChecked == true)
+                    if (showHideBarValueBox_Copy.IsChecked == true)
                     {
                         label.Visibility = Visibility.Visible;
                     }
@@ -1513,6 +1515,8 @@ namespace Capstone
             avgBarGraph.Content = "";
             lowerQuartileBarGraph.Content = "";
             upperQuartileBarGraph.Content = "";
+            Min.Content = "";
+            Max.Content = "";
 
             //clears line graph
             lineGraphCanvas.Children.Clear();
